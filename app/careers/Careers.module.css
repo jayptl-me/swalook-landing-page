@@ -1,0 +1,48 @@
+.whoSection { padding: var(--section-padding); background: var(--bg-section-alt); }
+.whoContent { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.whoContent p { color: var(--text-secondary); font-size: 1.02rem; line-height: 1.8; }
+
+.whyWorkSection { padding: var(--section-padding); background: var(--bg-white); }
+.whyGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.whyCard { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px; transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: var(--shadow-xs); }
+.whyCard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-primary); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+.whyCard:hover::before { transform: scaleX(1); }
+.whyCard:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+.whyCard h3 { font-size: 1rem; font-weight: 600; margin-bottom: 10px; color: var(--primary-dark); }
+.whyCard p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.7; }
+
+.lookingSection { padding: var(--section-padding); background: var(--bg-section-alt); }
+.lookingContent { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.lookingContent p { color: var(--text-secondary); margin-bottom: 18px; }
+.traitsList { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+.traitItem { display: flex; align-items: center; gap: 10px; font-size: 0.93rem; color: var(--text-secondary); }
+.traitIcon { color: var(--primary); flex-shrink: 0; }
+.emailLink { color: var(--primary); font-weight: 600; }
+
+.openingsSection { padding: var(--section-padding); background: var(--bg-white); }
+.openingsContainer { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.openingsTable { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 28px; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+.openingsTable thead th { text-align: left; padding: 14px 18px; font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); background: var(--bg-soft); border-bottom: 1px solid var(--border-color); }
+.openingsTable tbody td { padding: 14px 18px; font-size: 0.9rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+.openingsTable tbody tr { transition: background 0.3s ease; }
+.openingsTable tbody tr:hover { background: var(--bg-soft); }
+.openingsTable tbody tr:last-child td { border-bottom: none; }
+.applyBtn { display: inline-block; padding: 7px 18px; font-size: 0.8rem; font-weight: 600; color: #fff; background: var(--gradient-primary); border-radius: var(--radius-sm); transition: all 0.3s ease; }
+.applyBtn:hover { transform: translateY(-2px); box-shadow: var(--shadow-primary); color: #fff; }
+.noRole { text-align: center; padding: 22px; background: var(--bg-soft); border: 1px solid var(--border-color); border-radius: var(--radius-md); }
+.noRole p { color: var(--text-secondary); font-size: 0.9rem; }
+
+.teamSection { padding: var(--section-padding); background: var(--bg-section-alt); }
+.teamGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.teamCard { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 32px; position: relative; box-shadow: var(--shadow-xs); transition: all 0.3s ease; }
+.teamCard:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.teamCard::before { content: '"'; position: absolute; top: 16px; left: 24px; font-size: 3.5rem; font-family: var(--font-display); color: var(--primary); opacity: 0.12; line-height: 1; }
+.teamCard p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.7; font-style: italic; margin-bottom: 14px; }
+.teamCard span { font-size: 0.8rem; color: var(--primary); font-weight: 600; font-style: normal; }
+
+.joinCta { padding: 80px 0; text-align: center; background: var(--bg-white); }
+.joinCta h2 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; margin-bottom: 14px; color: var(--text-heading); }
+.joinCta p { color: var(--text-secondary); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.joinActions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 768px) { .whyGrid { grid-template-columns: 1fr; } .teamGrid { grid-template-columns: 1fr; } .openingsTable thead th, .openingsTable tbody td { padding: 10px 12px; } }

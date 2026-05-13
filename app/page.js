@@ -315,7 +315,7 @@ export default function HomePage() {
           <div key={f.title} className={`${styles.featureRow} ${i % 2 !== 0 ? styles.featureRowReverse : ''}`}>
             <AnimatedSection direction={i % 2 === 0 ? 'left' : 'right'}>
               <div className={styles.featureImageBox}>
-                <Image src={f.image} alt={f.title} width={560} height={350} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-xl)' }} />
+                <Image src={f.image} alt={f.title} width={560} height={350} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-xl)' }} priority={f.image === '/images/feature-marketing.png'} />
               </div>
             </AnimatedSection>
             <AnimatedSection direction={i % 2 === 0 ? 'right' : 'left'}>

@@ -8,32 +8,32 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/Ani
 import styles from './About.module.css';
 
 const bullets = [
-  'Salon POS: You can create and manage bills for your customers and send them via WhatsApp',
-  'Online Appointments: Your customers can schedule appointments with a few clicks',
-  'Membership: We help you manage membership in your salon and provide customer loyalty benefits',
-  'Reports & Feedback: You can get feedback from your customers on how they felt about their visit',
-  'Digital Catalog: Customers can browse through the digital catalog of services provided by your salon',
+  'Help salons improve repeat visits with smarter follow-ups, loyalty, and retargeting.',
+  'Reduce no-shows with reminders, confirmations, and easier appointment communication.',
+  'Make team performance visible with better staff, branch, and business tracking.',
+  'Bring billing, inventory, marketing, and operations into one simple platform.',
+  'Support salons, spas, beauty studios, and multi-branch businesses as they grow.',
 ];
 
 const values = [
-  { icon: <FiCpu />, text: 'Leveraging the latest technology to provide modern, effective solutions.' },
-  { icon: <FiHeart />, text: 'Understanding and meeting the unique needs of salon owners and your clients.' },
-  { icon: <FiZap />, text: 'Delivering easy-to-use features that simplify complex processes.' },
-  { icon: <FiRefreshCw />, text: 'Constantly improving to ensure salons receive the best tools and support.' },
+  { icon: <FiCpu />, text: 'Build practical tools that make salon operations simpler and more effective.' },
+  { icon: <FiHeart />, text: 'Put customer retention and long-term business growth at the center of every feature.' },
+  { icon: <FiZap />, text: 'Keep the platform fast, easy to use, and focused on measurable business impact.' },
+  { icon: <FiRefreshCw />, text: 'Continuously improve based on real salon workflows, feedback, and industry needs.' },
 ];
 
 const highlights = [
-  'Trusted by 50+ salons and spas across India and growing.',
-  'Built by a team that understands the beauty industry inside-out.',
-  'Designed for simplicity — no technical expertise required.',
-  'Continuous innovation with regular feature updates and improvements.',
+  'Designed to help beauty businesses grow revenue, not just manage tasks.',
+  'Focused on retention, retargeting, and repeat bookings.',
+  'Built to reduce no-shows and improve daily team efficiency.',
+  'Made for single locations and multi-branch businesses alike.',
 ];
 
 const detailFeatures = [
-  { title: 'From Idea to Impact', desc: 'Swalook was born from a simple observation — salon owners were spending more time on admin tasks than on their craft. We set out to change that by building a platform that handles the complexity, so you can focus on what you do best.', image: '/images/about-idea.png' },
-  { title: 'Built for the Beauty Industry', desc: 'Unlike generic business tools, every feature in Swalook is designed specifically for salons and spas. From appointment flows to loyalty programs, we speak your language and understand your daily challenges.', image: '/images/about-beauty.png' },
-  { title: 'Customer-Centric Development', desc: 'We build features based on real feedback from salon owners. Every update is shaped by the needs of our users, ensuring Swalook evolves alongside your business.', image: '/images/about-customer.png' },
-  { title: 'Security & Reliability First', desc: 'Your data is protected with enterprise-grade encryption and hosted on secure cloud infrastructure. With 99% uptime, Swalook is always there when you need it.', image: '/images/about-security.png' },
+  { title: 'Our Vision', desc: 'To become the most trusted revenue generation engine for the beauty industry by helping every salon grow with smarter retention, stronger marketing, and simpler operations.', image: '/images/about-idea.png' },
+  { title: 'Our Mission', desc: 'To empower salons, spas, and beauty businesses with one connected platform that improves customer retention, reduces no-shows, tracks performance, and makes growth easier.', image: '/images/about-beauty.png' },
+  { title: 'How We Work', desc: 'We focus on simple workflows, practical automation, and business insights that help salon owners make better decisions every day.', image: '/images/about-customer.png' },
+  { title: 'Why It Matters', desc: 'When salons keep more clients, run better campaigns, and operate more efficiently, they create stronger relationships and more reliable revenue.', image: '/images/about-security.png' },
 ];
 
 export default function AboutPage() {
@@ -41,9 +41,9 @@ export default function AboutPage() {
     <>
       <PageHero
         label="About Us"
-        title="THE ULTIMATE SALON MANAGEMENT SOLUTION —"
-        highlight="Boost Your Performance With Our Platform"
-        description="Discover why Swalook is the best salon CRM software for salons worldwide."
+        title="SWALOOK"
+        highlight="Revenue Generation Engine For The Beauty Industry"
+        description="Swalook helps beauty businesses grow through better retention, smarter marketing, and simpler operations."
       />
 
       {/* Company Info */}
@@ -51,13 +51,12 @@ export default function AboutPage() {
         <div className={styles.companyGrid}>
           <AnimatedSection direction="left">
             <div className={styles.companyText}>
-              <h3>Company Info</h3>
-              <h2>The Ultimate Salon Management Solution</h2>
+              <h3>About Swalook</h3>
+              <h2>Built for Growth, Retention, and Repeat Revenue</h2>
               <p>
-                Welcome to Swalook, the ultimate solution for salons looking to streamline their operations and enhance 
-                customer experience. Swalook is an intuitive, user-friendly, cloud-based innovative software and mobile 
-                app that helps salons manage appointments, billing, inventory, and customer relationships. You can also 
-                use integrated marketing to reach out to your customers better.
+                Swalook is a modern platform created for salons, spas, beauty studios, and wellness businesses that
+                want to grow with more clarity and less manual work. We help teams manage customer relationships,
+                operations, and marketing from one connected system.
               </p>
               <div className={styles.bulletList}>
                 {bullets.map((b, i) => (
@@ -89,8 +88,8 @@ export default function AboutPage() {
             <div className={styles.missionCard}>
               <h3>Our Mission</h3>
               <p>
-                Our mission is to empower salons with innovative tools and technology that make management effortless. 
-                We strive to help salon owners focus on what they do best—delivering exceptional beauty services—while we handle the rest.
+                To help beauty businesses increase repeat customers, reduce no-shows, and manage operations more
+                easily with practical tools that support daily growth.
               </p>
             </div>
           </StaggerItem>
@@ -98,8 +97,8 @@ export default function AboutPage() {
             <div className={styles.missionCard}>
               <h3>Our Vision</h3>
               <p>
-                Our vision is to revolutionize the salon industry by providing seamless management solutions that create 
-                thriving businesses and exceptional client experiences.
+                To become the most useful growth platform for the beauty industry by combining retention, marketing,
+                performance tracking, and operational clarity in one place.
               </p>
             </div>
           </StaggerItem>
@@ -131,20 +130,19 @@ export default function AboutPage() {
         <div className="section-header">
           <AnimatedSection>
             <span className="section-label">Journey</span>
-            <h2 className="section-title">Our Journey, Your Trust</h2>
+            <h2 className="section-title">Why Swalook Exists</h2>
           </AnimatedSection>
         </div>
         <AnimatedSection>
           <div className={styles.journeyContent}>
             <p>
-              Swalook started as a small project by a team passionate about the beauty and wellness industry. 
-              We noticed that salon owners were juggling multiple disconnected tools — from paper appointment books 
-              to scattered spreadsheets for billing and inventory. We knew there had to be a better way.
+              Swalook was created to solve a common problem in the beauty industry: too many disconnected tools and
+              too much time spent on manual follow-up. We wanted to build a platform that helps salons keep customers
+              coming back while making day-to-day management easier.
             </p>
             <p>
-              Today, Swalook serves 50+ salons across India, helping them save hours every week on admin work 
-              while delivering better experiences to their clients. Our journey is just getting started, and 
-              with every new feature, we&apos;re one step closer to our vision of empowering every salon to thrive.
+              Today, Swalook is focused on helping beauty businesses strengthen retention, improve marketing
+              performance, track business results, and reduce missed appointments — all with one platform.
             </p>
           </div>
         </AnimatedSection>
@@ -197,19 +195,17 @@ export default function AboutPage() {
         <AnimatedSection>
           <div className={styles.learnContent}>
             <p>
-              At Swalook, we believe that technology should be accessible and easy to use for everyone. That&apos;s 
-              why we&apos;ve designed our software and app to be as user-friendly and intuitive as possible, with a 
-              sleek and modern interface that&apos;s easy to navigate. We&apos;re committed to providing the best 
-              possible experience and striving to improve and innovate our software to meet customers&apos; evolving needs.
+              We believe beauty businesses should have the same level of growth tools that larger industries use,
+              without the complexity. Swalook makes retention, reactivation, reporting, and marketing easier to manage
+              so owners can spend more time serving clients.
             </p>
             <p>
-              We&apos;re dedicated to empowering salon owners to take their businesses to the next level. Whether 
-              you&apos;re a small independent salon or a large chain, we have the tools and expertise to help you succeed.
+              Our platform is designed to support businesses at every stage — from a single salon looking for more
+              repeat visits to a multi-branch brand that needs clearer control and better visibility.
             </p>
             <p>
-              But our mission continues after business operations. We also believe in serving our customers from 
-              acquisition to service. That&apos;s why our software includes features to help salon owners acquire new 
-              customers and keep them coming back, such as automated appointment reminders and targeted marketing campaigns.
+              Every feature is built to help salons grow revenue, improve customer relationships, and keep operations
+              running smoothly in the background.
             </p>
           </div>
         </AnimatedSection>
@@ -220,8 +216,8 @@ export default function AboutPage() {
         <AnimatedSection>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Ready to Get Started?</p>
           <h3 style={{ fontSize: '1.3rem', marginBottom: 24 }}>Book a free demo today</h3>
-          <span className={styles.ctaPhone}>+91 98701 03761</span>
-          <p className={styles.ctaTagline}>Engage. Enhance. Empower.</p>
+          <span className={styles.ctaPhone}>+91 XXXXX XXXXX</span>
+          <p className={styles.ctaTagline}>Grow. Retain. Repeat.</p>
         </AnimatedSection>
       </section>
     </>

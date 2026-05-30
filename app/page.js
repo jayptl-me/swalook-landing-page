@@ -8,85 +8,102 @@ import { FiArrowRight, FiPlus, FiCheckCircle } from 'react-icons/fi';
 import {
   FiLayout, FiCalendar, FiFileText, FiBarChart2, FiMessageSquare,
   FiPackage, FiUsers, FiDollarSign, FiHeart, FiMail,
-  FiTrendingDown, FiSettings, FiClock, FiSmile, FiLink, FiTrendingUp,
-  FiSearch, FiGift, FiEye, FiShoppingBag
+  FiTrendingDown, FiSettings, FiClock, FiTrendingUp,
+  FiGift, FiBell
 } from 'react-icons/fi';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import styles from './Home.module.css';
 
 const heroSlides = [
   {
-    subtitle: 'Salon CRM Software',
-    title: 'Are you looking for ways to',
-    highlight: 'manage customer relationships',
-    titleEnd: 'using multiple tools and spreadsheets?',
-    desc: 'Do you find it challenging to keep track of customer interactions and sales opportunities? Then, look no further than Swalook CRM system!',
-  },
-  {
-    subtitle: 'All-in-One Platform',
-    title: 'Managing a salon becomes chaotic',
-    highlight: 'without the right CRM software',
-    titleEnd: '',
-    desc: 'Missed appointments, scattered spreadsheets, inventory mismanagement, and inconsistent client follow-ups. Swalook solves this with a powerful all-in-one platform designed to streamline your operations.',
+    subtitle: 'Revenue Generation Engine For The Beauty Industry',
+    highlight: 'Grow Your Salon Business With Better Retention, Smarter Marketing & Fewer No-Shows.',
+    paragraphs: [
+      'One platform for retention, marketing, appointments, billing, and follow-ups.',
+    ],
   },
 ];
 
-const services = [
-  { icon: <FiLayout />, title: 'Dashboard', desc: 'Gain valuable insights into your salon\'s performance with real-time analytics and key metrics.', link: '/salon-dashboard-software' },
-  { icon: <FiCalendar />, title: 'Appointments', desc: 'Simplify scheduling with our intuitive calendar, enabling clients to book appointments online.', link: '/salon-appointment-scheduling-software' },
-  { icon: <FiFileText />, title: 'Invoices', desc: 'Generate professional digital invoices, track payments, and manage billing seamlessly.', link: '/salon-invoice-software' },
-  { icon: <FiBarChart2 />, title: 'Analysis', desc: 'Utilize powerful analytics tools to track sales trends and client behavior, helping you make informed decisions.', link: '/salon-analytics-software' },
-  { icon: <FiMessageSquare />, title: 'Inquiries', desc: 'Easily track customer inquiries and manage lead follow-ups in one place. Never miss a potential client.', link: '/salon-inquiry-management' },
-  { icon: <FiPackage />, title: 'Inventory', desc: 'Keep full control of your salon stock. Monitor product levels, set low-stock alerts, and streamline purchasing.', link: '/salon-inventory-management-software' },
-  { icon: <FiUsers />, title: 'Staff & Attendance', desc: 'Effortlessly manage your team\'s roles, shifts, and performance while tracking attendance.', link: '/salon-staff-attendance-software' },
-  { icon: <FiDollarSign />, title: 'Expense & Purchasing', desc: 'Track business expenses, purchases, and payment history with complete transparency.', link: '/salon-expense-management-software' },
-  { icon: <FiHeart />, title: 'Customer Loyalty', desc: 'Boost client retention with customized loyalty programs. Track visits, reward frequent clients.', link: '/salon-loyalty-program-software' },
-  { icon: <FiMail />, title: 'Templates', desc: 'Access ready-to-use marketing templates for emails, SMS, and promotions. Drive repeat bookings.', link: '/salon-marketing-templates' },
+const featureGroups = [
+  { icon: <FiLayout />, title: 'Dashboard & Analytics', desc: 'See sales, bookings, retention, and daily performance at a glance.', link: '/book-demo' },
+  { icon: <FiBarChart2 />, title: 'Branch Performance', desc: 'Compare branches, track growth, and spot what drives revenue.', link: '/book-demo' },
+  { icon: <FiUsers />, title: 'Staff Target & Performance', desc: 'Measure staff targets, service output, and contribution to growth.', link: '/book-demo' },
+  { icon: <FiFileText />, title: 'Smart Billing & POS', desc: 'Create fast bills, manage payments, and keep billing accurate.', link: '/book-demo' },
+  { icon: <FiCalendar />, title: 'Appointment Management', desc: 'Schedule, confirm, reschedule, and reduce booking confusion.', link: '/book-demo' },
+  { icon: <FiMessageSquare />, title: 'Inquiry & Lead Management', desc: 'Track every lead, follow up faster, and convert more enquiries.', link: '/book-demo' },
+  { icon: <FiPackage />, title: 'Inventory & Utilisation', desc: 'Monitor stock, usage, and replenishment before products run out.', link: '/book-demo' },
+  { icon: <FiDollarSign />, title: 'Payroll & Salary', desc: 'Handle payroll, salary planning, and staff payouts with clarity.', link: '/book-demo' },
+  { icon: <FiClock />, title: 'Time & Attendance', desc: 'Track attendance, shifts, and working hours in one place.', link: '/book-demo' },
+  { icon: <FiHeart />, title: 'Loyalty & Combo Offers', desc: 'Build repeat visits with rewards, combos, and special offers.', link: '/book-demo' },
+  { icon: <FiMail />, title: 'Marketing Automation', desc: 'Run WhatsApp, SMS, and email campaigns without manual follow-up.', link: '/book-demo' },
+  { icon: <FiTrendingUp />, title: 'Purchase & Expense Tracking', desc: 'Track expenses, purchases, and costs to protect margins.', link: '/book-demo' },
+];
+
+const whatSwalookHelps = [
+  { icon: <FiTrendingUp />, title: 'Increase Repeat Customers', desc: 'Bring clients back with better retention, loyalty, and targeted follow-ups.' },
+  { icon: <FiTrendingDown />, title: 'Reduce No-Shows', desc: 'Use reminders, confirmations, and timely follow-ups to protect your schedule.' },
+  { icon: <FiBarChart2 />, title: 'Track Business Performance', desc: 'View branch, staff, and sales data clearly so you can make better decisions.' },
+  { icon: <FiMail />, title: 'Run Marketing Campaigns', desc: 'Send offers and reactivation campaigns across WhatsApp, SMS, and email.' },
+  { icon: <FiSettings />, title: 'Manage Operations Easily', desc: 'Keep appointments, billing, stock, and staff processes simple and connected.' },
 ];
 
 const whyReasons = [
-  { icon: <FiTrendingDown />, title: 'Reduce Operational Costs', desc: 'By streamlining operations and automating tasks, you can significantly cut down on operational costs.' },
-  { icon: <FiSettings />, title: 'Highly Customizable', desc: 'Every salon is unique, and our highly customizable system allows you to tailor it to your specific needs and branding.' },
-  { icon: <FiClock />, title: 'Time Management', desc: 'Our system helps you manage your time more effectively, allowing you to focus on high-value tasks that drive business growth.' },
-  { icon: <FiSmile />, title: 'Client Satisfaction', desc: 'With easier appointment booking, automated reminders, and personalized loyalty programs, you can enhance client satisfaction.' },
-  { icon: <FiLink />, title: 'Seamless Integration', desc: 'Swalook integrates seamlessly with popular payment gateways, accounting tools, and communication platforms for a connected workflow.' },
-  { icon: <FiTrendingUp />, title: 'Scalable', desc: 'As your salon grows, Swalook can scale with you, providing the functionality you need to manage your expanding business.' },
+  { icon: <FiUsers />, title: 'Manage staff better', desc: 'Keep team roles, targets, and accountability clear across your salon.' },
+  { icon: <FiPackage />, title: 'Control inventory', desc: 'Track stock and usage so products are always available when needed.' },
+  { icon: <FiMessageSquare />, title: 'Follow up with clients', desc: 'Automate post-visit follow-ups and reactivation messages.' },
+  { icon: <FiBell />, title: 'Reduce no-shows', desc: 'Send reminders and confirmations that help customers keep appointments.' },
+  { icon: <FiMail />, title: 'Run marketing campaigns', desc: 'Reach customers with offers, reminders, and reactivation campaigns.' },
+  { icon: <FiBarChart2 />, title: 'See branch performance', desc: 'Compare locations and understand which branch drives the most growth.' },
+  { icon: <FiHeart />, title: 'Increase repeat visits', desc: 'Build loyalty and keep customers coming back more often.' },
 ];
 
-const mobileFeatures = [
-  { icon: <FiSearch />, title: 'Search Salons Near You', desc: 'Discover nearby salons, compare services, and book your next appointment in just a few taps.' },
-  { icon: <FiGift />, title: 'Get Personalized Offers', desc: 'Receive exclusive deals and discounts tailored to your visit history and preferences.' },
-  { icon: <FiEye />, title: 'AI-Powered Style Suggestions', desc: 'Explore trending hairstyles and get personalized recommendations based on your preferences — smart beauty at your fingertips.' },
-  { icon: <FiShoppingBag />, title: 'Shop Beauty Products', desc: 'Browse and purchase salon-recommended beauty products directly from the app.' },
+const retentionItems = [
+  { icon: <FiHeart />, title: 'Re-engage lapsed clients', desc: 'Target clients who have not visited recently with the right offer at the right time.' },
+  { icon: <FiMessageSquare />, title: 'Personalize every follow-up', desc: 'Use visit history and preferences to make your messages more relevant.' },
+  { icon: <FiGift />, title: 'Use loyalty and offers', desc: 'Reward repeat customers and encourage them to book again sooner.' },
+  { icon: <FiMail />, title: 'Stay in touch automatically', desc: 'Keep your salon top of mind with scheduled WhatsApp, SMS, and email campaigns.' },
+];
+
+const noShowItems = [
+  { icon: <FiBell />, title: 'Automated reminders', desc: 'Send appointment reminders before visits so customers do not forget.' },
+  { icon: <FiCalendar />, title: 'Easy confirmations', desc: 'Let customers confirm or reschedule quickly to protect your calendar.' },
+  { icon: <FiClock />, title: 'Timely follow-up', desc: 'Nudge clients before and after appointments to keep the schedule full.' },
+  { icon: <FiCheckCircle />, title: 'Better front-desk visibility', desc: 'Help your team manage the day with clear booking and status updates.' },
+];
+
+const useCases = [
+  {
+    title: 'Single Salons and Studios',
+    desc: 'Ideal for independent teams that want simpler operations, stronger retention, and more repeat bookings.',
+    image: '/images/feature-appointments.png',
+  },
+  {
+    title: 'Spas, Clinics, and Wellness Centers',
+    desc: 'Great for appointment-led businesses that need better follow-up, clearer reporting, and smooth daily coordination.',
+    image: '/images/feature-marketing.png',
+  },
+  {
+    title: 'Multi-Branch Beauty Brands',
+    desc: 'Built for growing brands that need branch visibility, staff targets, and centralized control across locations.',
+    image: '/images/feature-profiles.png',
+  },
 ];
 
 const testimonials = [
-  'Swalook has completely transformed how we manage appointments. The automated reminders have significantly reduced no-shows, and we\'re able to track customer preferences and provide personalized service. Our clients love the improved communication!',
-  'The personalized service we can now offer thanks to Swalook\'s CRM is incredible. We can track client preferences, send tailored promotions, and follow up on their last visit with precision. It\'s really boosted our reputation.',
-  'Managing inventory used to be a nightmare — we\'d constantly run out of products mid-service. With Swalook\'s real-time stock tracking and low-stock alerts, we\'ve eliminated wastage and our purchasing is now perfectly optimized.',
-  'Before Swalook, it was hard to keep track of all our client details and market to them effectively. Now, with centralized data and integrated marketing tools, we\'ve seen a 25% increase in returning customers in just a few months.',
-];
-
-const features = [
-  { title: 'Streamlined Appointment Booking', desc: 'Let your customers select their preferred service, date, time, and stylist online or via the app. Reduce scheduling conflicts and no-shows with automated reminders.', image: '/images/feature-appointments.png' },
-  { title: 'Customizable Customer Profiles', desc: 'Build detailed profiles with service preferences, visit history, and personal notes — empowering your team to deliver a truly personalised experience every time.', image: '/images/feature-profiles.png' },
-  { title: 'Marketing & Loyalty Programs', desc: 'Run targeted email, SMS, and WhatsApp campaigns. Reward loyal clients with points-based programs and keep them coming back with personalized offers.', image: '/images/feature-marketing.png' },
-  { title: 'Mobile App Access', desc: 'Give customers the power to book, reschedule, and explore your salon services on the go — anytime, anywhere from their smartphones.', image: '/images/feature-mobile.png' },
+  'Swalook helps our team stay on top of follow-ups and reminders, which has made a visible difference in repeat bookings.',
+  'We can now see branch-level performance and make faster decisions without chasing multiple spreadsheets.',
+  'Marketing campaigns are easier to manage, and our customers respond better because the messages are more relevant.',
+  'The platform makes it easier to handle billing, staff, and appointments while keeping the client experience smooth.',
 ];
 
 const faqItems = [
-  { q: 'What is Swalook?', a: 'Swalook is an all-in-one salon management CRM platform designed to help salon owners streamline operations, manage appointments, engage clients, track inventory, and grow their business – all from one dashboard.' },
-  { q: 'Who is Swalook for?', a: 'Swalook is ideal for salons, spas, beauty parlors, and wellness centers of all sizes – whether you\'re a solo stylist, a boutique salon, or a multi-location chain.' },
-  { q: 'Can clients book online?', a: 'Yes! With Swalook, your clients can book appointments online or via the mobile app. They can select services, choose stylists, pick a time, and get instant confirmations.' },
-  { q: 'How does inventory tracking work?', a: 'Swalook offers real-time inventory tracking, low-stock alerts, and detailed product usage reports so you always have the right products in stock without over-ordering.' },
+  { q: 'What is Swalook?', a: 'Swalook is a revenue generation engine for the beauty industry that helps salons grow through better retention, smarter marketing, and simpler operations.' },
+  { q: 'How does Swalook help reduce no-shows?', a: 'Swalook helps you send reminders, confirmations, and follow-ups so customers are less likely to miss appointments.' },
+  { q: 'Can Swalook help multi-branch businesses?', a: 'Yes. Swalook helps you track branch performance, staff output, and business results across multiple locations.' },
+  { q: 'Who should use Swalook?', a: 'Swalook is built for salons, spas, beauty studios, wellness centers, and growing multi-branch beauty businesses.' },
+  { q: 'Can I try Swalook before deciding?', a: 'Yes. You can book a free demo or start a free trial to see how Swalook fits your business.' },
 ];
 
-const stats = [
-  { number: '50+', label: 'Trusted Clients' },
-  { number: '10+', label: 'CRM Features' },
-  { number: '24/7', label: 'Support' },
-  { number: '99%', label: 'Uptime' },
-];
 
 export default function HomePage() {
   const [heroIndex, setHeroIndex] = useState(0);
@@ -121,17 +138,23 @@ export default function HomePage() {
             <h1 className={styles.heroTitle}>
               {slide.title}{' '}
               <span className={styles.heroHighlight}>{slide.highlight}</span>
-              {slide.titleEnd && ` ${slide.titleEnd}`}
             </h1>
-            <p className={styles.heroDesc}>{slide.desc}</p>
+            {slide.paragraphs.map((paragraph) => (
+              <p key={paragraph} className={styles.heroDesc}>
+                {paragraph}
+              </p>
+            ))}
           </motion.div>
           <div className={styles.heroActions}>
-            <Link href="/contact" className="btn btn-primary btn-lg">
-              Request a Demo <FiArrowRight />
+            <Link href="/book-demo" className="btn btn-primary btn-lg">
+              Book Free Demo <FiArrowRight />
             </Link>
-            <Link href="/about" className="btn btn-outline btn-lg">
-              Learn More
+            <Link href="/free-trial" className="btn btn-outline btn-lg">
+              Start Free Trial
             </Link>
+            <a href="https://wa.me/91XXXXXXXXXX" className="btn btn-outline btn-lg" target="_blank" rel="noreferrer">
+              WhatsApp Us
+            </a>
           </div>
           {/* Slide indicators */}
           <div className={styles.heroIndicators}>
@@ -156,20 +179,19 @@ export default function HomePage() {
           </AnimatedSection>
           <AnimatedSection direction="right">
             <div className={styles.aboutContent}>
-              <h3>About Company</h3>
-              <h2>Transform Your Salon Management with Swalook</h2>
+              <h3>About Swalook</h3>
+              <h2>Built to Grow Revenue for the Beauty Industry</h2>
               <p>
-                Swalook is a cloud-based salon management software trusted by salons and spas globally. 
-                With a centralized dashboard, you can manage appointments, payments, inventory, staff schedules, 
-                and customer relationships with ease. Our advanced analytics provide actionable insights to grow 
-                your revenue, improve client satisfaction, and automate routine tasks.
+                Swalook is designed for salons, spas, beauty studios, and multi-branch businesses that want to grow
+                smarter. We combine customer retention, marketing automation, appointments, billing, and operations
+                into one simple platform so your team can focus on service, not spreadsheets.
               </p>
               <p>
-                Whether you run a single salon or multiple locations, Swalook empowers you to operate efficiently, 
-                reduce errors, and deliver exceptional service every day.
+                From repeat visits to branch reporting, Swalook helps you turn everyday operations into better
+                customer experiences and stronger business results.
               </p>
               <div className={styles.aboutActions}>
-                <Link href="/contact" className="btn btn-primary">Contact Us Now</Link>
+                <Link href="/book-demo" className="btn btn-primary">Book a Demo</Link>
                 <Link href="/about" className="btn btn-outline">Learn More</Link>
               </div>
             </div>
@@ -177,26 +199,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== SERVICES ===== */}
+      {/* ===== FEATURES ===== */}
       <section className={styles.servicesSection}>
         <div className="section-header">
           <AnimatedSection>
-            <span className="section-label">Our Services</span>
-            <h2 className="section-title">Swalook&apos;s All-in-One Salon CRM Software Features</h2>
+            <span className="section-label">Features</span>
+            <h2 className="section-title">12 Feature Groups That Drive Growth</h2>
             <p className="section-subtitle">
-              Explore powerful tools designed to simplify daily operations, enhance client engagement, 
-              and scale your business—all from one easy-to-use platform.
+              Everything you need to improve retention, reduce no-shows, track performance, and manage your beauty business with confidence.
             </p>
           </AnimatedSection>
         </div>
         <StaggerContainer className={styles.servicesGrid}>
-          {services.map((svc) => (
-            <StaggerItem key={svc.title}>
-              <Link href={svc.link} style={{ display: 'block' }}>
+          {featureGroups.map((feature) => (
+            <StaggerItem key={feature.title}>
+              <Link href={feature.link} style={{ display: 'block' }}>
                 <div className={styles.serviceCard}>
-                  <div className={styles.serviceIcon}>{svc.icon}</div>
-                  <h3>{svc.title}</h3>
-                  <p>{svc.desc}</p>
+                  <div className={styles.serviceIcon}>{feature.icon}</div>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.desc}</p>
                   <span className={styles.serviceLink}>Learn More <FiArrowRight /></span>
                 </div>
               </Link>
@@ -205,59 +226,63 @@ export default function HomePage() {
         </StaggerContainer>
       </section>
 
-      {/* ===== WHAT WE PROVIDE ===== */}
+      {/* ===== WHAT SWALOOK HELPS YOU DO ===== */}
       <section className={styles.provideSection}>
         <div className={styles.provideContent}>
           <AnimatedSection>
-            <span className="section-label">What We Provide You</span>
-            <h2 className="section-title">Everything You Need, One Unified Platform</h2>
-            <p>
-              From appointment scheduling and billing to inventory tracking and marketing automation — 
-              Swalook consolidates every aspect of salon management into a single, easy-to-use system. 
-              Spend less time on admin work and more time delivering exceptional client experiences.
-            </p>
+            <span className="section-label">What Swalook Helps You Do</span>
+            <h2 className="section-title">A Clear Growth System For Your Beauty Business</h2>
+            <div className={styles.whyGrid} style={{ marginTop: 32 }}>
+              {whatSwalookHelps.map((item) => (
+                <div key={item.title} className={styles.whyCard}>
+                  <div className={styles.whyIcon}>{item.icon}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ===== WHY US ===== */}
+      {/* ===== WHY SWALOOK ===== */}
       <section className={styles.whySection}>
         <div className="section-header">
           <AnimatedSection>
-            <span className="section-label">Why Us</span>
-            <h2 className="section-title">Why Choose Swalook — The Best Salon CRM Software</h2>
+            <span className="section-label">Why Swalook</span>
+            <h2 className="section-title">Why Beauty Businesses Choose Swalook</h2>
           </AnimatedSection>
         </div>
         <StaggerContainer className={styles.whyGrid}>
-          {whyReasons.map((r) => (
-            <StaggerItem key={r.title}>
+          {whyReasons.map((reason) => (
+            <StaggerItem key={reason.title}>
               <div className={styles.whyCard}>
-                <div className={styles.whyIcon}>{r.icon}</div>
-                <h3>{r.title}</h3>
-                <p>{r.desc}</p>
+                <div className={styles.whyIcon}>{reason.icon}</div>
+                <h3>{reason.title}</h3>
+                <p>{reason.desc}</p>
               </div>
             </StaggerItem>
           ))}
         </StaggerContainer>
       </section>
 
-      {/* ===== MOBILE APP ===== */}
+      {/* ===== CUSTOMER RETENTION & RETARGETING ===== */}
       <section className={styles.mobileAppSection}>
         <div className={styles.mobileAppGrid}>
           <div className="section-header">
             <AnimatedSection>
-              <span className="section-label">Mobile App</span>
-              <h2 className="section-title">Your Beauty Transformation at your Fingertips</h2>
+              <span className="section-label">Customer Retention & Retargeting</span>
+              <h2 className="section-title">Bring Customers Back More Often</h2>
             </AnimatedSection>
           </div>
           <StaggerContainer className={styles.featureList}>
-            {mobileFeatures.map((f) => (
-              <StaggerItem key={f.title}>
+            {retentionItems.map((item) => (
+              <StaggerItem key={item.title}>
                 <div className={styles.featureItem}>
-                  <div className={styles.featureItemIcon}>{f.icon}</div>
+                  <div className={styles.featureItemIcon}>{item.icon}</div>
                   <div>
-                    <h4>{f.title}</h4>
-                    <p>{f.desc}</p>
+                    <h4>{item.title}</h4>
+                    <p>{item.desc}</p>
                   </div>
                 </div>
               </StaggerItem>
@@ -265,63 +290,58 @@ export default function HomePage() {
           </StaggerContainer>
           <AnimatedSection delay={0.3}>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: 28, fontSize: '0.92rem' }}>
-              Stay tuned for new and exciting features that will continuously enhance your experience with Swalook.
+              Use retention-focused follow-ups to turn one-time visitors into repeat customers.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
+      {/* ===== REDUCE NO-SHOWS ===== */}
       <section className={styles.testimonialsSection}>
         <AnimatedSection>
           <div className={styles.trustBadge}>
-            <span className={styles.trustNumber}>50+</span>
-            <h3>More Than 50 Clients Trust Us</h3>
+            <span className={styles.trustNumber}>Less</span>
+            <h3>Reduce No-Shows and Protect Your Calendar</h3>
             <p>
-              Transform Your Salon Business with Swalook: Boost Efficiency, Increase Revenue, 
-              and Deliver Exceptional Customer Experience.
+              Keep your schedules fuller with reminders, confirmations, and easy follow-up workflows.
             </p>
           </div>
         </AnimatedSection>
-        <div className="section-header">
-          <AnimatedSection>
-            <h2 className="section-title">Happy Stories</h2>
-          </AnimatedSection>
-        </div>
         <StaggerContainer className={styles.testimonialGrid}>
-          {testimonials.map((t, i) => (
-            <StaggerItem key={i}>
+          {noShowItems.map((item) => (
+            <StaggerItem key={item.title}>
               <div className={styles.testimonialCard}>
-                <p>{t}</p>
+                <div className={styles.whyIcon} style={{ marginBottom: 16 }}>{item.icon}</div>
+                <h3 style={{ marginBottom: 10, fontSize: '1rem' }}>{item.title}</h3>
+                <p>{item.desc}</p>
               </div>
             </StaggerItem>
           ))}
         </StaggerContainer>
       </section>
 
-      {/* ===== KEY FEATURES ===== */}
+      {/* ===== WHO CAN USE SWALOOK ===== */}
       <section className={styles.featuresOverview}>
         <div className="section-header">
           <AnimatedSection>
-            <span className="section-label">Key Features</span>
-            <h2 className="section-title">Explore Our Key Features</h2>
+            <span className="section-label">Who Can Use Swalook</span>
+            <h2 className="section-title">Built For Every Kind of Beauty Business</h2>
             <p className="section-subtitle">
-              Discover the tools that power smarter salon operations — from effortless booking 
-              to personalized client engagement and data-driven growth.
+              Swalook works for small studios, busy wellness centers, and growing multi-branch brands that want better control and more repeat revenue.
             </p>
           </AnimatedSection>
         </div>
-        {features.map((f, i) => (
-          <div key={f.title} className={`${styles.featureRow} ${i % 2 !== 0 ? styles.featureRowReverse : ''}`}>
+        {useCases.map((item, i) => (
+          <div key={item.title} className={`${styles.featureRow} ${i % 2 !== 0 ? styles.featureRowReverse : ''}`}>
             <AnimatedSection direction={i % 2 === 0 ? 'left' : 'right'}>
               <div className={styles.featureImageBox}>
-                <Image src={f.image} alt={f.title} width={560} height={350} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-xl)' }} priority={f.image === '/images/feature-marketing.png'} />
+                <Image src={item.image} alt={item.title} width={560} height={350} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'var(--radius-xl)' }} priority={i === 0} />
               </div>
             </AnimatedSection>
             <AnimatedSection direction={i % 2 === 0 ? 'right' : 'left'}>
               <div className={styles.featureTextBox}>
-                <h3>{f.title}</h3>
-                <p>{f.desc}</p>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
               </div>
             </AnimatedSection>
           </div>
@@ -332,10 +352,10 @@ export default function HomePage() {
       <section className={styles.ctaSection}>
         <AnimatedSection>
           <div className={styles.ctaContent}>
-            <h2>Get Started with Swalook</h2>
-            <p>Ready to transform your salon? Book a free demo and see Swalook in action.</p>
-            <Link href="/contact" className="btn btn-primary btn-lg">
-              Click here for free demo <FiArrowRight />
+            <h2>See Swalook in Action</h2>
+            <p>Book a free demo or start a free trial to see how Swalook can grow your beauty business.</p>
+            <Link href="/book-demo" className="btn btn-primary btn-lg">
+              Book Free Demo <FiArrowRight />
             </Link>
           </div>
         </AnimatedSection>

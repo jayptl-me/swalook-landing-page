@@ -8,26 +8,68 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/Ani
 import styles from './FAQ.module.css';
 
 const salonInfo = [
-  { q: 'How do I set up Swalook for my salon?', a: 'Getting started is simple — sign up through our website, and our onboarding team will help you configure your salon profile, import existing client data, set up services, and train your staff. The entire process typically takes less than a day.' },
-  { q: 'Can I manage multiple salon branches?', a: 'Yes! Swalook supports multi-location management. You can monitor performance, manage staff, and track inventory across all your branches from a single unified dashboard.' },
-  { q: 'How does Swalook handle billing and GST?', a: 'Swalook generates professional, GST-compliant invoices automatically. Tax calculations are built-in, and you can send digital invoices to clients via WhatsApp or email with a single click.' },
-  { q: 'What reports and analytics are available?', a: 'Swalook provides detailed reports on revenue trends, staff performance, service popularity, client retention rates, inventory usage, and more. All reports can be filtered by date range and exported for your records.' },
+  {
+    q: 'What can Swalook help my salon manage?',
+    a: 'Swalook is built around appointment scheduling, billing and invoices, dashboards and analytics, inventory, staff and attendance visibility, loyalty, inquiry management, and branch control.',
+  },
+  {
+    q: 'Can I manage multiple salon branches?',
+    a: 'Yes. The public product story and backend route surface both support branch visibility and multi-location operational control.',
+  },
+  {
+    q: 'Does Swalook support appointments and follow-ups?',
+    a: 'Yes. Swalook supports appointment scheduling workflows and helps salons keep their calendars organized with reminders, confirmations, and follow-up-oriented messaging.',
+  },
+  {
+    q: 'Can I review performance from one place?',
+    a: 'Yes. Swalook includes dashboard and analytics surfaces so teams can review operational visibility, branch performance, and business reporting in one system.',
+  },
 ];
 
 const clientInfo = [
-  { q: 'How do I book an appointment through Swalook?', a: 'You can book appointments online through your salon\'s Swalook-powered booking page or via the mobile app. Simply select your preferred service, stylist, date, and time — and you\'ll receive instant confirmation.' },
-  { q: 'Is my personal data safe with Swalook?', a: 'Absolutely. Swalook uses industry-standard encryption and secure cloud storage. Your personal data is never shared with third parties and can be deleted upon your request at any time.' },
-  { q: 'Will I get reminders for my appointments?', a: 'Yes! You\'ll receive automated SMS and email reminders before your appointment so you never miss a visit. You can also reschedule directly from the reminder notification.' },
-  { q: 'How do loyalty rewards work?', a: 'Your salon may offer a Swalook-powered loyalty program where you earn points for every visit or purchase. These points can be redeemed for discounts, free services, or special offers — ask your salon for details.' },
+  {
+    q: 'How do I explore Swalook before deciding?',
+    a: 'Start with the product pages, then use the Book Demo or Free Trial routes to see how Swalook fits your salon workflow.',
+  },
+  {
+    q: 'Where can I learn more about specific features?',
+    a: 'The feature hub links into appointment scheduling, billing, inventory, analytics, marketing templates, staff attendance, loyalty, and other product pages.',
+  },
+  {
+    q: 'Can I contact the team with questions?',
+    a: 'Yes. You can use the contact page to reach the team directly, or use the demo and trial flows if you want a guided product discussion.',
+  },
+  {
+    q: 'Where can I read supporting material?',
+    a: 'The blog and FAQ sections are designed to support product education, evaluation, and internal linking across the site.',
+  },
 ];
 
 const generalFaqs = [
-  { q: 'What marketing tools does Swalook offer?', a: 'Swalook provides automated marketing features such as SMS and email campaigns, client re-engagement tools, loyalty programs, birthday reminders, and promotional offers to keep your clients coming back.' },
-  { q: 'Can I access Swalook on my mobile device?', a: 'Absolutely! Swalook is available on both iOS and Android devices, so you and your team can manage appointments, view reports, and access client details on the go.' },
-  { q: 'Does Swalook support multiple salon locations?', a: 'Yes, Swalook can manage multiple branches or salon locations under one account. You can easily switch between branches and monitor performance individually or collectively.' },
-  { q: 'Is client data secure with Swalook?', a: 'We take data security seriously. Swalook uses industry-standard encryption and secure cloud storage to ensure your data is protected at all times.' },
-  { q: 'Do I need any technical expertise to use Swalook?', a: 'Not at all. Swalook is designed to be user-friendly with an intuitive interface. Our onboarding team and support resources will guide you every step of the way.' },
-  { q: 'How can I get started with Swalook?', a: 'You can Book a Demo or Sign Up through our website. Our team will help set up your account, import your data, and get your salon up and running smoothly.' },
+  {
+    q: 'What makes Swalook more than a basic booking page?',
+    a: 'Swalook is positioned as a broader beauty-business operations platform, covering retention, marketing, appointments, billing, analytics, and branch visibility rather than a single booking feature.',
+  },
+  {
+    q: 'Which parts of the site should I visit first?',
+    a: 'Start with the homepage for the overview, the feature hub for product depth, and the demo or trial routes if you want to continue toward evaluation.',
+  },
+  {
+    q: 'Does Swalook support loyalty and repeat-customer workflows?',
+    a: 'Yes. Loyalty and repeat-customer workflows are part of the market-now claim set and are reflected in the product and landing-page structure.',
+  },
+  {
+    q: 'How should I contact Swalook for product questions?',
+    a: 'Use the contact page for general questions, or the demo and trial pages if your next step is product evaluation.',
+  },
+  {
+    q: 'Where can I see related product content?',
+    a: 'The blog, feature pages, and FAQ are connected to help visitors move from education to product exploration without getting stuck in a dead end.',
+  },
+  {
+    q: 'What if I want a more detailed product walkthrough?',
+    a: 'The current public routes are built around the homepage, feature hub, blog, FAQ, demo, trial, and contact pages, so those are the best places to start.',
+  },
 ];
 
 function FAQAccordion({ items, category }) {
@@ -36,19 +78,38 @@ function FAQAccordion({ items, category }) {
   return (
     <div>
       {category && <h2 className={styles.faqCategoryTitle}>{category}</h2>}
-      {items.map((item, i) => (
-        <AnimatedSection key={i} delay={i * 0.05}>
-          <div className={styles.faqItem}>
-            <button className={styles.faqQuestion} onClick={() => setOpen(open === i ? null : i)}>
-              {item.q}
-              <FiPlus className={`${styles.faqIcon} ${open === i ? styles.faqIconOpen : ''}`} />
-            </button>
-            <div className={`${styles.faqAnswer} ${open === i ? styles.faqAnswerOpen : ''}`}>
-              <div className={styles.faqAnswerInner}>{item.a}</div>
+      {items.map((item, i) => {
+        const questionId = `faq-question-${category ? category.toLowerCase().replace(/\s+/g, '-') : 'general'}-${i}`;
+        const answerId = `faq-answer-${category ? category.toLowerCase().replace(/\s+/g, '-') : 'general'}-${i}`;
+        const isOpen = open === i;
+
+        return (
+          <AnimatedSection key={i} delay={i * 0.05}>
+            <div className={styles.faqItem}>
+              <button
+                type="button"
+                id={questionId}
+                className={styles.faqQuestion}
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                aria-controls={answerId}
+              >
+                {item.q}
+                <FiPlus className={`${styles.faqIcon} ${isOpen ? styles.faqIconOpen : ''}`} />
+              </button>
+              <div
+                id={answerId}
+                className={`${styles.faqAnswer} ${isOpen ? styles.faqAnswerOpen : ''}`}
+                role="region"
+                aria-labelledby={questionId}
+                hidden={!isOpen}
+              >
+                <div className={styles.faqAnswerInner}>{item.a}</div>
+              </div>
             </div>
-          </div>
-        </AnimatedSection>
-      ))}
+          </AnimatedSection>
+        );
+      })}
     </div>
   );
 }
@@ -59,8 +120,8 @@ export default function FAQPage() {
       <PageHero
         label="FAQ"
         title="Frequently Asked Questions"
-        highlight="Find Your Answers Here"
-        description="Browse common questions from salon owners and clients about Swalook."
+        highlight="Find the right page, feature, or next step."
+        description="Browse common questions about Swalook, the product surface, and the best route for evaluation."
       />
 
       {/* Salon Info */}
@@ -73,7 +134,7 @@ export default function FAQPage() {
       {/* Client Info */}
       <section className={`${styles.faqSection} ${styles.faqSectionAlt}`}>
         <div className={styles.faqContainer}>
-          <FAQAccordion items={clientInfo} category="For Salon Clients" />
+          <FAQAccordion items={clientInfo} category="For Visitors" />
           <div className={styles.askBtn}>
             <Link href="/contact" className="btn btn-outline btn-sm">
               Have More Questions? <FiArrowRight />
@@ -87,7 +148,7 @@ export default function FAQPage() {
         <div className="section-header">
           <AnimatedSection>
             <span className="section-label">General</span>
-            <h2 className="section-title">You Can Find All Answers Here</h2>
+            <h2 className="section-title">Product, Route, and Evaluation Help</h2>
           </AnimatedSection>
         </div>
         <StaggerContainer className={styles.generalFaqGrid}>

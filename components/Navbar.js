@@ -88,14 +88,18 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Toggle */}
-          <div
+          <button
+            type="button"
             className={`${styles.menuToggle} ${mobileOpen ? styles.menuOpen : ''}`}
             onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation-menu"
           >
             <span className={styles.menuBar} />
             <span className={styles.menuBar} />
             <span className={styles.menuBar} />
-          </div>
+          </button>
         </div>
       </nav>
 
@@ -103,10 +107,15 @@ export default function Navbar() {
       <div
         className={`${styles.mobileOverlay} ${mobileOpen ? styles.mobileOverlayActive : ''}`}
         onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
       />
 
       {/* Mobile Menu */}
-      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
+      <div
+        id="mobile-navigation-menu"
+        className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}
+        aria-hidden={!mobileOpen}
+      >
         {navItems.map((item) => (
           <div key={item.label}>
             <Link href={item.href} className={styles.mobileNavLink}>

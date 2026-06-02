@@ -72,6 +72,62 @@
   text-align: center;
 }
 
+.heroInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  gap: 40px;
+  align-items: center;
+  text-align: left;
+}
+
+.heroCopy {
+  max-width: 640px;
+}
+
+.heroVisual {
+  display: grid;
+  gap: 18px;
+}
+
+.heroVisualFrame {
+  position: relative;
+  min-height: 420px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--gradient-soft);
+  box-shadow: var(--shadow-md);
+}
+
+.heroVisualImage {
+  object-fit: cover;
+}
+
+.heroVisualCard {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+}
+
+.heroVisualLabel {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.heroVisualList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
 .heroLabel {
   display: inline-block;
   font-size: 0.76rem;
@@ -119,7 +175,28 @@
   justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.heroTrustStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
   margin-bottom: 48px;
+}
+
+.heroTrustItem {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 10px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 188, 212, 0.08);
+  border: 1px solid rgba(0, 188, 212, 0.14);
+  color: var(--text-heading);
+  font-size: 0.84rem;
+  font-weight: 500;
 }
 
 /* Hero Stats */
@@ -187,6 +264,59 @@
   font-size: 1.2rem;
   color: var(--primary);
   flex-shrink: 0;
+}
+
+/* ========== ROUTE CONNECTIONS ========== */
+.routeSection {
+  padding: var(--section-padding);
+  background: var(--bg-section-alt);
+}
+
+.routeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.routeCard {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--shadow-xs);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.routeCard:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.routeCard h3 {
+  font-size: 1.02rem;
+  margin-bottom: 10px;
+  color: var(--text-heading);
+}
+
+.routeCard p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.routeCardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* ========== ABOUT SECTION ========== */
@@ -447,6 +577,28 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.splitGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 32px;
+  align-items: start;
+  margin-top: 40px;
+}
+
+.splitMedia {
+  position: relative;
+  min-height: 420px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--gradient-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.splitMediaImage {
+  object-fit: cover;
 }
 
 .featureList {
@@ -776,25 +928,41 @@
 
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 96px;
+  }
+
+  .heroInner,
+  .splitGrid,
   .aboutGrid,
   .featureRow,
   .featureRowReverse {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 28px;
+  }
+
+  .heroContent,
+  .heroCopy {
+    text-align: center;
+  }
+
+  .heroVisualFrame,
+  .splitMedia {
+    min-height: 280px;
+  }
+
+  .heroActions,
+  .heroTrustStrip {
+    justify-content: center;
   }
 
   .featureRowReverse {
     direction: ltr;
   }
 
-  .whyGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .featureList {
-    grid-template-columns: 1fr;
-  }
-
+  .whyGrid,
+  .featureList,
   .testimonialGrid {
     grid-template-columns: 1fr;
   }

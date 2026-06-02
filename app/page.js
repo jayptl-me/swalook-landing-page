@@ -579,8 +579,31 @@ export default function HomePage() {
         <div className={styles.sectionShell}>
           <AnimatedSection>
             <div className={styles.ctaContent}>
-              <h2>See Swalook in Action</h2>
-              <p>Book a free demo or start a free trial to see how Swalook can grow your beauty business.</p>
+              <div className={styles.ctaIntro}>
+                <span className="section-label">Ready to grow?</span>
+                <h2>Turn more visits into repeat clients.</h2>
+                <p>
+                  Book a short demo to see how Swalook keeps bookings full, follow-ups simple, and revenue moving.
+                </p>
+              </div>
+
+              <div className={styles.ctaGrid}>
+                <div className={styles.ctaBenefit}>
+                  <FiHeart />
+                  <div>
+                    <h3>Retention that works</h3>
+                    <p>Bring clients back with reminders, loyalty, and smarter follow-ups.</p>
+                  </div>
+                </div>
+                <div className={styles.ctaBenefit}>
+                  <FiMail />
+                  <div>
+                    <h3>Marketing on autopilot</h3>
+                    <p>Run WhatsApp, SMS, and email campaigns without extra effort.</p>
+                  </div>
+                </div>
+              </div>
+
               <div className={styles.ctaActions}>
                 <Link href="/book-demo" className="btn btn-primary btn-lg">
                   Book Free Demo <FiArrowRight />

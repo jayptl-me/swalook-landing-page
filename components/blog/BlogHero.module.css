@@ -1,0 +1,113 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 144px 0 72px;
+  background: var(--bg-hero-gradient);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/feature-bg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.copy {
+  text-align: center;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 16px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 188, 212, 0.15);
+  background: rgba(0, 188, 212, 0.08);
+  color: var(--primary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.8vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text-heading);
+}
+
+.description {
+  max-width: 720px;
+  margin: 16px auto 0;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.stat {
+  padding: 18px 20px;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-xs);
+}
+
+.stat span {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  color: var(--text-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat p {
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding-top: 132px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 122px 0 60px;
+  }
+
+  .content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

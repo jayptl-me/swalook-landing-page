@@ -111,6 +111,10 @@
   padding: 0 24px;
 }
 
+.blogsContainerSingle {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .blogIntroRail {
   display: grid;
   gap: 18px;
@@ -124,10 +128,54 @@
 }
 
 .blogToolbar {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 16px;
   margin-bottom: 22px;
+}
+
+.toolbarTop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbarActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.railToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.railToggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-hover);
+  color: var(--primary);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.railToggle svg {
+  flex-shrink: 0;
 }
 
 .categoryTabs {
@@ -446,34 +494,213 @@
   min-width: 260px;
 }
 
-/* responsive */
+.ctaSection {
+  margin-top: 32px;
+  padding: 72px 0 72px;
+  background: var(--bg-white);
+  position: relative;
+  overflow: hidden;
+}
 
-@media (max-width: 1100px) {
-  .blogsContainer {
+.ctaShell {
+  display: grid;
+  gap: 22px;
+}
+
+.ctaIntro {
+  max-width: 760px;
+}
+
+.ctaIntro :global(.section-subtitle) {
+  margin-bottom: 0;
+}
+
+.ctaIntro .section-label {
+  margin-bottom: 16px;
+}
+
+.ctaIntro h2 {
+  color: var(--text-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+  margin: 16px 0 14px;
+}
+
+.ctaIntro p {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.85;
+  max-width: 58ch;
+  margin: 0 auto;
+}
+
+.ctaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.ctaCard {
+  display: grid;
+  gap: 18px;
+  align-content: space-between;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-white);
+  box-shadow: var(--shadow-xs);
+}
+
+.ctaCard h3 {
+  margin: 0 0 10px;
+  color: var(--text-heading);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.ctaCard p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.75;
+}
+
+.ctaButton {
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.ctaButton svg {
+  flex-shrink: 0;
+}
+
+.ctaActions {
+  justify-content: center;
+  margin-top: 0;
+}
+
+.ctaActions .btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-primary);
+}
+
+.ctaActions .btn-primary:hover {
+  color: #ffffff;
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.ctaActions .btn-outline {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.ctaActions .btn-outline:hover {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.faqList {
+  max-width: 840px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+
+.faqItem {
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.faqItem:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 22px;
+  text-align: left;
+  color: var(--text-heading);
+  background: transparent;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.faqQuestion span {
+  min-width: 0;
+}
+
+.faqIcon {
+  flex-shrink: 0;
+  color: var(--primary);
+  font-size: 1.05rem;
+  transition: transform var(--transition-base);
+}
+
+.faqIconOpen {
+  transform: rotate(45deg);
+}
+
+.faqAnswer {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease;
+}
+
+.faqAnswerOpen {
+  max-height: 240px;
+}
+
+.faqAnswerInner {
+  padding: 0 22px 20px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.faqMoreLink {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .aboutGrid,
+  .routeGrid,
+  .splitGrid,
+  .featureRow {
     grid-template-columns: 1fr;
   }
 
-  .blogIntroRail {
-    position: static;
+  .heroStats {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .blogIntroRail > * {
-    min-width: 0;
-  }
-
-  .blogToolbar {
-    margin-top: 6px;
+  .featureList,
+  .testimonialGrid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 900px) {
-  .blogHero {
-    padding-top: 136px;
+  .heroInner {
+    grid-template-columns: 1fr;
   }
 
-  .blogStats,
-  .blogIntroRail {
+  .heroVisualWrap {
+    justify-self: stretch;
+  }
+
+  .ctaGrid {
     grid-template-columns: 1fr;
   }
 
@@ -497,6 +724,96 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding-top: 96px;
+  }
+
+  .heroContent,
+  .sectionShell {
+    width: min(100%, calc(100% - 20px));
+  }
+
+  .heroInner {
+    gap: 28px;
+  }
+
+  .heroTitle {
+    max-width: none;
+  }
+
+  .heroDesc {
+    font-size: 1rem;
+  }
+
+  .heroStats {
+    grid-template-columns: 1fr;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .heroActions > * {
+    width: 100%;
+  }
+
+  .routeSection,
+  .aboutSection,
+  .servicesSection,
+  .provideSection,
+  .whySection,
+  .mobileAppSection,
+  .testimonialsSection,
+  .featuresOverview,
+  .faqPreview {
+    padding: 64px 0;
+  }
+
+  .sectionHeading {
+    margin-bottom: 30px;
+  }
+
+  .routeCard,
+  .serviceCard,
+  .infoCard,
+  .testimonialCard,
+  .featureItem {
+    padding: 22px;
+  }
+
+  .heroVisualFrame,
+  .splitMedia,
+  .featureImageBox,
+  .aboutImage {
+    min-height: 280px;
+  }
+
+  .heroDeviceBody {
+    padding: 18px;
+  }
+
+  .heroMetricRow {
+    grid-template-columns: 1fr;
+  }
+
+  .heroDeviceHeader,
+  .panelHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ctaActions .btn-primary,
+  .ctaActions .btn-outline {
+    width: 100%;
+  }
+
+  .aboutActions,
+  .faqMoreLink {
+    width: 100%;
+  }
+
   .blogHero {
     padding: 126px 0 60px;
   }
@@ -509,6 +826,15 @@
 
   .blogToolbar {
     gap: 14px;
+  }
+
+  .toolbarTop {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbarActions {
+    justify-content: flex-start;
   }
 
   .categoryTabs {
@@ -531,12 +857,44 @@
 }
 
 @media (max-width: 480px) {
-  .blogHeroTitle {
-    font-size: clamp(2rem, 10vw, 2.8rem);
+  .hero {
+    padding-top: 88px;
   }
 
-  .blogStat {
-    padding: 16px;
+  .heroLabel,
+  .heroTrustItem,
+  .visualStatus,
+  .heroVisualLabel {
+    letter-spacing: 0.08em;
+  }
+
+  .ctaBenefit {
+    padding: 18px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 11vw, 2.8rem);
+  }
+
+  .sectionHeadingLeft {
+    text-align: center;
+  }
+
+  .faqQuestion {
+    padding: 18px 18px;
+    font-size: 0.94rem;
+  }
+
+  .faqAnswerInner {
+    padding: 0 18px 18px;
+  }
+
+  .routeCardTop h3,
+  .infoCard h3,
+  .serviceCard h3,
+  .testimonialCard h3,
+  .featureTextBox h3 {
+    word-break: break-word;
   }
 
   .blogImage {
@@ -546,5 +904,20 @@
   .quickRoute,
   .categoryTab {
     min-height: 44px;
+  }
+}
+
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(32px, -24px, 0) scale(1.04);
+  }
+  50% {
+    transform: translate3d(-18px, 18px, 0) scale(0.97);
+  }
+  75% {
+    transform: translate3d(24px, 20px, 0) scale(1.02);
   }
 }

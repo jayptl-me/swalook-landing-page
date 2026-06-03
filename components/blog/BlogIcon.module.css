@@ -1,0 +1,42 @@
+.blogIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-white);
+  box-shadow: var(--shadow-xs);
+  color: var(--text-heading);
+  flex-shrink: 0;
+}
+
+.blogIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.accentEmerald {
+  background: rgba(0, 188, 212, 0.08);
+  border-color: rgba(0, 188, 212, 0.15);
+  color: var(--primary);
+}
+
+.accentAmber {
+  background: rgba(255, 152, 0, 0.08);
+  border-color: rgba(255, 152, 0, 0.15);
+  color: #c77700;
+}
+
+.accentCyan {
+  background: rgba(38, 198, 218, 0.08);
+  border-color: rgba(38, 198, 218, 0.15);
+  color: var(--primary-dark);
+}
+
+.accentViolet {
+  background: rgba(108, 99, 255, 0.08);
+  border-color: rgba(108, 99, 255, 0.15);
+  color: var(--secondary);
+}

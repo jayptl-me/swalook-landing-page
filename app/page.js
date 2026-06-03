@@ -32,11 +32,6 @@ const heroHighlights = [
   'Simple booking and follow-up',
 ];
 
-const heroStats = [
-  { value: '12', label: 'Feature groups' },
-  { value: '3', label: 'Growth levers' },
-  { value: '1', label: 'CRM system' },
-];
 
 const featureGroups = [
   { icon: <FiLayout />, title: 'Dashboard & Analytics', desc: 'See sales, bookings, retention, and daily performance at a glance.', link: '/salon-dashboard-software' },
@@ -162,14 +157,6 @@ function SectionHeading({ eyebrow, title, subtitle, align = 'center' }) {
   );
 }
 
-function StatPill({ value, label }) {
-  return (
-    <div className={styles.statPill}>
-      <span>{value}</span>
-      <p>{label}</p>
-    </div>
-  );
-}
 
 function InfoCard({ icon, title, desc }) {
   return (
@@ -248,12 +235,6 @@ export default function HomePage() {
                 One place for bookings, follow-ups, and billing.
               </p>
 
-              <div className={styles.heroStats}>
-                {heroStats.map((stat) => (
-                  <StatPill key={stat.label} value={stat.value} label={stat.label} />
-                ))}
-              </div>
-
               <div className={styles.heroActions}>
                 <Link href="/book-demo" className="btn btn-primary btn-lg">
                   Book Free Demo <FiArrowRight />
@@ -330,14 +311,6 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className={styles.heroVisualCard}>
-                  <p className={styles.heroVisualLabel}>Core platform</p>
-                  <ul className={styles.heroVisualList}>
-                    <li>Appointment scheduling and confirmations</li>
-                    <li>Retention, loyalty, and follow-up workflows</li>
-                    <li>Billing, analytics, and branch visibility</li>
-                  </ul>
-                </div>
               </div>
             </AnimatedSection>
           </div>
@@ -579,8 +552,31 @@ export default function HomePage() {
         <div className={styles.sectionShell}>
           <AnimatedSection>
             <div className={styles.ctaContent}>
-              <h2>See Swalook in Action</h2>
-              <p>Book a free demo or start a free trial to see how Swalook can grow your beauty business.</p>
+              <div className={styles.ctaIntro}>
+                <span className="section-label">Ready to grow?</span>
+                <h2>Turn more visits into repeat clients.</h2>
+                <p>
+                  Book a short demo to see how Swalook keeps bookings full, follow-ups simple, and revenue moving.
+                </p>
+              </div>
+
+              <div className={styles.ctaGrid}>
+                <div className={styles.ctaBenefit}>
+                  <FiHeart />
+                  <div>
+                    <h3>Retention that works</h3>
+                    <p>Bring clients back with reminders, loyalty, and smarter follow-ups.</p>
+                  </div>
+                </div>
+                <div className={styles.ctaBenefit}>
+                  <FiMail />
+                  <div>
+                    <h3>Marketing on autopilot</h3>
+                    <p>Run WhatsApp, SMS, and email campaigns without extra effort.</p>
+                  </div>
+                </div>
+              </div>
+
               <div className={styles.ctaActions}>
                 <Link href="/book-demo" className="btn btn-primary btn-lg">
                   Book Free Demo <FiArrowRight />

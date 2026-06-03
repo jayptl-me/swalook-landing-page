@@ -2,71 +2,77 @@
 
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
+import BlogBreadcrumb from '@/components/blog/BlogBreadcrumb';
+import BlogMeta from '@/components/blog/BlogMeta';
+import { getRelatedBlogPosts } from '@/components/blog/blogData';
 import styles from './BlogPost.module.css';
 
-const allPosts = [
-  { slug: '7-key-factors-for-choosing-salon-crm-software', title: '7 Key Factors When Choosing Salon CRM Software' },
-  { slug: 'why-salons-fall-behind-without-crm-software', title: 'Why Salons Need CRM Software: Swalook Solutions' },
-  { slug: 'the-importance-of-integrated-marketing', title: 'Integrated Marketing for Salons with Swalook CRM' },
-  { slug: 'how-to-automate-your-salon-marketing-with-swalook', title: 'How to Automate Your Salon Marketing with Swalook' },
-];
-
-export default function BlogPostLayout({ title, category, children, currentSlug }) {
-  const relatedPosts = allPosts.filter(p => p.slug !== currentSlug);
+export default function BlogPostLayout({
+  title,
+  category,
+  children,
+  currentSlug,
+  readTime = '6 min read',
+  publishedAt = '2026-01-01',
+  author = 'Swalook Editorial',
+}) {
+  const relatedPosts = getRelatedBlogPosts(currentSlug);
 
   return (
-    <article className={styles.blogPost}>
-      <div className={styles.blogContainer}>
-        {/* Main Content */}
-        <div>
-          <div className={styles.blogBreadcrumb}>
-            <Link href="/">Home</Link>
-            <span>/</span>
-            <Link href="/blogs">Blog</Link>
-            <span>/</span>
-            <span>{title}</span>
-          </div>
-          <span className={styles.blogCategory}>{category}</span>
-          <h1 className={styles.blogTitle}>{title}</h1>
-          <div className={styles.blogMeta}>
-            <span>By Swalook</span>
-            <span>•</span>
-            <span>0 Comments</span>
-          </div>
-          <div className={styles.blogContent}>
-            {children}
-          </div>
+    <article className={styles.post}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <BlogBreadcrumb title={title} />
+
+          <header className={styles.header}>
+            <BlogMeta
+              category={category}
+              readTime={readTime}
+              author={author}
+              publishedAt={publishedAt}
+            />
+            <h1 className={styles.title}>{title}</h1>
+          </header>
+
+          <div className={styles.body}>{children}</div>
         </div>
 
-        {/* Sidebar */}
-        <aside className={styles.blogSidebar}>
-          <div className={styles.sidebarWidget}>
-            <h3>About Company</h3>
+        <aside className={styles.sidebar}>
+          <section className={styles.sidebarCard}>
+            <span className={styles.sidebarEyebrow}>About Swalook</span>
+            <h2>Built for salon growth</h2>
             <p>
-              Swalook is a powerful, cloud-based CRM platform designed specifically for the salon industry. 
-              It empowers salon owners to streamline operations, enhance customer experiences, and optimize 
-              business performance.
+              Swalook helps salons improve retention, simplify operations, and turn everyday workflows into
+              more repeat revenue.
             </p>
-          </div>
+          </section>
 
-          <div className={styles.sidebarWidget}>
-            <h3>Related Posts</h3>
+          <section className={styles.sidebarCard}>
+            <span className={styles.sidebarEyebrow}>Related posts</span>
+            <h3>Continue reading</h3>
             <div className={styles.relatedList}>
               {relatedPosts.map((post) => (
-                <Link key={post.slug} href={`/${post.slug}`} className={styles.relatedLink}>
-                  {post.title}
+                <Link key={post.slug} href={post.href} className={styles.relatedLink}>
+                  <span>{post.title}</span>
+                  <FiArrowRight aria-hidden="true" />
                 </Link>
               ))}
             </div>
-          </div>
+          </section>
 
-          <div className={styles.blogCta}>
-            <h3>Ready to grow?</h3>
-            <p>Try Swalook free and transform your salon management.</p>
-            <Link href="/contact" className="btn btn-primary btn-sm">
-              Get a Demo <FiArrowRight />
-            </Link>
-          </div>
+          <section className={styles.sidebarCard}>
+            <span className={styles.sidebarEyebrow}>Next step</span>
+            <h3>See the product in action</h3>
+            <p>Book a demo or start a trial to explore the workflows behind these insights.</p>
+            <div className={styles.actionStack}>
+              <Link href="/book-demo" className="btn btn-primary btn-sm">
+                Book Free Demo <FiArrowRight />
+              </Link>
+              <Link href="/free-trial" className="btn btn-outline btn-sm">
+                Start Free Trial
+              </Link>
+            </div>
+          </section>
         </aside>
       </div>
     </article>

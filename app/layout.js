@@ -1,6 +1,6 @@
 import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 
 export const metadata = {
   title: 'Swalook - Revenue Generation Engine For The Beauty Industry',

@@ -17,6 +17,12 @@ const features = [
   { icon: <FiClock />, title: 'Order History and Reminders', desc: 'Easily keep track of your past appointments and receive reminders for upcoming visits.' },
 ];
 
+const proofPoints = [
+  'Check appointments without opening a laptop',
+  'Stay connected to client activity while away from the counter',
+  'Keep the mobile experience aligned with salon operations',
+];
+
 export default function MobileAppPage() {
   return (
     <>
@@ -48,28 +54,25 @@ export default function MobileAppPage() {
         </AnimatedSection>
       </section>
 
-      <section className={styles.servicesSection} style={{ paddingTop: '24px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px 20px' }}>
+      {/* Product Proof */}
+      <section className={styles.proofSection}>
+        <div className={styles.proofContainer}>
           <AnimatedSection>
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 0.95fr) minmax(0, 1.05fr)', gap: '24px', alignItems: 'center', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-xl)', background: '#fff', boxShadow: 'var(--shadow-xs)', overflow: 'hidden' }}>
-              <div style={{ position: 'relative', minHeight: '280px' }}>
+            <div className={styles.proofCard}>
+              <div className={styles.proofImage}>
                 <Image src="/images/feature-mobile.png" alt="Swalook mobile app proof" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
               </div>
-              <div style={{ padding: '28px' }}>
+              <div className={styles.proofBody}>
                 <span className="section-label">Product proof</span>
-                <h2 className="section-title" style={{ marginTop: '12px' }}>A real app surface for appointments and updates</h2>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginTop: '14px' }}>
+                <h2 className="section-title">A real app surface for appointments and updates</h2>
+                <p>
                   This screen grounds the mobile app story in an interface that teams can actually use for reminders,
                   quick updates, and checking schedule details away from the desk.
                 </p>
-                <div style={{ display: 'grid', gap: '12px', marginTop: '20px' }}>
-                  {[
-                    'Check appointments without opening a laptop',
-                    'Stay connected to client activity while away from the counter',
-                    'Keep the mobile experience aligned with salon operations',
-                  ].map((point) => (
-                    <div key={point} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '12px 14px', border: '1px solid rgba(0, 188, 212, 0.12)', borderRadius: 'var(--radius-md)', background: 'rgba(0, 188, 212, 0.04)', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                      <FiCheckCircle style={{ flexShrink: 0, color: 'var(--primary)', marginTop: '2px' }} />
+                <div className={styles.proofPoints}>
+                  {proofPoints.map((point) => (
+                    <div key={point} className={styles.proofPoint}>
+                      <FiCheckCircle className={styles.proofPointIcon} />
                       <span>{point}</span>
                     </div>
                   ))}
@@ -91,7 +94,7 @@ export default function MobileAppPage() {
         <AnimatedSection>
           <div className={styles.servicesContent}>
             <p>
-              The Swalook mobile app extends the CRM&apos;s capabilities to your fingertips. 
+              The Swalook mobile app extends the CRM's capabilities to your fingertips. 
               Clients can manage their appointments seamlessly, while salon owners get instant 
               access to dashboards, notifications, and business insights from anywhere.
             </p>

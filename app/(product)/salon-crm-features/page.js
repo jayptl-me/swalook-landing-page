@@ -37,6 +37,12 @@ const withPoints = [
   'Focus more on clients, less on admin work.',
 ];
 
+const proofPoints = [
+  'Keep client history and preferences in one place',
+  'Reduce manual follow-up and context switching',
+  'Support better service with easier access to data',
+];
+
 export default function SalonCrmFeaturesPage() {
   return (
     <>
@@ -60,23 +66,12 @@ export default function SalonCrmFeaturesPage() {
         </AnimatedSection>
       </section>
 
-      <section style={{ padding: '24px 0 56px', background: 'var(--bg-white)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+      {/* Product Proof */}
+      <section className={styles.proofSection}>
+        <div className={styles.proofContainer}>
           <AnimatedSection>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'minmax(0, 1.05fr) minmax(0, 0.95fr)',
-                gap: '24px',
-                alignItems: 'center',
-                border: '1px solid var(--border-color)',
-                borderRadius: 'var(--radius-xl)',
-                background: '#fff',
-                boxShadow: 'var(--shadow-xs)',
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ position: 'relative', minHeight: '320px' }}>
+            <div className={styles.proofCard}>
+              <div className={styles.proofImage}>
                 <Image
                   src="/images/feature-profiles.png"
                   alt="Swalook client profile and salon workflow screen"
@@ -85,37 +80,17 @@ export default function SalonCrmFeaturesPage() {
                   style={{ objectFit: 'cover' }}
                 />
               </div>
-
-              <div style={{ padding: '28px' }}>
+              <div className={styles.proofBody}>
                 <span className="section-label">Product proof</span>
-                <h2 className="section-title" style={{ marginTop: '12px' }}>
-                  Real client profiles, not generic CRM copy
-                </h2>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginTop: '14px' }}>
+                <h2 className="section-title">Real client profiles, not generic CRM copy</h2>
+                <p>
                   The CRM experience starts with the customer record. This view gives salon teams one place to keep
                   notes, visit history, and important context so every interaction feels more personal.
                 </p>
-                <div style={{ display: 'grid', gap: '12px', marginTop: '20px' }}>
-                  {[
-                    'Keep client history and preferences in one place',
-                    'Reduce manual follow-up and context switching',
-                    'Support better service with easier access to data',
-                  ].map((point) => (
-                    <div
-                      key={point}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        gap: '10px',
-                        padding: '12px 14px',
-                        border: '1px solid rgba(0, 188, 212, 0.12)',
-                        borderRadius: 'var(--radius-md)',
-                        background: 'rgba(0, 188, 212, 0.04)',
-                        color: 'var(--text-secondary)',
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      <FiCheckCircle style={{ flexShrink: 0, color: 'var(--primary)', marginTop: '2px' }} />
+                <div className={styles.proofPoints}>
+                  {proofPoints.map((point) => (
+                    <div key={point} className={styles.proofPoint}>
+                      <FiCheckCircle className={styles.proofPointIcon} />
                       <span>{point}</span>
                     </div>
                   ))}
@@ -150,7 +125,7 @@ export default function SalonCrmFeaturesPage() {
       <section className={styles.whySection}>
         <div className="section-header">
           <AnimatedSection>
-            <h2 className="section-title">Why Choose Swalook&apos;s All-in-One CRM?</h2>
+            <h2 className="section-title">Why Choose Swalook's All-in-One CRM?</h2>
           </AnimatedSection>
         </div>
         <AnimatedSection>

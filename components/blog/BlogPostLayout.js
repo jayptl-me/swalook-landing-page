@@ -4,7 +4,14 @@ import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
 import BlogBreadcrumb from '@/components/blog/BlogBreadcrumb';
 import BlogMeta from '@/components/blog/BlogMeta';
-import { getRelatedBlogPosts } from '@/components/blog/blogData';
+import { getRelatedPosts, getAllPosts } from '@/lib/blog';
+
+function getRelatedBlogPosts(currentSlug) {
+  return getRelatedPosts(currentSlug).map((post) => ({
+    ...post,
+    href: `/blogs/${post.slug}`,
+  }));
+}
 import styles from './BlogPost.module.css';
 
 export default function BlogPostLayout({

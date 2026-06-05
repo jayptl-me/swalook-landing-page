@@ -1,0 +1,40 @@
+{
+  "quickRoutes": [
+    { "label": "Salon CRM Features", "href": "/salon-crm-features" },
+    { "label": "Book Free Demo", "href": "/book-demo" },
+    { "label": "Start Free Trial", "href": "/free-trial" },
+    { "label": "FAQ", "href": "/faq" },
+    { "label": "Contact Us", "href": "/contact" }
+  ],
+  "insights": [
+    {
+      "title": "Growth-focused content",
+      "desc": "Each article should move readers toward retention, revenue, and repeat visits."
+    },
+    {
+      "title": "Practical, not fluffy",
+      "desc": "Clear examples and simple steps beat long, vague marketing advice."
+    },
+    {
+      "title": "Built for conversion",
+      "desc": "Every post should have a natural next step into a demo, feature page, or FAQ."
+    }
+  ],
+  "ctaItems": [
+    {
+      "title": "See the product",
+      "desc": "Explore the core feature pages behind the blog content.",
+      "href": "/salon-crm-features"
+    },
+    {
+      "title": "Book a demo",
+      "desc": "Talk through your salon goals and see Swalook in action.",
+      "href": "/book-demo"
+    },
+    {
+      "title": "Start a trial",
+      "desc": "Try the platform and see the workflows yourself.",
+      "href": "/free-trial"
+    }
+  ]
+}

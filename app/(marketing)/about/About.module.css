@@ -46,6 +46,8 @@
 .learnContent p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 18px; font-size: 0.93rem; }
 
 .aboutCta { padding: 60px 0 80px; text-align: center; background: var(--bg-white); }
+.ctaLead { font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; }
+.ctaHeading { font-size: 1.3rem; margin-bottom: 24px; }
 .ctaPhone { font-family: var(--font-display); font-size: 2rem; font-weight: 700; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; margin-bottom: 8px; }
 .ctaTagline { color: var(--text-secondary); font-size: 1.05rem; }
 

@@ -1,8 +1,7 @@
 'use client';
 
 import PageHero from '@/components/marketing/PageHero';
-import AnimatedSection from '@/components/ui/AnimatedSection';
-import styles from '../contact/Contact.module.css';
+import LeadForm from '@/components/marketing/LeadForm';
 
 export default function FreeTrialPage() {
   return (
@@ -14,63 +13,24 @@ export default function FreeTrialPage() {
         description="Explore the platform with a free trial and see how Swalook fits your salon workflow."
       />
 
-      <section className={styles.formSection}>
-        <div className={styles.formGrid}>
-          <AnimatedSection direction="left">
-            <div className={styles.formInfo}>
-              <h2>Try Swalook Before You Decide</h2>
-              <p>
-                Experience the tools that help beauty businesses grow with better customer retention, smarter marketing,
-                and simpler operations.
-              </p>
-              <div className={styles.infoBullets}>
-                <div className={styles.infoBullet}>
-                  <span className={styles.infoBulletIcon}>•</span>
-                  <span>See how automation saves time on follow-ups and reminders.</span>
-                </div>
-                <div className={styles.infoBullet}>
-                  <span className={styles.infoBulletIcon}>•</span>
-                  <span>Test the tools for appointments, marketing, and reporting.</span>
-                </div>
-                <div className={styles.infoBullet}>
-                  <span className={styles.infoBulletIcon}>•</span>
-                  <span>Discover how Swalook can support your business growth.</span>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection direction="right">
-            <form className={styles.contactForm} onSubmit={(e) => e.preventDefault()}>
-              <div className={styles.formGroup}>
-                <label>Name</label>
-                <input type="text" placeholder="Your name" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Salon Name</label>
-                <input type="text" placeholder="Salon name" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Phone Number</label>
-                <input type="tel" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Email Address</label>
-                <input type="email" placeholder="your@email.com" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>City</label>
-                <input type="text" placeholder="Your city" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Business Type</label>
-                <input type="text" placeholder="Salon, spa, studio, clinic" />
-              </div>
-              <button type="submit" className={styles.submitBtn}>Start Free Trial</button>
-            </form>
-          </AnimatedSection>
-        </div>
-      </section>
+      <LeadForm
+        title="Try Swalook Before You Decide"
+        description="Experience the tools that help beauty businesses grow with better customer retention, smarter marketing, and simpler operations."
+        bullets={[
+          { text: 'See how automation saves time on follow-ups and reminders.' },
+          { text: 'Test the tools for appointments, marketing, and reporting.' },
+          { text: 'Discover how Swalook can support your business growth.' },
+        ]}
+        fields={[
+          { name: 'name', label: 'Name', type: 'text', placeholder: 'Your name' },
+          { name: 'salonName', label: 'Salon Name', type: 'text', placeholder: 'Salon name' },
+          { name: 'mobile', label: 'Phone Number', type: 'tel', placeholder: '+91 XXXXX XXXXX' },
+          { name: 'email', label: 'Email Address', type: 'email', placeholder: 'your@email.com' },
+          { name: 'city', label: 'City', type: 'text', placeholder: 'Your city' },
+          { name: 'businessType', label: 'Business Type', type: 'text', placeholder: 'Salon, spa, studio, clinic' },
+        ]}
+        submitLabel="Start Free Trial"
+      />
     </>
   );
 }

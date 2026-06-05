@@ -3,6 +3,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 
 export const metadata = {
+  metadataBase: new URL('https://swalook.in'),
   title: 'Swalook - Revenue Generation Engine For The Beauty Industry',
   description: 'Swalook - Revenue Generation Engine For The Beauty Industry. Grow your salon business with better customer retention, smarter marketing, and fewer no-shows.',
   keywords: [
@@ -30,6 +31,9 @@ export const metadata = {
     'salon CRM Pune',
     'salon CRM Kolkata'
   ].join(', '),
+  alternates: {
+    canonical: 'https://swalook.in',
+  },
   openGraph: {
     title: 'Swalook - Revenue Generation Engine For The Beauty Industry',
     description: 'Swalook - Revenue Generation Engine For The Beauty Industry. Grow your salon business with better customer retention, smarter marketing, and fewer no-shows.',

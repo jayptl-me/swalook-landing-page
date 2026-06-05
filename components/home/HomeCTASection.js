@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FiArrowRight, FiHeart, FiMail } from 'react-icons/fi';
-import AnimatedSection from '@/components/AnimatedSection';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import styles from '@/components/home/Home.module.css';
 
 export default function HomeCTASection() {

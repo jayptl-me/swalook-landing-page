@@ -214,9 +214,9 @@ export default function AboutPage() {
       {/* CTA */}
       <section className={styles.aboutCta}>
         <AnimatedSection>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-tertiary)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Ready to Get Started?</p>
-          <h3 style={{ fontSize: '1.3rem', marginBottom: 24 }}>Book a free demo today</h3>
-          <span className={styles.ctaPhone}>+91 XXXXX XXXXX</span>
+          <p className={styles.ctaLead}>Ready to Get Started?</p>
+          <h3 className={styles.ctaHeading}>Book a free demo today</h3>
+          <span className={styles.ctaPhone}>+91 98701 03761</span>
           <p className={styles.ctaTagline}>Grow. Retain. Repeat.</p>
         </AnimatedSection>
       </section>

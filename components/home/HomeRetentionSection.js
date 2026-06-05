@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSection';
 import styles from '@/components/home/Home.module.css';
 
 export default function HomeRetentionSection({ items }) {

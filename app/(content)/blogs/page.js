@@ -1,31 +1,86 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { FiArrowRight, FiSearch } from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 import BlogHero from '@/components/blog/BlogHero';
 import BlogCategoryTabs from '@/components/blog/BlogCategoryTabs';
 import BlogPostGrid from '@/components/blog/BlogPostGrid';
 import BlogSidebarRail from '@/components/blog/BlogSidebarRail';
-import {
-  blogCategories,
-  blogPosts,
-  blogQuickRoutes,
-  blogInsights,
-  blogCTAItems,
-} from '@/components/blog/blogData';
+import BlogSearch from '@/components/blog/BlogSearch';
+import BlogFeaturedPost from '@/components/blog/BlogFeaturedPost';
+import BlogPagination from '@/components/blog/BlogPagination';
+import { getAllPosts, getCategories } from '@/lib/blog';
+import blogConfig from '@/data/blog-config.json';
+
+const blogPosts = getAllPosts().map((post) => ({
+  ...post,
+  href: `/blogs/${post.slug}`,
+}));
+const blogCategories = getCategories();
+const blogQuickRoutes = blogConfig.quickRoutes;
+const blogInsights = blogConfig.insights;
+const blogCTAItems = blogConfig.ctaItems;
 import styles from './Blogs.module.css';
+
+const POSTS_PER_PAGE = 6;
 
 export default function BlogsPage() {
   const [activeCategory, setActiveCategory] = useState('All Posts');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleSearch = useCallback((query) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  }, []);
+
+  const handleCategoryChange = useCallback((category) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
+  }, []);
+
+  const handlePageChange = useCallback((page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === 'All Posts') {
-      return blogPosts;
+    let posts = blogPosts;
+
+    // Category filter
+    if (activeCategory !== 'All Posts') {
+      posts = posts.filter((post) => post.category === activeCategory);
     }
 
-    return blogPosts.filter((post) => post.category === activeCategory);
-  }, [activeCategory]);
+    // Search filter (fuzzy match on title + excerpt)
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      posts = posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query) ||
+          post.category.toLowerCase().includes(query)
+      );
+    }
+
+    return posts;
+  }, [activeCategory, searchQuery]);
+
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * POSTS_PER_PAGE,
+    currentPage * POSTS_PER_PAGE
+  );
+
+  // Featured post: first post when no filters active, otherwise none
+  const showFeatured = activeCategory === 'All Posts' && !searchQuery && currentPage === 1;
+  const featuredPost = showFeatured ? blogPosts[0] : null;
+
+  // Remove featured post from grid when showing it
+  const gridPosts = showFeatured
+    ? paginatedPosts.filter((p) => p.slug !== featuredPost.slug)
+    : paginatedPosts;
 
   return (
     <>
@@ -33,6 +88,11 @@ export default function BlogsPage() {
         label="Blog"
         title={<>Insights and strategies for salon success</>}
         description="Practical CRM, marketing, and growth guidance for salon owners who want more repeat clients, cleaner operations, and stronger revenue."
+        stats={[
+          { value: '4+', label: 'In-depth guides' },
+          { value: '5 min', label: 'Avg. read time' },
+          { value: 'Weekly', label: 'New articles' },
+        ]}
       />
 
       <section className={styles.blogsLayout}>
@@ -48,27 +108,60 @@ export default function BlogsPage() {
 
           <main className={styles.blogMain}>
             <div className={styles.blogToolbar}>
-              <BlogCategoryTabs
-                categories={blogCategories}
-                activeCategory={activeCategory}
-                onChange={setActiveCategory}
-              />
-
-              <div className={styles.searchHint} aria-label="Category browser">
-                <FiSearch aria-hidden="true" />
-                <span>Browse articles by category</span>
+              <div className={styles.toolbarTop}>
+                <BlogCategoryTabs
+                  categories={blogCategories}
+                  activeCategory={activeCategory}
+                  onChange={handleCategoryChange}
+                />
+                <BlogSearch onSearch={handleSearch} />
               </div>
+
+              {searchQuery && (
+                <p className={styles.searchResultInfo}>
+                  {filteredPosts.length === 0
+                    ? `No results for "${searchQuery}"`
+                    : `Found ${filteredPosts.length} result${filteredPosts.length === 1 ? '' : 's'} for "${searchQuery}"`}
+                </p>
+              )}
             </div>
 
-            <BlogPostGrid
-              posts={filteredPosts}
-              emptyState={
-                <div className={styles.emptyState}>
-                  <h2>No posts found</h2>
-                  <p>Try another category or return to all posts.</p>
-                </div>
-              }
-            />
+            {showFeatured && featuredPost && (
+              <BlogFeaturedPost post={featuredPost} />
+            )}
+
+            {filteredPosts.length === 0 && searchQuery ? (
+              <div className={styles.emptyState}>
+                <h2>No articles found</h2>
+                <p>
+                  Try a different search term or browse by category.
+                </p>
+                <button
+                  onClick={() => handleSearch('')}
+                  className="btn btn-outline btn-sm"
+                >
+                  Clear search
+                </button>
+              </div>
+            ) : (
+              <>
+                <BlogPostGrid
+                  posts={gridPosts}
+                  emptyState={
+                    <div className={styles.emptyState}>
+                      <h2>No posts in this category yet</h2>
+                      <p>Check back soon or browse all articles.</p>
+                    </div>
+                  }
+                />
+
+                <BlogPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </>
+            )}
 
             <section className={`${styles.ctaSection} section section-alt`}>
               <div className={`container ${styles.ctaShell}`}>

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import AnimatedSection from '@/components/AnimatedSection';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import styles from '@/components/home/Home.module.css';
 
 export default function HomeFeaturesOverviewSection({ useCases }) {

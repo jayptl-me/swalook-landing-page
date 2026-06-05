@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { FaFacebookF, FaXTwitter, FaYoutube, FaLinkedinIn, FaInstagram } from 'react-icons/fa6';
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
-import styles from '../Footer.module.css';
+import styles from './Footer.module.css';
 
 export default function Footer() {
   const crmLinks = [
@@ -28,7 +28,7 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: <FaFacebookF />, href: 'https://www.facebook.com/people/SwaLook/100082780576167/', label: 'Facebook' },
-    { icon: <FaXTwitter />, href: 'https://twitter.com/home', label: 'Twitter' },
+    // Twitter/X profile removed — Swalook does not maintain an active X/Twitter presence
     { icon: <FaYoutube />, href: 'https://www.youtube.com/channel/UCQj9_wk87-iDb9h9TdxjHYg', label: 'YouTube' },
     { icon: <FaLinkedinIn />, href: 'https://www.linkedin.com/company/swalook/', label: 'LinkedIn' },
     { icon: <FaInstagram />, href: 'https://www.instagram.com/swalook_official/', label: 'Instagram' },
@@ -105,7 +105,7 @@ export default function Footer() {
             <Link href="/terms-conditions" className={styles.policyLink}>Terms & Conditions</Link>
             <Link href="/privacy-policy" className={styles.policyLink}>Privacy Policy</Link>
             <Link href="/cancellation-policy" className={styles.policyLink}>Cancellation Policy</Link>
-            <Link href="/shipping-policy" className={styles.policyLink}>Shipping Policy</Link>
+            <Link href="/shipping-policy" className={styles.policyLink}>Service Delivery</Link>
           </div>
         </div>
       </div>

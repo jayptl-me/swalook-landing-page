@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiArrowRight, FiCheckCircle } from 'react-icons/fi';
-import AnimatedSection from '@/components/AnimatedSection';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import styles from '@/components/home/Home.module.css';
 
 export default function HomeHeroSection({ heroHighlights }) {

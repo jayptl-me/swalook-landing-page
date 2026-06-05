@@ -25,3 +25,20 @@
 
 @media (max-width: 900px) { .introContent { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .featureGrid { grid-template-columns: 1fr; } }
+
+/* Product Proof Card */
+.proofSection { padding-top: 24px; }
+.proofContainer { max-width: 1200px; margin: 0 auto; padding: 0 24px 20px; }
+.proofCard { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 24px; align-items: center; border: 1px solid var(--border-color); border-radius: var(--radius-xl); background: #fff; box-shadow: var(--shadow-xs); overflow: hidden; }
+.proofImage { position: relative; min-height: 280px; }
+.proofBody { padding: 28px; }
+.proofBody h2 { margin-top: 12px; }
+.proofBody > p { color: var(--text-secondary); line-height: 1.8; margin-top: 14px; }
+.proofPoints { display: grid; gap: 12px; margin-top: 20px; }
+.proofPoint { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1px solid rgba(0, 188, 212, 0.12); border-radius: var(--radius-md); background: rgba(0, 188, 212, 0.04); color: var(--text-secondary); line-height: 1.6; }
+.proofPointIcon { flex-shrink: 0; color: var(--primary); margin-top: 2px; }
+
+@media (max-width: 900px) {
+  .proofCard { grid-template-columns: 1fr; }
+  .proofImage { min-height: 200px; }
+}

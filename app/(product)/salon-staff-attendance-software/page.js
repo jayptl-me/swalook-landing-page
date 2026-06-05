@@ -1,6 +1,6 @@
 'use client';
 import { FiUsers } from 'react-icons/fi';
-import FeaturePage from '@/components/FeaturePage';
+import FeaturePage from '@/components/product/FeaturePage';
 
 export default function StaffPage() {
   return (

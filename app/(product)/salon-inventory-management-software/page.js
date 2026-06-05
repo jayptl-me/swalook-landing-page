@@ -1,6 +1,6 @@
 'use client';
 import { FiPackage } from 'react-icons/fi';
-import FeaturePage from '@/components/FeaturePage';
+import FeaturePage from '@/components/product/FeaturePage';
 
 export default function InventoryPage() {
   return (

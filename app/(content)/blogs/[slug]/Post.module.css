@@ -1,0 +1,33 @@
+.postWrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 36px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.tocSidebar {
+  align-self: start;
+  position: sticky;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 1100px) {
+  .postWrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .tocSidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .postWrapper {
+    padding: 0 16px;
+  }
+}

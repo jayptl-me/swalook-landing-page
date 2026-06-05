@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
-import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
+import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSection';
 import styles from '@/components/home/Home.module.css';
 
 function InfoCard({ icon, title, desc, link }) {

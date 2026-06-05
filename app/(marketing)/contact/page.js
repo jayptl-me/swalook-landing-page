@@ -1,8 +1,9 @@
 'use client';
 
-import { FiMail, FiPhone, FiGlobe, FiCheckCircle, FiCalendar, FiCreditCard } from 'react-icons/fi';
+import { FiMail, FiPhone, FiCheckCircle, FiCalendar, FiCreditCard } from 'react-icons/fi';
 import PageHero from '@/components/marketing/PageHero';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/ui/AnimatedSection';
+import LeadForm from '@/components/marketing/LeadForm';
 import styles from './Contact.module.css';
 
 export default function ContactPage() {
@@ -36,62 +37,29 @@ export default function ContactPage() {
             <div className={styles.contactCard}>
               <div className={styles.cardIcon}><FiPhone /></div>
               <h3>Phone</h3>
-              <p>+91-XXXXXXXXXX</p>
+              <p>+91 98701 03761</p>
             </div>
           </StaggerItem>
         </StaggerContainer>
       </section>
 
-      {/* Form Section */}
-      <section className={styles.formSection}>
-        <div className={styles.formGrid}>
-          <AnimatedSection direction="left">
-            <div className={styles.formInfo}>
-              <h2>Get In Touch with Us!</h2>
-              <p>Tell us about your beauty business and our team will get back to you soon.</p>
-              <div className={styles.infoBullets}>
-                <div className={styles.infoBullet}>
-                  <FiCheckCircle className={styles.infoBulletIcon} />
-                  <span>Learn how Swalook can help improve retention and repeat visits.</span>
-                </div>
-                <div className={styles.infoBullet}>
-                  <FiCalendar className={styles.infoBulletIcon} />
-                  <span>See how reminders and follow-ups can reduce no-shows.</span>
-                </div>
-                <div className={styles.infoBullet}>
-                  <FiCreditCard className={styles.infoBulletIcon} />
-                  <span>Explore tools for billing, marketing, staff, and branch tracking.</span>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection direction="right">
-            <form className={styles.contactForm} onSubmit={e => e.preventDefault()}>
-              <div className={styles.formGroup}>
-                <label>Full Name</label>
-                <input type="text" placeholder="Your full name" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Mobile Number</label>
-                <input type="tel" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Email Address</label>
-                <input type="email" placeholder="your@email.com" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Business Name</label>
-                <input type="text" placeholder="Your business name" />
-              </div>
-              <div className={styles.formGroup}>
-                <label>Message</label>
-                <textarea placeholder="Tell us what you need help with..." />
-              </div>
-              <button type="submit" className={styles.submitBtn}>Send Message</button>
-            </form>
-          </AnimatedSection>
-        </div>
-      </section>
+      <LeadForm
+        title="Get In Touch with Us!"
+        description="Tell us about your beauty business and our team will get back to you soon."
+        bullets={[
+          { icon: <FiCheckCircle />, text: 'Learn how Swalook can help improve retention and repeat visits.' },
+          { icon: <FiCalendar />, text: 'See how reminders and follow-ups can reduce no-shows.' },
+          { icon: <FiCreditCard />, text: 'Explore tools for billing, marketing, staff, and branch tracking.' },
+        ]}
+        fields={[
+          { name: 'fullName', label: 'Full Name', type: 'text', placeholder: 'Your full name' },
+          { name: 'mobile', label: 'Mobile Number', type: 'tel', placeholder: '+91 XXXXX XXXXX' },
+          { name: 'email', label: 'Email Address', type: 'email', placeholder: 'your@email.com' },
+          { name: 'businessName', label: 'Business Name', type: 'text', placeholder: 'Your business name' },
+          { name: 'message', label: 'Message', type: 'textarea', placeholder: 'Tell us what you need help with...' },
+        ]}
+        submitLabel="Send Message"
+      />
 
       {/* Newsletter */}
       <section className={styles.newsletter}>

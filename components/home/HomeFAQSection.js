@@ -1,41 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { FiArrowRight, FiPlus } from 'react-icons/fi';
-import AnimatedSection from '@/components/AnimatedSection';
+import { FiArrowRight } from 'react-icons/fi';
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import FAQAccordion from '@/components/ui/FAQAccordion';
 import styles from '@/components/home/Home.module.css';
 
-function FAQItem({ question, answer, id, open, onToggle }) {
-  const buttonId = `faq-question-${id}`;
-  const panelId = `faq-answer-${id}`;
-
-  return (
-    <div className={styles.faqItem}>
-      <button
-        type="button"
-        id={buttonId}
-        className={styles.faqQuestion}
-        onClick={onToggle}
-        aria-expanded={open}
-        aria-controls={panelId}
-      >
-        <span>{question}</span>
-        <FiPlus className={`${styles.faqIcon} ${open ? styles.faqIconOpen : ''}`} />
-      </button>
-      <div
-        id={panelId}
-        className={`${styles.faqAnswer} ${open ? styles.faqAnswerOpen : ''}`}
-        role="region"
-        aria-labelledby={buttonId}
-        hidden={!open}
-      >
-        <div className={styles.faqAnswerInner}>{answer}</div>
-      </div>
-    </div>
-  );
-}
-
-export default function HomeFAQSection({ items, openFaq, onToggle }) {
+export default function HomeFAQSection({ items }) {
   return (
     <section className={styles.faqPreview}>
       <div className={styles.sectionShell}>
@@ -46,23 +17,12 @@ export default function HomeFAQSection({ items, openFaq, onToggle }) {
           </AnimatedSection>
         </div>
 
-        <div className={styles.faqList}>
-          {items.map((item, i) => (
-            <AnimatedSection key={item.q} delay={i * 0.05}>
-              <FAQItem
-                id={i}
-                question={item.q}
-                answer={item.a}
-                open={openFaq === i}
-                onToggle={() => onToggle(i)}
-              />
-            </AnimatedSection>
-          ))}
-          <div className={styles.faqMoreLink}>
-            <Link href="/faq" className="btn btn-outline">
-              People Also Ask <FiArrowRight />
-            </Link>
-          </div>
+        <FAQAccordion items={items} styles={styles} />
+
+        <div className={styles.faqMoreLink}>
+          <Link href="/faq" className="btn btn-outline">
+            People Also Ask <FiArrowRight />
+          </Link>
         </div>
       </div>
     </section>

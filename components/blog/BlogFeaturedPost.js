@@ -29,7 +29,7 @@ export default function BlogFeaturedPost({ post }) {
           </div>
 
           <h2 className={styles.title}>
-            <Link href={post.href}>{post.title}</Link>
+            <Link href={post.href || `/blogs/${post.slug}`}>{post.title}</Link>
           </h2>
 
           <p className={styles.excerpt}>{post.excerpt}</p>
@@ -45,7 +45,7 @@ export default function BlogFeaturedPost({ post }) {
           ) : null}
 
           <div className={styles.actions}>
-            <Link href={post.href} className="btn btn-primary btn-sm">
+            <Link href={post.href || `/blogs/${post.slug}`} className="btn btn-primary btn-sm">
               Read full article <FiArrowRight aria-hidden="true" />
             </Link>
             {post.primaryCta && (

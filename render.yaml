@@ -1,0 +1,28 @@
+## ─────────────────────────────────────────────────────────────────────────────
+##  Swalook Landing Page (Marketing + Blog) – Render Blueprint
+##  Primary domain: https://swalook.in
+##  Deploy → https://dashboard.render.com (New → Blueprint)
+## ─────────────────────────────────────────────────────────────────────────────
+services:
+  - type: web
+    name: swalook-landing
+    plan: starter
+    runtime: node
+    region: oregon
+
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+
+    autoDeploy: true
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # Backend API — same as all other frontends
+      - key: NEXT_PUBLIC_API_URL
+        value: https://swalook-node-staging.onrender.com
+
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"

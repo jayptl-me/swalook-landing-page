@@ -1,0 +1,29 @@
+name: CD Release - swalook-landing-page
+
+on:
+  schedule:
+    - cron: "30 15 * * 1"
+  workflow_dispatch:
+
+jobs:
+  weekly-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null)
+          if [ -z "$PR_URL" ] || [ "$PR_URL" = "null" ]; then
+            PR_URL=$(gh pr create \
+              --title "chore: weekly promotion staging to main ($(date +'%Y-%m-%d'))" \
+              --body "Weekly scheduled promotion. Auto-promoted from staging to main per Monday 9PM IST schedule." \
+              --base main --head staging --label auto-promotion,weekly-promotion \
+              --json url --jq '.url' 2>/dev/null)
+          fi
+          if [ -n "$PR_URL" ] && [ "$PR_URL" != "null" ]; then
+            gh pr merge "$PR_URL" --merge \
+              --subject "chore: weekly promotion to main ($(date +'%Y-%m-%d'))" 2>/dev/null && echo "Merged" || echo "Merge failed"
+          fi

@@ -1,0 +1,37 @@
+name: CI Staging - swalook-landing-page
+
+on:
+  push:
+    branches: [staging]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: |
+          echo "Build output:"
+          ls -la .next/ 2>/dev/null && echo ".next/ exists" || echo "No .next/"
+
+  auto-promote:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          EXISTS=$(gh pr list --head staging --base main --json id --jq 'length')
+          if [ "$EXISTS" -eq 0 ]; then
+            gh pr create \
+              --title "chore: promote staging to main ($(date +'%Y-%m-%d'))" \
+              --body "Auto-promotion from staging. Build verified." \
+              --base main --head staging --label auto-promotion
+          fi

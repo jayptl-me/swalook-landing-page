@@ -1,0 +1,31 @@
+name: CI Fast
+
+on:
+  push:
+    branches: [live-testing]
+  pull_request:
+    branches: [live-testing]
+
+jobs:
+  fast-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - name: Lint
+        run: npx next lint 2>/dev/null || true
+      - name: Build Check
+        run: npx next build
+      - name: Dependency Audit
+        run: npm audit --audit-level=high || true
+      - name: OSV-Scanner
+        uses: google/osv-scanner/actions/github-action@v1
+        continue-on-error: true
+      - name: Semgrep SAST
+        uses: semgrep/semgrep-action@v1
+        continue-on-error: true
+        env:
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}

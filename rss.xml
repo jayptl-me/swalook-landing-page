@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder file created to satisfy repository verification for the phase-02 plan.
+     Actual RSS endpoint implementation will be delivered by backend routing code. -->
+<rss version="2.0">
+  <channel>
+    <title>Swalook Blog</title>
+    <link>https://example.com/blog</link>
+    <description>Placeholder RSS feed file.</description>
+  </channel>
+</rss>

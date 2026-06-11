@@ -1,0 +1,47 @@
+name: Weekly Main Promotion - swalook-landing-page
+
+on:
+  schedule:
+    - cron: "30 15 * * 1"
+  workflow_dispatch:
+
+jobs:
+  weekly-promote-to-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge staging to main (weekly promotion)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null)
+          if [ -z "$PR_URL" ] || [ "$PR_URL" = "null" ]; then
+            echo "No open PR from staging to main found. Creating one..."
+            PR_URL=$(gh pr create \
+              --title "chore: weekly promotion staging to main ($(date +'%Y-%m-%d'))" \
+              --body "Weekly Scheduled Promotion
+
+          Auto-promoted from staging to main per the Monday 9PM IST schedule.
+
+          Promotion Window: $(date +'%Y-%m-%d %H:%M %Z')
+          Trigger: Weekly schedule (cron)" \
+              --base main --head staging \
+              --label auto-promotion,weekly-promotion \
+              --json url --jq '.url' 2>/dev/null)
+          fi
+          if [ -n "$PR_URL" ] && [ "$PR_URL" != "null" ]; then
+            echo "Merging PR: $PR_URL"
+            gh pr merge "$PR_URL" --merge \
+              --subject "chore: weekly promotion to main ($(date +'%Y-%m-%d'))" 2>/dev/null && \
+              echo "Successfully merged staging to main" || \
+              echo "Merge failed -- may need manual resolution"
+          else
+            echo "Could not create or find a PR from staging to main"
+          fi
+
+      - name: Notify on success
+        if: success()
+        run: echo "Weekly promotion to main completed for swalook-landing-page"

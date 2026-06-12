@@ -1,0 +1,43 @@
+name: CI Promote - swalook-landing-page
+
+on:
+  push:
+    branches: [staging]
+
+concurrency:
+  group: ci-promote-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/setup
+      - run: bun run build
+      - run: bun run test
+      - name: Validate env configuration
+        run: |-
+          if [ -f .env.example ]; then
+            grep -o '^[A-Z_]*=' .env.example | sort
+          fi
+        shell: bash
+
+  create-promotion-pr:
+    runs-on: ubuntu-latest
+    needs: [integration]
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |-
+          EXISTS=$(gh pr list --head staging --base main --json id --jq 'length')
+          if [ "$EXISTS" -eq 0 ]; then
+            gh pr create \
+              --title "chore: promote staging to main ($(date +'%Y-%m-%d'))" \
+              --body "Auto-promotion: staging to main. Validated by integration checks. PR created same-day after staging push. Merge happens Monday 9PM IST via weekly-release cron (cd-release.yml)." \
+              --base main --head staging \
+              --label auto-promotion,promotion:staging-to-main
+          fi
+        shell: bash

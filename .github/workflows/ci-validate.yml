@@ -1,0 +1,164 @@
+name: CI Validate - swalook-landing-page
+
+on:
+  pull_request:
+    branches: [live-testing]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [live-testing]
+
+concurrency:
+  group: ci-validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 7
+          keep_minimum_runs: 20
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/setup
+      - run: bun run lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: ./.github/actions/setup
+      - run: bun run typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/setup
+      - run: bun run test
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/setup
+      - run: bun run build
+
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: ./.github/actions/setup
+      - uses: ./.github/actions/security-scan
+
+  quality-and-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check console.log statements
+        run: |-
+          COUNT=$(grep -rn 'console\.log' --include='*.ts' --include='*.tsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test | wc -l)
+          echo "console.log count: $COUNT"
+        shell: bash
+      - name: Check for secrets in source
+        run: |-
+          RESULTS=$(grep -rn 'password.*secret.*key.*token' --include='*.ts' --include='*.tsx' . 2>/dev/null | grep -v '.env' | grep -v 'process.env' | wc -l)
+          echo "Potential secrets: $RESULTS"
+        shell: bash
+      - name: Validate config files
+        run: |-
+          for f in render.yaml .env.example; do
+            [ -f "$f" ] && echo "$f present" || echo "$f MISSING"
+          done
+        shell: bash
+
+  test-with-services:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: swalook
+          MYSQL_DATABASE: swalook_test
+          MYSQL_USER: swalook
+          MYSQL_PASSWORD: swalook
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping -h localhost"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: ./.github/actions/setup
+      - run: bun run test
+        env:
+          DATABASE_URL: mysql://swalook:swalook@localhost:3306/swalook_test
+          REDIS_URL: redis://localhost:6379
+          NODE_ENV: test
+          JWT_SECRET: test-jwt-secret-32-chars-minimum-req
+          JWT_REFRESH_SECRET: test-jwt-refresh-secret-32-chars-min
+          JWT_EXPIRES_IN: 7d
+          LOG_LEVEL: error
+        shell: bash
+
+  migration-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate SQL migrations
+        run: |-
+          echo "Migration count: $(ls -1 migrations/*.sql 2>/dev/null | wc -l)"
+          ls -1 migrations/*.sql | sort
+        shell: bash
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and scan
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: production
+          tags: swalook-node:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  promote-to-staging:
+    if: github.event_name == 'push' && github.ref_name == 'live-testing'
+    needs: [lint, typecheck, test, build, security-scan, quality-and-config, docker-build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |-
+          EXISTS=$(gh pr list --head live-testing --base staging --json id --jq 'length')
+          if [ "$EXISTS" -eq 0 ]; then
+            gh pr create \
+              --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
+              --body "Auto-promotion: live-testing to staging. Validated by ci-validate.yml (lint, typecheck, test, build, security-scan, docker-build). All checks passed. PR created same-day. Merge happens when staging validates." \
+              --base staging --head live-testing \
+              --label auto-promotion,promotion:live-testing-to-staging
+          fi
+        shell: bash

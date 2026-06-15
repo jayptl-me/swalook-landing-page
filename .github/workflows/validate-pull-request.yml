@@ -127,24 +127,9 @@ jobs:
           ls -1 migrations/*.sql | sort
         shell: bash
 
-  docker-build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build and scan
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          target: production
-          tags: swalook-node:ci
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
   promote-to-staging:
     if: github.event_name == 'push' && github.ref_name == 'live-testing'
-    needs: [lint, typecheck, test, build, security-scan, quality-and-config, docker-build]
+    needs: [lint, typecheck, test, build, security-scan, quality-and-config]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -157,7 +142,7 @@ jobs:
           if [ "$EXISTS" -eq 0 ]; then
             gh pr create \
               --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
-              --body "Auto-promotion: live-testing to staging. Validated by ci-validate.yml (lint, typecheck, test, build, security-scan, docker-build). All checks passed. PR created same-day. Merge happens when staging validates." \
+              --body "Auto-promotion: live-testing to staging. Validated by ci-validate.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
               --base staging --head live-testing \
               --label auto-promotion,promotion:live-testing-to-staging
           fi

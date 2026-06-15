@@ -1,0 +1,57 @@
+name: Weekly Release - swalook-landing-page
+
+on:
+  schedule:
+    - cron: '30 15 * * 1'
+  workflow_dispatch:
+
+jobs:
+  weekly-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |-
+          TAG_DATE=$(date +'%Y-%m-%d')
+          TAG_NAME="v${TAG_DATE}"
+
+          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null)
+          if [ -z "$PR_URL" ] || [ "$PR_URL" = "null" ]; then
+            echo "No existing PR found. Creating promotion PR."
+            PR_URL=$(gh pr create \
+              --title "chore: weekly promotion staging to main (${TAG_DATE})" \
+              --body "Weekly scheduled promotion. Auto-merge and tag created by cd-release.yml Monday cron." \
+              --base main --head staging \
+              --label auto-promotion,weekly-promotion \
+              --json url --jq '.url' 2>/dev/null)
+          fi
+
+          if [ -n "$PR_URL" ] && [ "$PR_URL" != "null" ]; then
+            MERGE_RESULT=$(gh pr merge "$PR_URL" --merge --delete-branch=false --subject "chore: weekly promotion to main (${TAG_DATE})" 2>&1) && echo "Merged: $MERGE_RESULT" || echo "Merge failed (may need manual resolution): $MERGE_RESULT"
+          fi
+
+          git fetch origin main 2>/dev/null
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag $TAG_NAME already exists — skipping duplicate tag"
+          else
+            MAIN_SHA=$(git rev-parse origin/main 2>/dev/null || echo "")
+            if [ -n "$MAIN_SHA" ]; then
+              git tag -a "$TAG_NAME" "$MAIN_SHA" -m "Release ${TAG_NAME} — weekly promotion to main"
+              git push origin "$TAG_NAME" 2>/dev/null && echo "Tag $TAG_NAME created and pushed" || echo "Tag push failed (may need permissions)"
+            fi
+          fi
+
+          LATEST_TAG=$(git tag --sort=-creatordate | head -1)
+          if [ -n "$LATEST_TAG" ]; then
+            gh release create "$LATEST_TAG" \
+              --title "Release ${LATEST_TAG}" \
+              --notes "Weekly release to main (${TAG_DATE}). Changes from staging branch." \
+              --latest 2>/dev/null && echo "GitHub Release $LATEST_TAG created" || echo "Release creation failed (may already exist)"
+          fi
+        shell: bash

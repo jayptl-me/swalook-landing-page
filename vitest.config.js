@@ -11,5 +11,11 @@ export default defineConfig({
         environment: "happy-dom",
         globals: true,
         setupFiles: ["./__tests__/setup.js"],
+        include: ["__tests__/**/*.test.{js,jsx}"],
+        server: {
+            deps: {
+                inline: ["app", "components"],
+            },
+        },
     },
 });

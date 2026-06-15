@@ -1,4 +1,4 @@
-name: CD Release - swalook-landing-page
+name: Weekly Release - swalook-landing-page
 
 on:
   schedule:

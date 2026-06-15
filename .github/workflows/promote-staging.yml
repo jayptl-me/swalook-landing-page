@@ -1,4 +1,4 @@
-name: CI Promote - swalook-landing-page
+name: Promote Staging - swalook-landing-page
 
 on:
   push:

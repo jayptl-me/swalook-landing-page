@@ -1,4 +1,4 @@
-name: CI Validate - swalook-landing-page
+name: Validate PR - swalook-landing-page
 
 on:
   pull_request:

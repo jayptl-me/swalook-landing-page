@@ -17,5 +17,10 @@ export default defineConfig({
                 inline: ["app", "components"],
             },
         },
+        coverage: {
+            provider: "v8",
+            reporter: ["text", "lcov"],
+            reportsDirectory: "./coverage",
+        },
     },
 });

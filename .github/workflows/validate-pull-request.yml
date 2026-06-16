@@ -14,6 +14,7 @@ concurrency:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  COVERAGE_REPORT: coverage/lcov.info
 
 jobs:
   cleanup:

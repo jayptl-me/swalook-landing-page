@@ -21,10 +21,10 @@ jobs:
           TAG_DATE=$(date +'%Y-%m-%d')
           TAG_NAME="v${TAG_DATE}"
 
-          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null)
+          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null) || echo ''
           if [ -z "$PR_URL" ] || [ "$PR_URL" = "null" ]; then
             echo "No existing PR found. Creating promotion PR."
-            PR_URL=$(gh pr create \
+            PR_URL=$(gh pr create \ || echo ''
               --title "chore: weekly promotion staging to main (${TAG_DATE})" \
               --body "Weekly scheduled promotion. Auto-merge and tag created by cd-release.yml Monday cron." \
               --base main --head staging \
@@ -49,7 +49,7 @@ jobs:
 
           LATEST_TAG=$(git tag --sort=-creatordate | head -1)
           if [ -n "$LATEST_TAG" ]; then
-            gh release create "$LATEST_TAG" \
+            gh release create "$LATEST_TAG" \ || echo 'Release creation skipped'
               --title "Release ${LATEST_TAG}" \
               --notes "Weekly release to main (${TAG_DATE}). Changes from staging branch." \
               --latest 2>/dev/null && echo "GitHub Release $LATEST_TAG created" || echo "Release creation failed (may already exist)"

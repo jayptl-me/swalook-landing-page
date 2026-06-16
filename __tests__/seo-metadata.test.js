@@ -40,7 +40,7 @@ describe("SEO Metadata Audit", () => {
     });
 
     it("sitemap.xml exists at project root", () => {
-        const sitemapPath = path.join(process.cwd(), "..", "sitemap.xml");
+        const sitemapPath = path.join(process.cwd(), "sitemap.xml");
         expect(fs.existsSync(sitemapPath)).toBe(true);
     });
 

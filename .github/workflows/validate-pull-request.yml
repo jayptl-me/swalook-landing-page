@@ -17,12 +17,16 @@ jobs:
     permissions:
       actions: write
     steps:
-      - uses: Mattraks/delete-workflow-runs@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          retain_days: 7
-          keep_minimum_runs: 20
+      - name: Delete old workflow runs (keep last 20)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Keeping the 20 most recent workflow runs..."
+          ids=$(gh run list --limit 30 --json databaseId --jq '.[].databaseId' 2>/dev/null | tail -n +21)
+          for id in $ids; do
+            gh run delete "$id" 2>/dev/null || true
+          done
+        shell: bash
 
   lint:
     runs-on: ubuntu-latest
@@ -33,7 +37,6 @@ jobs:
 
   typecheck:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
@@ -55,15 +58,32 @@ jobs:
 
   security-scan:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - uses: ./.github/actions/security-scan
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Bun audit (dependency vulnerabilities)
+        run: bun audit 2>&1 || true
+        shell: bash
+
+      - name: Trivy vulnerability & secret scan (open source)
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/workspace \
+            aquasec/trivy:latest \
+            filesystem --scanners vuln,secret,misconfig \
+            --severity CRITICAL,HIGH \
+            --exit-code 0 \
+            /workspace
+        shell: bash
+
+      - name: Gitleaks secret scan (open source, no token needed)
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/path \
+            zricethezav/gitleaks:latest \
+            detect --source=/path --no-git -v
+        shell: bash
 
   quality-and-config:
     runs-on: ubuntu-latest

@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: bun run test --coverage
+      - run: bun run test -- --coverage
         env:
           JWT_SECRET: test-jwt-secret-32-chars-minimum-req
           JWT_EXPIRES_IN: 7d

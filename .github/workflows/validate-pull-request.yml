@@ -51,18 +51,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: bun run test -- --coverage
+      - run: bun run test
         env:
           JWT_SECRET: test-jwt-secret-32-chars-minimum-req
           JWT_EXPIRES_IN: 7d
           NODE_ENV: test
           LOG_LEVEL: error
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage/
-          retention-days: 30
 
   build:
     runs-on: ubuntu-latest

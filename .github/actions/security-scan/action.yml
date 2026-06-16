@@ -1,5 +1,10 @@
-name: Security Scan swalook-landing-page
+name: Security Scan swalook-node
 description: Run security scans (Trivy, Gitleaks, dependency-review, CodeQL, Bun audit)
+
+inputs:
+  token:
+    description: GitHub token for authenticated API calls
+    required: true
 
 runs:
   using: composite
@@ -19,7 +24,7 @@ runs:
       uses: gitleaks/gitleaks-action@v2
       continue-on-error: true
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
     - name: Dependency review
       uses: actions/dependency-review-action@v4
       with:

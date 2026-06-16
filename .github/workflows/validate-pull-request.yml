@@ -22,7 +22,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Keeping the 20 most recent workflow runs..."
-          ids=$(gh run list --limit 30 --json databaseId --jq '.[].databaseId' 2>/dev/null | tail -n +21)
+          ids=$(gh run list --limit 30 --json databaseId --jq '.[].databaseId' 2>/dev/null | tail -n +21 || true)
           for id in $ids; do
             gh run delete "$id" 2>/dev/null || true
           done

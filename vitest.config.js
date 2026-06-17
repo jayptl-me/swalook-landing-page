@@ -3,6 +3,10 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 
 export default defineConfig({
+    esbuild: {
+        loader: "jsx",
+        include: /\.js$/,
+    },
     plugins: [react()],
     resolve: {
         alias: {

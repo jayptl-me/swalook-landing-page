@@ -2,27 +2,52 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Mock next/link
+function MockLink({ children, href, className }) {
+  return <a href={href} className={className}>{children}</a>;
+}
+
+function MockPhoneIcon() {
+  return <span data-testid="phone-icon" />;
+}
+function MockMailIcon() {
+  return <span data-testid="mail-icon" />;
+}
+function MockMapPinIcon() {
+  return <span data-testid="map-pin-icon" />;
+}
+function MockFacebookIcon() {
+  return <span data-testid="facebook-icon" />;
+}
+function MockTwitterIcon() {
+  return <span data-testid="twitter-icon" />;
+}
+function MockYoutubeIcon() {
+  return <span data-testid="youtube-icon" />;
+}
+function MockLinkedinIcon() {
+  return <span data-testid="linkedin-icon" />;
+}
+function MockInstagramIcon() {
+  return <span data-testid="instagram-icon" />;
+}
+
 vi.mock("next/link", () => ({
-  default: ({ children, href, className }) => (
-    <a href={href} className={className}>
-      {children}
-    </a>
-  ),
+  default: MockLink,
 }));
 
 // Mock react-icons
 vi.mock("react-icons/fi", () => ({
-  FiPhone: () => <span data-testid="phone-icon" />,
-  FiMail: () => <span data-testid="mail-icon" />,
-  FiMapPin: () => <span data-testid="map-pin-icon" />,
+  FiPhone: MockPhoneIcon,
+  FiMail: MockMailIcon,
+  FiMapPin: MockMapPinIcon,
 }));
 
 vi.mock("react-icons/fa6", () => ({
-  FaFacebookF: () => <span data-testid="facebook-icon" />,
-  FaXTwitter: () => <span data-testid="twitter-icon" />,
-  FaYoutube: () => <span data-testid="youtube-icon" />,
-  FaLinkedinIn: () => <span data-testid="linkedin-icon" />,
-  FaInstagram: () => <span data-testid="instagram-icon" />,
+  FaFacebookF: MockFacebookIcon,
+  FaXTwitter: MockTwitterIcon,
+  FaYoutube: MockYoutubeIcon,
+  FaLinkedinIn: MockLinkedinIcon,
+  FaInstagram: MockInstagramIcon,
 }));
 
 import Footer from "@/components/Footer";

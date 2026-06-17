@@ -8,17 +8,21 @@ vi.mock("next/navigation", () => ({
 }));
 
 // Mock next/link
+function MockLink({ children, href, className }) {
+  return <a href={href} className={className}>{children}</a>;
+}
+
+function MockChevronDown() {
+  return <span data-testid="chevron-down" />;
+}
+
 vi.mock("next/link", () => ({
-  default: ({ children, href, className }) => (
-    <a href={href} className={className}>
-      {children}
-    </a>
-  ),
+  default: MockLink,
 }));
 
 // Mock react-icons
 vi.mock("react-icons/fi", () => ({
-  FiChevronDown: () => <span data-testid="chevron-down" />,
+  FiChevronDown: MockChevronDown,
 }));
 
 import Navbar from "@/components/Navbar";

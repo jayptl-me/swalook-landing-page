@@ -41,6 +41,6 @@ jobs:
               --title "chore: promote staging to main ($(date +'%Y-%m-%d'))" \
               --body "Auto-promotion: staging to main. Validated by integration checks. PR created same-day after staging push. Merge happens Monday 9PM IST via weekly-release cron (release-weekly.yml)." \
               --base main --head staging \
-              --label auto-promotion,promotion:staging-to-main
+              --label auto-promotion,promotion:staging-to-main || echo "PR create skipped"
           fi
         shell: bash

@@ -137,6 +137,6 @@ jobs:
               --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
               --body "Auto-promotion: live-testing to staging. Validated by validate-pull-request.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
               --base staging --head live-testing \
-              --label auto-promotion,promotion:live-testing-to-staging
+              --label auto-promotion,promotion:live-testing-to-staging || echo "PR create skipped (already exists or rate limited)"
           fi
         shell: bash

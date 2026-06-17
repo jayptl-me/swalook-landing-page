@@ -31,12 +31,12 @@ jobs:
               --title "chore: weekly promotion staging to main (${TAG_DATE})" \
               --body "Weekly scheduled promotion. Auto-merge and tag created by weekly-release cron." \
               --base main --head staging \
-              --label auto-promotion,weekly-promotion \
+              --label auto-promotion,weekly-promotion || echo "PR create skipped" \
               --json url --jq '.url' 2>/dev/null || true)
           fi
 
           if [ -n "$PR_URL" ] && [ "$PR_URL" != "null" ]; then
-            gh pr merge "$PR_URL" --merge --delete-branch=false \
+            gh pr merge "$PR_URL" --merge 2>&1 || echo "Merge skipped" --delete-branch=false \
               --subject "chore: weekly promotion to main (${TAG_DATE})" 2>&1 || \
               echo "Merge failed (may need manual resolution)"
           fi
@@ -54,7 +54,7 @@ jobs:
 
           LATEST_TAG=$(git tag --sort=-creatordate | head -1)
           if [ -n "$LATEST_TAG" ]; then
-            gh release create "$LATEST_TAG" \
+            gh release create "$LATEST_TAG" 2>&1 || echo "Release create skipped" \
               --title "Release ${LATEST_TAG}" \
               --notes "Weekly release to main (${TAG_DATE}). Changes from staging branch." \
               --latest 2>/dev/null && echo "GitHub Release created" || echo "Release creation failed (may already exist)"

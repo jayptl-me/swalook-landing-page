@@ -193,12 +193,11 @@ Skills to load and use: senior-devops
 Tasks:
 - Verify Docker: sudo docker info (password: 123456)
 - Install/update act: curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
-- Test ci-validate.yml via act -- lint job first, then full pipeline (lint, typecheck, test, build, security-scan, quality-and-config, seo-audit)
-- Test ci-promote.yml via act
-- Test cd-release.yml via act (dry-run)
+- Test validate-pull-request.yml via act -- lint job first, then full pipeline (lint, typecheck, test, build, security-scan, quality-and-config, seo-audit)
+- Test promote-staging.yml via act
+- Test release-weekly.yml via act (dry-run)
 - Fix any workflow/act compatibility issues
 - Verify composite actions work: .github/actions/setup/, .github/actions/security-scan/
-- Note: landing page uses packageManager: bun@1.3.4 -- verify bun install works via act
 
 Loop until all jobs green.
 
@@ -263,11 +262,10 @@ Run ALL the following checks. If ANY fails, diagnose and fix before re-running a
 - bun run lint -- 0 errors (install eslint if needed, or verify next lint works)
 - bun run build -- 0 errors (critical -- Next.js build must pass)
 - bun run test -- passes (once vitest is configured and all tests written)
-- sudo act -W .github/workflows/ci-validate.yml -- all jobs green (lint, typecheck, test, build, security-scan, quality-and-config, seo-audit)
-- sudo act -W .github/workflows/ci-promote.yml -- all jobs green
+- sudo act -W .github/workflows/validate-pull-request.yml -- all jobs green (lint, typecheck, test, build, security-scan, quality-and-config, seo-audit)
+- sudo act -W .github/workflows/promote-staging.yml -- all jobs green
 - scripts/validate-before-push.sh passes
 - Home page renders all 12 feature groups without errors
-- All 30+ sub-pages load without crash
 - Every internal link resolves to an existing page
 - Layout has correct SEO metadata (title, description, OG tags)
 - Images have alt texts

@@ -8,9 +8,6 @@ concurrency:
   group: ci-promote-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   integration:
     runs-on: ubuntu-latest
@@ -20,10 +17,7 @@ jobs:
       - run: bun run build
       - run: bun run test
         env:
-          JWT_SECRET: test-jwt-secret-32-chars-minimum-req
-          JWT_EXPIRES_IN: 7d
           NODE_ENV: test
-          LOG_LEVEL: error
       - name: Validate env configuration
         run: |-
           if [ -f .env.example ]; then
@@ -45,7 +39,7 @@ jobs:
           if [ "$EXISTS" -eq 0 ]; then
             gh pr create \
               --title "chore: promote staging to main ($(date +'%Y-%m-%d'))" \
-              --body "Auto-promotion: staging to main. Validated by integration checks. PR created same-day after staging push. Merge happens Monday 9PM IST via weekly-release cron (cd-release.yml)." \
+              --body "Auto-promotion: staging to main. Validated by integration checks. PR created same-day after staging push. Merge happens Monday 9PM IST via weekly-release cron (release-weekly.yml)." \
               --base main --head staging \
               --label auto-promotion,promotion:staging-to-main
           fi

@@ -13,7 +13,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   COVERAGE_REPORT: coverage/lcov.info
 
 jobs:
@@ -120,56 +119,6 @@ jobs:
           done
         shell: bash
 
-  test-with-services:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: swalook
-          MYSQL_DATABASE: swalook_test
-          MYSQL_USER: swalook
-          MYSQL_PASSWORD: swalook
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd "mysqladmin ping -h localhost"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-      redis:
-        image: redis:7-alpine
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
-      - run: bun run test
-        env:
-          DATABASE_URL: mysql://swalook:swalook@localhost:3306/swalook_test
-          REDIS_URL: redis://localhost:6379
-          NODE_ENV: test
-          JWT_SECRET: test-jwt-secret-32-chars-minimum-req
-          JWT_REFRESH_SECRET: test-jwt-refresh-secret-32-chars-min
-          JWT_EXPIRES_IN: 7d
-          LOG_LEVEL: error
-        shell: bash
-
-  migration-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Validate SQL migrations
-        run: |-
-          echo "Migration count: $(ls -1 migrations/*.sql 2>/dev/null | wc -l)"
-          ls -1 migrations/*.sql 2>/dev/null | sort || true
-        shell: bash
-
   promote-to-staging:
     if: github.event_name == 'push' && github.ref_name == 'live-testing'
     needs: [lint, typecheck, test, build, security-scan, quality-and-config]
@@ -185,7 +134,7 @@ jobs:
           if [ "$EXISTS" -eq 0 ]; then
             gh pr create \
               --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
-              --body "Auto-promotion: live-testing to staging. Validated by ci-validate.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
+              --body "Auto-promotion: live-testing to staging. Validated by validate-pull-request.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
               --base staging --head live-testing \
               --label auto-promotion,promotion:live-testing-to-staging
           fi

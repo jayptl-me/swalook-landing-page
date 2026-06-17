@@ -15,10 +15,52 @@ export default [
           jsx: true,
         },
       },
+      globals: {
+        window: "readonly",
+        document: "readonly",
+        navigator: "readonly",
+        location: "readonly",
+        localStorage: "readonly",
+        sessionStorage: "readonly",
+        fetch: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        console: "readonly",
+        Buffer: "readonly",
+        process: "readonly",
+      },
     },
     rules: {
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-console": "off",
+    },
+  },
+  {
+    files: ["__tests__/**/*.test.{js,jsx}"],
+    languageOptions: {
+      globals: {
+        describe: "readonly",
+        it: "readonly",
+        expect: "readonly",
+        vi: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+      },
+    },
+  },
+  {
+    files: ["vitest.config.js", "next.config.mjs", "eslint.config.mjs"],
+    languageOptions: {
+      globals: {
+        __dirname: "readonly",
+        require: "readonly",
+        module: "readonly",
+        process: "readonly",
+      },
     },
   },
 ];

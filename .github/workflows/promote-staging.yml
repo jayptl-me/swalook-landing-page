@@ -35,9 +35,9 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |-
-          EXISTS=$(gh pr list --head staging --base main --json id --jq 'length')
+          EXISTS=$(gh pr list --repo ${{ github.repository }} --head staging --base main --json id --jq 'length')
           if [ "$EXISTS" -eq 0 ]; then
-            gh pr create \
+            gh pr create --repo ${{ github.repository }} \
               --title "chore: promote staging to main ($(date +'%Y-%m-%d'))" \
               --body "Auto-promotion: staging to main. Validated by integration checks. PR created same-day after staging push. Merge happens Monday 9PM IST via weekly-release cron (release-weekly.yml)." \
               --base main --head staging \

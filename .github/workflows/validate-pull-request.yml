@@ -131,9 +131,9 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |-
-          EXISTS=$(gh pr list --head live-testing --base staging --json id --jq 'length')
+          EXISTS=$(gh pr list --repo ${{ github.repository }} --head live-testing --base staging --json id --jq 'length')
           if [ "$EXISTS" -eq 0 ]; then
-            gh pr create \
+            gh pr create --repo ${{ github.repository }} \
               --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
               --body "Auto-promotion: live-testing to staging. Validated by validate-pull-request.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
               --base staging --head live-testing \

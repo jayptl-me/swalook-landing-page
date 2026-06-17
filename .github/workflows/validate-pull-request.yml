@@ -81,10 +81,11 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Dependency Review
-        continue-on-error: true
+        if: github.event_name == 'pull_request'
         uses: actions/dependency-review-action@v4
 
       - name: Bun audit (dependency vulnerabilities)
+        continue-on-error: true
         run: bun audit --audit-level high
         shell: bash
 

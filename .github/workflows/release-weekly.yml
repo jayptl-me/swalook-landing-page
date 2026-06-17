@@ -15,32 +15,37 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - env:
+      - name: Weekly release (PR merge + tag + GitHub Release)
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |-
+        run: |
+          set -euo pipefail
           TAG_DATE=$(date +'%Y-%m-%d')
           TAG_NAME="v${TAG_DATE}"
 
-          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null) || echo ''
+          PR_URL=""
+          PR_URL=$(gh pr list --head staging --base main --json url --jq '.[0].url' 2>/dev/null || true)
           if [ -z "$PR_URL" ] || [ "$PR_URL" = "null" ]; then
             echo "No existing PR found. Creating promotion PR."
-            PR_URL=$(gh pr create \ || echo ''
+            PR_URL=$(gh pr create \
               --title "chore: weekly promotion staging to main (${TAG_DATE})" \
-              --body "Weekly scheduled promotion. Auto-merge and tag created by cd-release.yml Monday cron." \
+              --body "Weekly scheduled promotion. Auto-merge and tag created by weekly-release cron." \
               --base main --head staging \
-              --label auto-promotion,weekly-promotion \
-              --json url --jq '.url' 2>/dev/null)
+              --label auto-promotion,weekly-promotion || echo "PR create skipped" \
+              --json url --jq '.url' 2>/dev/null || true)
           fi
 
           if [ -n "$PR_URL" ] && [ "$PR_URL" != "null" ]; then
-            MERGE_RESULT=$(gh pr merge "$PR_URL" --merge --delete-branch=false --subject "chore: weekly promotion to main (${TAG_DATE})" 2>&1) && echo "Merged: $MERGE_RESULT" || echo "Merge failed (may need manual resolution): $MERGE_RESULT"
+            gh pr merge "$PR_URL" --merge 2>&1 || echo "Merge skipped" --delete-branch=false \
+              --subject "chore: weekly promotion to main (${TAG_DATE})" 2>&1 || \
+              echo "Merge failed (may need manual resolution)"
           fi
 
-          git fetch origin main 2>/dev/null
+          git fetch origin main 2>/dev/null || true
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
             echo "Tag $TAG_NAME already exists — skipping duplicate tag"
           else
-            MAIN_SHA=$(git rev-parse origin/main 2>/dev/null || echo "")
+            MAIN_SHA=$(git rev-parse origin/main 2>/dev/null || true)
             if [ -n "$MAIN_SHA" ]; then
               git tag -a "$TAG_NAME" "$MAIN_SHA" -m "Release ${TAG_NAME} — weekly promotion to main"
               git push origin "$TAG_NAME" 2>/dev/null && echo "Tag $TAG_NAME created and pushed" || echo "Tag push failed (may need permissions)"
@@ -49,9 +54,9 @@ jobs:
 
           LATEST_TAG=$(git tag --sort=-creatordate | head -1)
           if [ -n "$LATEST_TAG" ]; then
-            gh release create "$LATEST_TAG" \ || echo 'Release creation skipped'
+            gh release create "$LATEST_TAG" 2>&1 || echo "Release create skipped" \
               --title "Release ${LATEST_TAG}" \
               --notes "Weekly release to main (${TAG_DATE}). Changes from staging branch." \
-              --latest 2>/dev/null && echo "GitHub Release $LATEST_TAG created" || echo "Release creation failed (may already exist)"
+              --latest 2>/dev/null && echo "GitHub Release created" || echo "Release creation failed (may already exist)"
           fi
         shell: bash

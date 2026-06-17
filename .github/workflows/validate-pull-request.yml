@@ -2,10 +2,10 @@ name: Validate PR - swalook-landing-page
 
 on:
   pull_request:
-    branches: [live-testing]
+    branches: [main, live-testing]
     types: [opened, synchronize, reopened]
   push:
-    branches: [live-testing]
+    branches: [main, live-testing, staging]
   workflow_dispatch:
 
 concurrency:
@@ -21,14 +21,23 @@ jobs:
     permissions:
       actions: write
     steps:
-      - name: Delete old workflow runs (keep last 20)
+      - name: Delete workflow runs older than 7 days
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Keeping the 20 most recent workflow runs..."
-          ids=$(gh run list --limit 30 --json databaseId --jq '.[].databaseId' 2>/dev/null | tail -n +21 || true)
-          for id in $ids; do
-            gh run delete "$id" 2>/dev/null || true
+          SEVEN_DAYS_AGO=$(date -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -v-7d +%Y-%m-%dT%H:%M:%SZ 2>/dev/null)
+          if [ -z "$SEVEN_DAYS_AGO" ]; then
+            echo "Cannot compute date -- skipping cleanup"
+            exit 0
+          fi
+          echo "Deleting runs older than $SEVEN_DAYS_AGO"
+          gh run list --repo ${{ github.repository }} --limit 200 \
+            --json databaseId,createdAt \
+            --jq '.[] | select(.createdAt < "$SEVEN_DAYS_AGO") | .databaseId' | \
+          while read id; do
+            if [ -n "$id" ]; then
+              gh run delete "$id" --repo ${{ github.repository }} 2>/dev/null || true
+            fi
           done
         shell: bash
 
@@ -73,20 +82,19 @@ jobs:
 
       - name: Dependency Review
         uses: actions/dependency-review-action@v4
-        continue-on-error: true
 
       - name: Bun audit (dependency vulnerabilities)
-        run: bun audit 2>&1 || true
+        run: bun audit --audit-level high
         shell: bash
 
       - name: Trivy vulnerability & secret scan (open source)
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/workspace \
-            aquasec/trivy:latest \
+            aquasec/trivy:0.60.0 \
             filesystem --scanners vuln,secret,misconfig \
             --severity CRITICAL,HIGH \
-            --exit-code 0 \
+            --exit-code 1 \
             /workspace
         shell: bash
 
@@ -104,19 +112,22 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check console.log statements
         run: |-
-          COUNT=$(grep -rn 'console\.log' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test | wc -l) || true
+          COUNT=$(grep -rn 'console\.log' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test | wc -l)
           echo "console.log count: $COUNT"
+          exit 0
         shell: bash
       - name: Check for secrets in source
         run: |-
-          RESULTS=$(grep -rn 'password.*secret.*key.*token' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v '.env' | grep -v 'process.env' | wc -l) || true
+          RESULTS=$(grep -rn 'password.*secret.*key.*token' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v '.env' | grep -v 'process.env' | wc -l)
           echo "Potential secrets: $RESULTS"
+          exit 0
         shell: bash
       - name: Validate config files
         run: |-
           for f in render.yaml .env.example; do
             [ -f "$f" ] && echo "$f present" || echo "$f MISSING"
           done
+          exit 0
         shell: bash
 
   promote-to-staging:
@@ -131,12 +142,14 @@ jobs:
       - env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |-
-          EXISTS=$(gh pr list --repo ${{ github.repository }} --head live-testing --base staging --json id --jq 'length')
+          EXISTS=$(gh pr list --repo ${{ github.repository }} --head live-testing --base staging --json id --jq 'length' 2>/dev/null || echo "0")
           if [ "$EXISTS" -eq 0 ]; then
             gh pr create --repo ${{ github.repository }} \
               --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
               --body "Auto-promotion: live-testing to staging. Validated by validate-pull-request.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
               --base staging --head live-testing \
-              --label auto-promotion,promotion:live-testing-to-staging || echo "PR create skipped (already exists or rate limited)"
+              --label auto-promotion,promotion:live-testing-to-staging
+          else
+            echo "PR already exists - skipping creation"
           fi
         shell: bash

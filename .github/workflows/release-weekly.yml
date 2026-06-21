@@ -36,9 +36,10 @@ jobs:
           fi
 
           if [ -n "$PR_URL" ] && [ "$PR_URL" != "null" ]; then
-            gh pr merge "$PR_URL" --merge 2>&1 || echo "Merge skipped" --delete-branch=false \
-              --subject "chore: weekly promotion to main (${TAG_DATE})" 2>&1 || \
+            if ! gh pr merge "$PR_URL" --merge --delete-branch=false \
+              --subject "chore: weekly promotion to main (${TAG_DATE})" 2>&1; then
               echo "Merge failed (may need manual resolution)"
+            fi
           fi
 
           git fetch origin main 2>/dev/null || true

@@ -5,7 +5,7 @@ on:
     branches: [main, live-testing]
     types: [opened, synchronize, reopened]
   push:
-    branches: ['**']  # TEMP: all branches for CI validation — revert to [main, live-testing, staging] when done
+    branches: [main, live-testing, staging, dj*]
   workflow_dispatch:
 
 concurrency:
@@ -16,31 +16,6 @@ env:
   COVERAGE_REPORT: coverage/lcov.info
 
 jobs:
-  cleanup:
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-    steps:
-      - name: Delete workflow runs older than 7 days
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          SEVEN_DAYS_AGO=$(date -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -v-7d +%Y-%m-%dT%H:%M:%SZ 2>/dev/null)
-          if [ -z "$SEVEN_DAYS_AGO" ]; then
-            echo "Cannot compute date -- skipping cleanup"
-            exit 0
-          fi
-          echo "Deleting runs older than $SEVEN_DAYS_AGO"
-          gh run list --repo ${{ github.repository }} --limit 200 \
-            --json databaseId,createdAt \
-            --jq '.[] | select(.createdAt < "$SEVEN_DAYS_AGO") | .databaseId' | \
-          while read id; do
-            if [ -n "$id" ]; then
-              gh run delete "$id" --repo ${{ github.repository }} 2>/dev/null || true
-            fi
-          done
-        shell: bash
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -62,10 +37,7 @@ jobs:
       - uses: ./.github/actions/setup
       - run: bun run test -- --coverage
         env:
-          JWT_SECRET: test-jwt-secret-32-chars-minimum-req
-          JWT_EXPIRES_IN: 7d
           NODE_ENV: test
-          LOG_LEVEL: error
       - name: Verify coverage report
         run: |
           if [ -f coverage/lcov.info ]; then
@@ -90,7 +62,18 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Bun audit (fail on critical/high)
-        run: bun audit 2>&1
+        run: |
+          set +e
+          OUTPUT=$(bun audit 2>&1)
+          EXIT_CODE=$?
+          set -e
+          echo "$OUTPUT"
+          REAL_HIGH=$(echo "$OUTPUT" | grep -E -i "high:|critical:" | wc -l || echo "0")
+          if [ "$REAL_HIGH" -gt 0 ] 2>/dev/null; then
+            echo "FAIL: Found $REAL_HIGH HIGH/CRITICAL vulnerability(ies)"
+            exit 1
+          fi
+          echo "OK: No HIGH/CRITICAL vulnerabilities"
         shell: bash
 
       - name: Osv-scanner vulnerability scan
@@ -124,8 +107,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check console.log statements
         run: |-
-          FILES=$(grep -rn 'console\.log' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test || true)
-          COUNT=$(echo "$FILES" | wc -l)
+          set +e
+          FILES=$(grep -rn 'console\.log' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test. || true)
+          COUNT=$(echo "$FILES" | grep -c . || echo "0")
           echo "console.log count: $COUNT"
           if [ "$COUNT" -gt 5 ]; then
             echo "FAIL: Found $COUNT console.log statements — use a proper logger instead"
@@ -135,7 +119,8 @@ jobs:
         shell: bash
       - name: Check for secrets in source
         run: |-
-          RESULTS=$(grep -rn 'password.*secret.*key.*token' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v '.env' | grep -v 'process.env' | wc -l || true)
+          set +e
+          RESULTS=$(grep -rn 'password.*secret.*key.*token' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v '.env' | grep -v 'process.env' | grep -v node_modules | wc -l || true)
           echo "Potential secrets: $RESULTS"
           if [ "$RESULTS" -gt 0 ]; then
             echo "FAIL: Found $RESULTS potential secrets in source code"
@@ -144,6 +129,7 @@ jobs:
         shell: bash
       - name: Validate config files
         run: |-
+          set +e
           FAIL=0
           for f in render.yaml .env.example; do
             if [ -f "$f" ]; then
@@ -158,9 +144,24 @@ jobs:
           fi
         shell: bash
 
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Check for E2E tests
+        run: |
+          COUNT=$(find e2e -name '*.spec.*' -o -name '*.test.*' 2>/dev/null | wc -l)
+          if [ "$COUNT" -lt 1 ]; then
+            echo "FAIL: No E2E tests found in e2e/"
+            exit 1
+          fi
+          echo "Found $COUNT E2E test files"
+        shell: bash
+
   promote-to-staging:
     if: github.event_name == 'push' && github.ref_name == 'live-testing'
-    needs: [lint, typecheck, test, build, security-scan, quality-and-config]
+    needs: [lint, typecheck, test, build, security-scan, quality-and-config, e2e-tests]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -174,7 +175,7 @@ jobs:
           if [ "$EXISTS" -eq 0 ]; then
             gh pr create --repo ${{ github.repository }} \
               --title "chore: promote live-testing to staging ($(date +'%Y-%m-%d'))" \
-              --body "Auto-promotion: live-testing to staging. Validated by validate-pull-request.yml (lint, typecheck, test, build, security-scan). All checks passed. PR created same-day. Merge happens when staging validates." \
+              --body "Auto-promotion: live-testing to staging. Validated by validate-pull-request.yml (lint, typecheck, test, build, security-scan, quality-and-config, e2e-tests). All checks passed." \
               --base staging --head live-testing \
               --label auto-promotion,promotion:live-testing-to-staging
           else

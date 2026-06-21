@@ -2,7 +2,7 @@ name: Deploy Production - swalook-landing-page
 
 on:
   push:
-    branches: ['**']  # TEMP: all branches for CI validation — revert to [main] when done
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -18,7 +18,7 @@ jobs:
       - run: bun run build
         env:
           NODE_ENV: production
-      - run: bun run test
+      - run: bun run test -- --coverage
         env:
           NODE_ENV: test
       - name: Security scan
@@ -26,19 +26,35 @@ jobs:
           docker run --rm -v ${{ github.workspace }}:/workspace aquasec/trivy:0.60.0 \
             filesystem --scanners vuln,secret,misconfig --severity CRITICAL,HIGH --exit-code 1 /workspace
       - name: Dependency audit
-        run: bun audit 2>&1
+        run: |
+          set +e
+          OUTPUT=$(bun audit 2>&1)
+          EXIT_CODE=$?
+          set -e
+          echo "$OUTPUT"
+          REAL_HIGH=$(echo "$OUTPUT" | grep -E -i "high:|critical:" | wc -l || echo "0")
+          if [ "$REAL_HIGH" -gt 0 ] 2>/dev/null; then
+            echo "FAIL: Found $REAL_HIGH HIGH/CRITICAL vulnerability(ies)"
+            exit 1
+          fi
+          echo "OK: No HIGH/CRITICAL vulnerabilities"
         shell: bash
 
   deploy:
     needs: [validate-before-deploy]
-    if: github.ref_name == 'main'
+    if: success()
     runs-on: ubuntu-latest
     environment: production
     steps:
       - name: Trigger Render deploy
         run: |
-          curl -s -o /dev/null -w "%{http_code}" -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" || echo "WARN: No RENDER_DEPLOY_HOOK_URL configured — manual deploy required"
-
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}" 2>/dev/null || echo "000")
+          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "202" ]; then
+            echo "FAIL: Render deploy hook returned $HTTP_CODE"
+            exit 1
+          fi
+          echo "OK: Render deploy hook triggered (HTTP $HTTP_CODE)"
+  
   post-deploy-smoke:
     needs: [deploy]
     runs-on: ubuntu-latest

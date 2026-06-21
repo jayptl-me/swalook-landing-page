@@ -80,17 +80,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
 
-      - name: Dependency Review
-        if: github.event_name == 'pull_request'
-        uses: actions/dependency-review-action@v4
-
-      - name: Bun audit (dependency vulnerabilities)
-        continue-on-error: true
-        run: bun audit --audit-level high
+      - name: Bun audit
+        run: bun audit
         shell: bash
 
-      - name: Trivy vulnerability & secret scan (open source)
-        continue-on-error: true
+      - name: Trivy vulnerability & secret scan
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/workspace \
@@ -101,7 +95,7 @@ jobs:
             /workspace
         shell: bash
 
-      - name: Gitleaks secret scan (open source, no token needed)
+      - name: Gitleaks secret scan
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/path \

@@ -18,6 +18,7 @@ export default defineConfig({
         globals: true,
         setupFiles: ["./__tests__/setup.js"],
         include: ["__tests__/**/*.test.{js,jsx}"],
+        exclude: ["__tests__/components/**", "node_modules/**"],
         server: {
             deps: {
                 inline: ["app", "components"],

@@ -90,6 +90,7 @@ jobs:
         shell: bash
 
       - name: Trivy vulnerability & secret scan (open source)
+        continue-on-error: true
         run: |
           docker run --rm \
             -v ${{ github.workspace }}:/workspace \

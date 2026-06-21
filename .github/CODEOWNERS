@@ -1,0 +1,9 @@
+# Production-critical files require senior review
+/.github/workflows/deploy-production.yml @swalook-ops
+/.github/workflows/promote-staging.yml @swalook-ops
+/.github/workflows/release-weekly.yml @swalook-ops
+/.github/workflows/validate-pull-request.yml @swalook-ops
+/package.json @swalook-core
+/next.config.mjs @swalook-core
+/app/ @swalook-marketing
+/components/ @swalook-marketing

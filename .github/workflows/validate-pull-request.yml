@@ -5,7 +5,7 @@ on:
     branches: [main, live-testing]
     types: [opened, synchronize, reopened]
   push:
-    branches: [main, live-testing, staging]
+    branches: ['**']  # TEMP: all branches for CI validation — revert to [main, live-testing, staging] when done
   workflow_dispatch:
 
 concurrency:
@@ -60,12 +60,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
-      - run: bun run test
+      - run: bun run test -- --coverage
         env:
           JWT_SECRET: test-jwt-secret-32-chars-minimum-req
           JWT_EXPIRES_IN: 7d
           NODE_ENV: test
           LOG_LEVEL: error
+      - name: Verify coverage report
+        run: |
+          if [ -f coverage/lcov.info ]; then
+            echo "Coverage report generated successfully"
+          else
+            echo "FAIL: No coverage report found — coverage thresholds not met or tests failed"
+            exit 1
+          fi
+        shell: bash
 
   build:
     runs-on: ubuntu-latest
@@ -80,8 +89,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
 
-      - name: Bun audit
-        run: bun audit 2>&1 || true
+      - name: Bun audit (fail on critical/high)
+        run: bun audit 2>&1
+        shell: bash
+
+      - name: Osv-scanner vulnerability scan
+        run: |
+          npm install -g @google/osv-scanner
+          osv-scanner --recursive .
         shell: bash
 
       - name: Trivy vulnerability & secret scan
@@ -109,22 +124,38 @@ jobs:
       - uses: actions/checkout@v4
       - name: Check console.log statements
         run: |-
-          COUNT=$(grep -rn 'console\.log' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test | wc -l || true)
+          FILES=$(grep -rn 'console\.log' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v node_modules | grep -v .next | grep -v .test || true)
+          COUNT=$(echo "$FILES" | wc -l)
           echo "console.log count: $COUNT"
-          exit 0
+          if [ "$COUNT" -gt 5 ]; then
+            echo "FAIL: Found $COUNT console.log statements — use a proper logger instead"
+            echo "$FILES"
+            exit 1
+          fi
         shell: bash
       - name: Check for secrets in source
         run: |-
           RESULTS=$(grep -rn 'password.*secret.*key.*token' --include='*.js' --include='*.jsx' . 2>/dev/null | grep -v '.env' | grep -v 'process.env' | wc -l || true)
           echo "Potential secrets: $RESULTS"
-          exit 0
+          if [ "$RESULTS" -gt 0 ]; then
+            echo "FAIL: Found $RESULTS potential secrets in source code"
+            exit 1
+          fi
         shell: bash
       - name: Validate config files
         run: |-
+          FAIL=0
           for f in render.yaml .env.example; do
-            [ -f "$f" ] && echo "$f present" || echo "$f MISSING"
+            if [ -f "$f" ]; then
+              echo "$f present"
+            else
+              echo "FAIL: $f MISSING"
+              FAIL=1
+            fi
           done
-          exit 0
+          if [ "$FAIL" -eq 1 ]; then
+            exit 1
+          fi
         shell: bash
 
   promote-to-staging:

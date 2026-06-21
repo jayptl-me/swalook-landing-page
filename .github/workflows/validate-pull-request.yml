@@ -5,7 +5,7 @@ on:
     branches: [main, live-testing]
     types: [opened, synchronize, reopened]
   push:
-    branches: [main, live-testing, staging, dj*]
+    branches: [main, live-testing, staging, dj**]
   workflow_dispatch:
 
 concurrency:

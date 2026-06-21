@@ -81,8 +81,7 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Bun audit
-        run: |
-          bun audit 2>&1; true
+        run: bun audit 2>&1 || true
         shell: bash
 
       - name: Trivy vulnerability & secret scan

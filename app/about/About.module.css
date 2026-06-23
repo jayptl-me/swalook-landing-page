@@ -41,6 +41,31 @@
 .detailText h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text-heading); }
 .detailText p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
 
+.featuresSection { padding: var(--section-padding); background: var(--bg-white); }
+.featuresGrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.featureCard { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px 20px; text-align: center; transition: all 0.3s ease; box-shadow: var(--shadow-xs); }
+.featureCard:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+.featureCardIcon { width: 48px; height: 48px; border-radius: 50%; background: rgba(0,188,212,0.08); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.2rem; color: var(--primary); }
+.featureCard h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--text-heading); }
+.featureCard p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.65; }
+
+.milestonesSection { padding: var(--section-padding); background: var(--bg-section-alt); }
+.milestonesGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.milestoneCard { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px 20px; text-align: center; transition: all 0.3s ease; box-shadow: var(--shadow-xs); }
+.milestoneCard:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+.milestoneIcon { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, rgba(0,188,212,0.12), rgba(0,150,136,0.12)); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.3rem; color: var(--primary); }
+.milestoneCard h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-heading); }
+.milestoneCard p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; }
+
+@media (max-width: 1024px) {
+  .featuresGrid { grid-template-columns: repeat(3, 1fr); }
+  .milestonesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .featuresGrid { grid-template-columns: 1fr; }
+  .milestonesGrid { grid-template-columns: 1fr; }
+}
+
 .learnMore { padding: var(--section-padding); background: var(--bg-section-alt); }
 .learnContent { max-width: 900px; margin: 0 auto; padding: 0 24px; }
 .learnContent p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 18px; font-size: 0.93rem; }

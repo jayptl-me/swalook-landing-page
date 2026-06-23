@@ -3,17 +3,19 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Swalook - Revenue Generation Engine For The Beauty Industry',
-  description: 'Swalook - Revenue Generation Engine For The Beauty Industry. Grow your salon business with better customer retention, smarter marketing, and fewer no-shows.',
+  title: 'Swalook: All-in-One Salon Management Software and Marketing Platform',
+  description: 'Swalook is an all-in-one salon management software and marketing platform for bookings, billing, retention, marketing automation, and staff management. Trusted by salons, spas, and multi-branch beauty brands across India.',
   keywords: [
-    'salon CRM',
     'salon management software',
+    'salon CRM',
+    'salon marketing platform',
     'beauty industry software',
+    'salon booking software',
+    'salon billing software',
     'salon retention software',
     'salon marketing automation',
     'salon no show reduction',
     'salon appointment management',
-    'salon billing software',
     'salon inventory management',
     'beauty salon CRM',
     'spa management software',
@@ -31,8 +33,8 @@ export const metadata = {
     'salon CRM Kolkata'
   ].join(', '),
   openGraph: {
-    title: 'Swalook - Revenue Generation Engine For The Beauty Industry',
-    description: 'Swalook - Revenue Generation Engine For The Beauty Industry. Grow your salon business with better customer retention, smarter marketing, and fewer no-shows.',
+    title: 'Swalook: All-in-One Salon Management Software and Marketing Platform',
+    description: 'Swalook is an all-in-one salon management software and marketing platform for bookings, billing, retention, marketing automation, and staff management.',
     url: 'https://swalook.in',
     siteName: 'Swalook',
     type: 'website',

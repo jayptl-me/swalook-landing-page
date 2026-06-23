@@ -226,13 +226,12 @@ export default function HomePage() {
         <div className={styles.heroContent}>
           <div className={styles.heroInner}>
             <AnimatedSection className={styles.heroCopy} direction="left">
-              <span className={styles.heroLabel}>Growth platform for salons</span>
+              <span className={styles.heroLabel}>All-in-One Salon Management Software</span>
               <h1 className={styles.heroTitle}>
-                Grow Your Salon Business
-                <span className={styles.heroHighlight}> with retention, marketing, and fewer no-shows.</span>
+                Swalook: All-in-One Salon Management Software and Marketing Platform
               </h1>
               <p className={styles.heroDesc}>
-                One place for bookings, follow-ups, and billing.
+                One place for bookings, follow-ups, billing, and marketing.
               </p>
 
               <div className={styles.heroActions}>

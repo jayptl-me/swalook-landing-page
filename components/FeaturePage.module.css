@@ -38,4 +38,7 @@
 .otherIcon { color: var(--primary); flex-shrink: 0; }
 
 @media (max-width: 768px) { .featuresGrid { grid-template-columns: 1fr; } .otherGrid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .otherGrid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .otherGrid { grid-template-columns: 1fr; } .featureHero { padding: 130px 0 40px; } .featureHeroIcon { width: 56px; height: 56px; font-size: 1.4rem; } }
+@media (max-width: 360px) { .fCard { padding: 16px; } .fCardIcon { width: 32px; height: 32px; } .featureHero { padding: 110px 0 30px; } .featureHeroIcon { width: 48px; height: 48px; font-size: 1.2rem; } .otherGrid { grid-template-columns: 1fr; gap: 8px; } .otherCard { padding: 10px 12px; } }
+@media (min-width: 1440px) { .featuresGrid { grid-template-columns: repeat(4, 1fr); gap: 30px; } .otherGrid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+@media (hover: none) and (pointer: coarse) { .fCard:hover { transform: none; border-color: var(--border-color); box-shadow: var(--shadow-xs); } .otherCard:hover { transform: none; border-color: var(--border-color); color: var(--text-secondary); box-shadow: var(--shadow-xs); } }

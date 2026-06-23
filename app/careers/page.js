@@ -127,28 +127,30 @@ export default function CareersPage() {
         </div>
         <AnimatedSection>
           <div className={styles.openingsContainer}>
-            <table className={styles.openingsTable}>
-              <thead>
-                <tr>
-                  <th>Role</th>
-                  <th>Type</th>
-                  <th>Location</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {openings.map((o) => (
-                  <tr key={o.role}>
-                    <td>{o.role}</td>
-                    <td>{o.type}</td>
-                    <td>{o.location}</td>
-                    <td>
-                      <a href="mailto:hr@swalook.in" className={styles.applyBtn}>Apply Now</a>
-                    </td>
+            <div className={styles.openingsTableWrapper}>
+              <table className={styles.openingsTable}>
+                <thead>
+                  <tr>
+                    <th>Role</th>
+                    <th>Type</th>
+                    <th>Location</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {openings.map((o) => (
+                    <tr key={o.role}>
+                      <td>{o.role}</td>
+                      <td>{o.type}</td>
+                      <td>{o.location}</td>
+                      <td>
+                        <a href="mailto:hr@swalook.in" className={styles.applyBtn}>Apply Now</a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className={styles.noRole}>
               <p>
                 Didn&apos;t see a role that fits? We still want to hear from you! Drop us a line at{' '}

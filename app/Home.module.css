@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   padding-top: 92px;
@@ -767,11 +768,15 @@
 }
 
 .featureRowReverse {
-  direction: rtl;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
 }
 
-.featureRowReverse > * {
-  direction: ltr;
+.featureRowReverse > :first-child {
+  order: 2;
+}
+
+.featureRowReverse > :last-child {
+  order: 1;
 }
 
 .featureImageBox {
@@ -991,7 +996,7 @@
 }
 
 .faqAnswerOpen {
-  max-height: 240px;
+  max-height: 1000px;
 }
 
 .faqAnswerInner {
@@ -1059,7 +1064,7 @@
   }
 
   .heroStats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .heroActions {
@@ -1129,6 +1134,27 @@
   .faqMoreLink {
     width: 100%;
   }
+
+  .heroVisualFrame {
+    border-radius: 20px;
+  }
+
+  .routeCard,
+  .infoCard,
+  .testimonialCard,
+  .serviceCard {
+    border-radius: 18px;
+  }
+
+  .featureItem {
+    border-radius: 16px;
+  }
+
+  .aboutImage,
+  .splitMedia,
+  .featureImageBox {
+    border-radius: 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1141,6 +1167,11 @@
   .visualStatus,
   .heroVisualLabel {
     letter-spacing: 0.08em;
+  }
+
+  .heroStats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
   .ctaBenefit {
@@ -1170,6 +1201,189 @@
   .testimonialCard h3,
   .featureTextBox h3 {
     word-break: break-word;
+  }
+
+  .heroMetric {
+    padding: 12px 10px;
+  }
+
+  .heroMetric span {
+    font-size: 1.1rem;
+  }
+
+  .ctaGrid {
+    gap: 12px;
+  }
+
+  .ctaBenefit {
+    gap: 12px;
+  }
+
+  .featureRows {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding-top: 84px;
+  }
+
+  .heroLabel {
+    font-size: 0.68rem;
+    min-height: 32px;
+    padding: 0 12px;
+  }
+
+  .heroTrustItem {
+    min-height: 34px;
+    padding: 0 10px;
+    font-size: 0.78rem;
+  }
+
+  .heroStats {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .statPill {
+    padding: 12px 14px;
+  }
+
+  .statPill span {
+    font-size: 1.2rem;
+  }
+
+  .statPill p {
+    font-size: 0.8rem;
+  }
+
+  .routeSection,
+  .aboutSection,
+  .servicesSection,
+  .provideSection,
+  .whySection,
+  .mobileAppSection,
+  .testimonialsSection,
+  .featuresOverview,
+  .faqPreview {
+    padding: 48px 0;
+  }
+
+  .routeCard,
+  .serviceCard,
+  .infoCard,
+  .testimonialCard,
+  .featureItem {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .serviceIcon,
+  .infoIcon,
+  .featureItemIcon,
+  .testimonialIcon {
+    width: 44px;
+    height: 44px;
+    font-size: 1rem;
+    border-radius: 12px;
+  }
+
+  .serviceCard h3,
+  .infoCard h3,
+  .testimonialCard h3 {
+    font-size: 0.92rem;
+  }
+
+  .serviceCard p,
+  .infoCard p,
+  .testimonialCard p {
+    font-size: 0.84rem;
+  }
+
+  .heroVisualFrame {
+    border-radius: 16px;
+  }
+
+  .heroDeviceBody {
+    padding: 14px;
+  }
+
+  .ctaBenefit {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .ctaBenefit h3 {
+    font-size: 0.92rem;
+  }
+
+  .ctaBenefit p {
+    font-size: 0.84rem;
+  }
+
+  .faqQuestion {
+    padding: 14px 16px;
+    font-size: 0.88rem;
+  }
+
+  .faqAnswerInner {
+    padding: 0 16px 14px;
+  }
+
+  .routeCardTop h3 {
+    font-size: 0.92rem;
+  }
+
+  .routeCard p {
+    font-size: 0.84rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .heroInner {
+    gap: 56px;
+  }
+
+  .heroContent,
+  .sectionShell {
+    width: min(1440px, calc(100% - 64px));
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 3.6vw, 4.2rem);
+  }
+
+  .heroVisualFrame {
+    border-radius: 32px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .whyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .routeGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .aboutGrid {
+    gap: 72px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .servicesGrid,
+  .whyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2rem, 3.2vw, 4.5rem);
   }
 }
 

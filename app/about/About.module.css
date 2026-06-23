@@ -35,8 +35,9 @@
 
 .detailSection { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .detailRow { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-bottom: 56px; }
-.detailRowReverse { direction: rtl; }
-.detailRowReverse > * { direction: ltr; }
+.detailRowReverse { grid-template-columns: 1fr 1fr; }
+.detailRowReverse > :first-child { order: 2; }
+.detailRowReverse > :last-child { order: 1; }
 .detailImage { border-radius: var(--radius-xl); aspect-ratio: 16/10; background: var(--gradient-soft); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); overflow: hidden; }
 .detailText h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text-heading); }
 .detailText p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
@@ -61,9 +62,18 @@
   .featuresGrid { grid-template-columns: repeat(3, 1fr); }
   .milestonesGrid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .featuresGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
   .featuresGrid { grid-template-columns: 1fr; }
   .milestonesGrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 360px) {
+  .missionCard, .valueCard, .highlightCard, .featureCard, .milestoneCard { padding: 18px; }
+  .featuresGrid, .milestonesGrid, .valuesGrid, .highlightsGrid { gap: 12px; }
+  .missionCard h3, .valueCard h3, .featureCard h3, .milestoneCard h3 { font-size: 0.85rem; }
+  .missionCard p, .valueCard p, .highlightCard p, .featureCard p, .milestoneCard p { font-size: 0.85rem; }
 }
 
 .learnMore { padding: var(--section-padding); background: var(--bg-section-alt); }
@@ -81,4 +91,22 @@
 }
 @media (max-width: 600px) {
   .valuesGrid, .highlightsGrid { grid-template-columns: 1fr; }
+}
+@media (min-width: 1200px) {
+  .featuresGrid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1440px) {
+  .featuresGrid { gap: 28px; }
+  .valuesGrid { gap: 28px; }
+  .highlightsGrid { gap: 28px; }
+  .milestonesGrid { gap: 28px; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .featureCard:hover,
+  .valueCard:hover,
+  .highlightCard:hover,
+  .milestoneCard:hover,
+  .missionCard:hover {
+    transform: none;
+  }
 }

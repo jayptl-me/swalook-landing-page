@@ -208,4 +208,45 @@
   .sidebarCard {
     padding: 20px;
   }
+
+  .body {
+    font-size: 0.95rem;
+  }
+
+  .body h2 {
+    font-size: 1.45rem;
+  }
+
+  .body h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 108px 12px 48px;
+  }
+
+  .body {
+    font-size: 0.92rem;
+  }
+
+  .body h2 {
+    font-size: 1.3rem;
+  }
+
+  .body h3 {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 360px) {
+  .container { padding: 96px 10px 32px; }
+  .body { font-size: 0.88rem; }
+  .body h2 { font-size: 1.15rem; }
+  .body h3 { font-size: 1rem; }
+  .title { font-size: clamp(1.4rem, 8vw, 2rem); }
+  .sidebarCard { padding: 16px; }
+}
+@media (min-width: 1440px) {
+  .container { max-width: 1440px; }
 }

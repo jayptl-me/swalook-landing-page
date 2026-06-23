@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 
 export default function AnimatedSection({ 
   children, 
@@ -13,6 +13,7 @@ export default function AnimatedSection({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, amount: threshold });
+  const prefersReducedMotion = useReducedMotion();
 
   const directions = {
     up: { y: 40, x: 0 },
@@ -23,6 +24,10 @@ export default function AnimatedSection({
   };
 
   const { x, y } = directions[direction] || directions.up;
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div
@@ -44,6 +49,11 @@ export default function AnimatedSection({
 export function StaggerContainer({ children, className = '', staggerDelay = 0.1 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
     <motion.div

@@ -21,7 +21,17 @@
 
 .openingsSection { padding: var(--section-padding); background: var(--bg-white); }
 .openingsContainer { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-.openingsTable { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 28px; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+
+/* Allow table to scroll horizontally on small screens */
+.openingsTableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 28px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.openingsTable { width: 100%; border-collapse: separate; border-spacing: 0; border: none; }
 .openingsTable thead th { text-align: left; padding: 14px 18px; font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); background: var(--bg-soft); border-bottom: 1px solid var(--border-color); }
 .openingsTable tbody td { padding: 14px 18px; font-size: 0.9rem; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
 .openingsTable tbody tr { transition: background 0.3s ease; }
@@ -45,4 +55,15 @@
 .joinCta p { color: var(--text-secondary); margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
 .joinActions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
+@media (max-width: 1024px) { .whyGrid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) { .whyGrid { grid-template-columns: 1fr; } .teamGrid { grid-template-columns: 1fr; } .openingsTable thead th, .openingsTable tbody td { padding: 10px 12px; } }
+@media (max-width: 480px) { .whyGrid { grid-template-columns: 1fr; gap: 14px; } .teamGrid { grid-template-columns: 1fr; gap: 14px; } .whyCard { padding: 20px; } .openingsTable thead th, .openingsTable tbody td { padding: 8px 10px; font-size: 0.82rem; } .joinCta { padding: 48px 0; } }
+@media (max-width: 360px) { .whyCard { padding: 16px; } .whyGrid, .teamGrid { gap: 10px; } .openingsTableWrapper { border-radius: 8px; } .openingsTable thead th, .openingsTable tbody td { font-size: 0.8rem; } }
+@media (min-width: 1440px) { .whyGrid { grid-template-columns: repeat(4, 1fr); } .teamGrid { grid-template-columns: repeat(3, 1fr); } }
+@media (hover: none) and (pointer: coarse) {
+  .whyCard:hover::before { transform: none; }
+  .whyCard:hover { border-color: var(--border-color); transform: none; box-shadow: var(--shadow-xs); }
+  .openingsTable tbody tr:hover { background: transparent; }
+  .applyBtn:hover { transform: none; box-shadow: none; }
+  .teamCard:hover { box-shadow: var(--shadow-xs); transform: none; }
+}

@@ -510,6 +510,29 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-heading);
 }
 
+/* --- Hover Effect Suppression (Mobile / Touch) --- */
+@media (hover: none) and (pointer: coarse) {
+  *:hover {
+    --hover-active: false;
+  }
+
+  .btn-primary:hover::before {
+    left: -100%;
+  }
+
+  .btn-primary:hover {
+    transform: none;
+  }
+
+  .btn-outline:hover {
+    transform: none;
+  }
+
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
 /* --- Responsive --- */
 @media (max-width: 1024px) {
   :root {
@@ -550,5 +573,66 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 480px) {
   :root {
     --section-padding: 48px 0;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --section-padding: 40px 0;
+    --container-padding: 0 12px;
+  }
+
+  .btn-lg {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 11px 20px;
+    font-size: 0.84rem;
+  }
+
+  .section-header {
+    margin-bottom: 24px;
+  }
+}
+
+/* --- Ultra-Large Displays (1440px and above) --- */
+@media (min-width: 1440px) {
+  :root {
+    --container-width: 1400px;
+    --section-padding: 120px 0;
+  }
+
+  .container {
+    max-width: var(--container-width);
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  }
+
+  .heading-xl {
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --container-width: 1500px;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
   }
 }

@@ -36,8 +36,46 @@
 .newsletterForm button { padding: 14px 28px; background: var(--gradient-primary); color: #fff; border: none; border-radius: var(--radius-full); font-weight: 600; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; box-shadow: var(--shadow-primary); font-size: 0.9rem; }
 .newsletterForm button:hover { transform: translateY(-2px); box-shadow: var(--shadow-primary-lg); }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .cardsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
   .cardsGrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
   .formGrid { grid-template-columns: 1fr; gap: 36px; }
   .newsletterForm { flex-direction: column; }
+}
+@media (min-width: 1440px) {
+  .cardsGrid { gap: 28px; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .contactCard:hover {
+    transform: none;
+  }
+  .contactCard:hover::before {
+    transform: scaleX(0);
+  }
+  .contactCard:hover .cardIcon {
+    background: rgba(0,188,212,0.08);
+    color: var(--primary);
+  }
+  .submitBtn:hover {
+    transform: none;
+  }
+  .newsletterForm button:hover {
+    transform: none;
+  }
+}
+@media (max-width: 480px) {
+  .contactForm { padding: 24px; }
+  .newsletterForm button { width: 100%; }
+}
+@media (max-width: 360px) {
+  .contactForm { padding: 18px; }
+  .contactCard { padding: 20px; }
+  .newsletter { padding: 40px 0; }
+  .contactCard h3 { font-size: 0.85rem; }
+  .contactCard p { font-size: 0.85rem; }
+  .cardIcon { width: 48px; height: 48px; font-size: 1.1rem; }
 }

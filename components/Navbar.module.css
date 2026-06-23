@@ -279,4 +279,26 @@
     border-radius: var(--radius-full);
     box-shadow: var(--shadow-primary);
   }
+
+  @media (max-width: 360px) {
+    .mobileMenu {
+      padding: 70px 20px 32px;
+    }
+
+    .mobileNavLink {
+      font-size: 0.9rem;
+      padding: 12px 0;
+    }
+
+    .mobileCta {
+      padding: 12px 24px;
+      font-size: 0.88rem;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .navContainer {
+    max-width: 1400px;
+  }
 }

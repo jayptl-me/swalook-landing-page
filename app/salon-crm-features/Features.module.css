@@ -31,4 +31,8 @@
 .withCta { margin-top: 14px; color: var(--text-secondary); font-size: 0.98rem; margin-bottom: 24px; }
 
 @media (max-width: 900px) { .featuresGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .featuresGrid { grid-template-columns: repeat(2, 1fr); gap: 16px; } .featureCard { padding: 22px; } }
 @media (max-width: 600px) { .featuresGrid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .introSection { padding: 40px 0; } }
+@media (max-width: 360px) { .featuresGrid { grid-template-columns: 1fr; } .featureCard { padding: 16px; } .featureIcon { width: 48px; height: 48px; font-size: 1.1rem; } .featureDesc { font-size: 0.84rem; } .whyItem { padding: 8px 12px; } .introSection { padding: 28px 0; } }
+@media (min-width: 1440px) { .featuresGrid { grid-template-columns: repeat(4, 1fr); } }

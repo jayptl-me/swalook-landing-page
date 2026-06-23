@@ -22,3 +22,43 @@
   color: var(--text-secondary);
   line-height: 1.7;
 }
+
+@media (max-width: 480px) {
+  .grid {
+    gap: 14px;
+  }
+
+  .emptyState {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .emptyState h2 {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .grid {
+    gap: 12px;
+  }
+
+  .emptyState {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .emptyState h2 {
+    font-size: 0.95rem;
+  }
+
+  .emptyState p {
+    font-size: 0.84rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid {
+    gap: 22px;
+  }
+}

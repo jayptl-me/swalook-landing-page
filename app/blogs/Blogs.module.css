@@ -657,7 +657,7 @@
 }
 
 .faqAnswerOpen {
-  max-height: 240px;
+  max-height: 1000px;
 }
 
 .faqAnswerInner {
@@ -674,32 +674,12 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .aboutGrid,
-  .routeGrid,
-  .splitGrid,
-  .featureRow {
-    grid-template-columns: 1fr;
-  }
-
-  .heroStats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .featureList,
-  .testimonialGrid {
-    grid-template-columns: 1fr;
+  .ctaGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 900px) {
-  .heroInner {
-    grid-template-columns: 1fr;
-  }
-
-  .heroVisualWrap {
-    justify-self: stretch;
-  }
-
   .ctaGrid {
     grid-template-columns: 1fr;
   }
@@ -724,102 +704,18 @@
 }
 
 @media (max-width: 768px) {
-  .hero {
-    min-height: auto;
-    padding-top: 96px;
-  }
-
-  .heroContent,
-  .sectionShell {
-    width: min(100%, calc(100% - 20px));
-  }
-
-  .heroInner {
-    gap: 28px;
-  }
-
-  .heroTitle {
-    max-width: none;
-  }
-
-  .heroDesc {
-    font-size: 1rem;
-  }
-
-  .heroStats {
-    grid-template-columns: 1fr;
-  }
-
-  .heroActions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .heroActions > * {
-    width: 100%;
-  }
-
-  .routeSection,
-  .aboutSection,
-  .servicesSection,
-  .provideSection,
-  .whySection,
-  .mobileAppSection,
-  .testimonialsSection,
-  .featuresOverview,
-  .faqPreview {
-    padding: 64px 0;
-  }
-
-  .sectionHeading {
-    margin-bottom: 30px;
-  }
-
-  .routeCard,
-  .serviceCard,
-  .infoCard,
-  .testimonialCard,
-  .featureItem {
-    padding: 22px;
-  }
-
-  .heroVisualFrame,
-  .splitMedia,
-  .featureImageBox,
-  .aboutImage {
-    min-height: 280px;
-  }
-
-  .heroDeviceBody {
-    padding: 18px;
-  }
-
-  .heroMetricRow {
-    grid-template-columns: 1fr;
-  }
-
-  .heroDeviceHeader,
-  .panelHeader {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .ctaActions .btn-primary,
-  .ctaActions .btn-outline {
-    width: 100%;
-  }
-
-  .aboutActions,
-  .faqMoreLink {
-    width: 100%;
-  }
-
   .blogHero {
     padding: 126px 0 60px;
   }
 
-  .blogHeroContent,
   .blogsContainer {
+    grid-template-columns: 1fr;
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 24px;
+  }
+
+  .blogHeroContent {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -854,47 +750,31 @@
   .blogContent {
     padding: 20px;
   }
+
+  .blogStats {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarCard {
+    border-radius: 20px;
+  }
+
+  .blogCard {
+    border-radius: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-  .hero {
-    padding-top: 88px;
+  .blogHero {
+    padding: 110px 0 48px;
   }
 
-  .heroLabel,
-  .heroTrustItem,
-  .visualStatus,
-  .heroVisualLabel {
-    letter-spacing: 0.08em;
+  .blogHeroTitle {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
   }
 
-  .ctaBenefit {
-    padding: 18px;
-  }
-
-  .heroTitle {
-    font-size: clamp(2rem, 11vw, 2.8rem);
-  }
-
-  .sectionHeadingLeft {
-    text-align: center;
-  }
-
-  .faqQuestion {
-    padding: 18px 18px;
-    font-size: 0.94rem;
-  }
-
-  .faqAnswerInner {
-    padding: 0 18px 18px;
-  }
-
-  .routeCardTop h3,
-  .infoCard h3,
-  .serviceCard h3,
-  .testimonialCard h3,
-  .featureTextBox h3 {
-    word-break: break-word;
+  .blogHeroDesc {
+    font-size: 0.95rem;
   }
 
   .blogImage {
@@ -904,6 +784,156 @@
   .quickRoute,
   .categoryTab {
     min-height: 44px;
+  }
+
+  .blogContent h3 {
+    font-size: 1rem;
+  }
+
+  .blogContent p {
+    font-size: 0.88rem;
+  }
+
+  .ctaGrid {
+    gap: 12px;
+  }
+
+  .ctaCard {
+    padding: 18px;
+  }
+
+  .ctaCard h3 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .blogHero {
+    padding: 100px 0 40px;
+  }
+
+  .blogHeroTitle {
+    font-size: clamp(1.4rem, 7vw, 1.8rem);
+  }
+
+  .blogHeroContent {
+    padding: 0 12px;
+  }
+
+  .blogsContainer {
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 18px;
+  }
+
+  .sidebarCard,
+  .blogFooterCta,
+  .blogContent {
+    padding: 16px;
+  }
+
+  .sidebarCard {
+    border-radius: 16px;
+  }
+
+  .sidebarEyebrow {
+    min-height: 28px;
+    padding: 0 8px;
+    font-size: 0.68rem;
+  }
+
+  .sidebarCard h2 {
+    font-size: 1.05rem;
+  }
+
+  .sidebarCard h3 {
+    font-size: 0.92rem;
+  }
+
+  .sidebarCard p {
+    font-size: 0.84rem;
+  }
+
+  .quickRoute {
+    min-height: 40px;
+    padding: 0 10px;
+    font-size: 0.82rem;
+    border-radius: 14px;
+  }
+
+  .blogCard {
+    border-radius: 16px;
+  }
+
+  .blogContent h3 {
+    font-size: 0.92rem;
+  }
+
+  .blogContent p {
+    font-size: 0.84rem;
+  }
+
+  .blogImage {
+    font-size: 2rem;
+    min-height: 140px;
+  }
+
+  .categoryTab {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 0.76rem;
+  }
+
+  .searchHint {
+    min-height: 36px;
+    font-size: 0.78rem;
+    padding: 0 12px;
+  }
+
+  .ctaIntro h2 {
+    font-size: clamp(1.4rem, 8vw, 1.8rem);
+  }
+
+  .ctaCard {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .ctaCard h3 {
+    font-size: 0.9rem;
+  }
+
+  .ctaCard p {
+    font-size: 0.82rem;
+  }
+
+  .blogFooterCta {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .blogFooterCta h2 {
+    font-size: clamp(1.2rem, 6vw, 1.5rem);
+  }
+}
+
+@media (min-width: 1440px) {
+  .blogsContainer {
+    max-width: 1440px;
+    gap: 44px;
+  }
+
+  .blogHeroContent {
+    max-width: 960px;
+  }
+
+  .ctaGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .blogCard {
+    border-radius: 32px;
   }
 }
 

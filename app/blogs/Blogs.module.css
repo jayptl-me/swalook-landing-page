@@ -951,3 +951,83 @@
     transform: translate3d(24px, 20px, 0) scale(1.02);
   }
 }
+
+/* Loading skeleton */
+.loadingState {
+  padding: 20px 0;
+}
+
+.gridSkeleton {
+  display: grid;
+  gap: 18px;
+}
+
+.skeletonCard {
+  height: 180px;
+  border-radius: 28px;
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeletonImage {
+  width: 80px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeletonLine {
+  height: 16px;
+  width: 70%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeletonLineShort {
+  height: 16px;
+  width: 45%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.errorState {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.errorIcon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: var(--text-tertiary);
+}
+
+.retryButton {
+  margin-top: 12px;
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-white);
+  color: var(--primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.retryButton:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

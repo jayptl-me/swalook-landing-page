@@ -14,7 +14,7 @@ export const metadata = {
     type: 'article',
     publishedTime: '2026-01-07',
     authors: ['Swalook Editorial'],
-    images: ['https://swalook.in/og-default.svg'],
+    images: ['https://swalook.in/swalook-logo.webp'],
   },
 };
 

@@ -7,7 +7,7 @@ export default function BlogJsonLd({ title, description, url, publishedAt, categ
     headline: title,
     description,
     url,
-    image: `${SITE_URL}/og-default.svg`,
+    image: `${SITE_URL}/swalook-logo.webp`,
     datePublished: publishedAt,
     dateModified: publishedAt,
     author: {
@@ -20,7 +20,7 @@ export default function BlogJsonLd({ title, description, url, publishedAt, categ
       name: 'Swalook',
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/og-default.svg`,
+        url: `${SITE_URL}/swalook-logo.webp`,
       },
     },
     about: {

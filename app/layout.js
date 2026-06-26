@@ -50,9 +50,9 @@ export const metadata = {
     locale: 'en_IN',
     images: [
       {
-        url: `${SITE_URL}/og-default.svg`,
-        width: 1200,
-        height: 630,
+        url: `${SITE_URL}/swalook-logo.webp`,
+        width: 360,
+        height: 56,
         alt: 'Swalook - All-in-One Salon Management Software & Marketing Platform',
       },
     ],
@@ -61,7 +61,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'All-in-One Salon Management Software & Marketing Platform | Swalook',
     description: 'Swalook is an all-in-one salon management software and marketing platform that helps salons manage appointments, automate marketing, reduce no-shows, retain clients, and grow revenue.',
-    images: [`${SITE_URL}/og-default.svg`],
+    images: [`${SITE_URL}/swalook-logo.webp`],
   },
 };
 

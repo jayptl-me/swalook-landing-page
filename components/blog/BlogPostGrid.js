@@ -8,8 +8,12 @@ export default function BlogPostGrid({ posts, emptyState }) {
 
   return (
     <div className={styles.grid}>
-      {posts.map((post) => (
-        <BlogPostCard key={post.slug} post={post} />
+      {posts.map((post, index) => (
+        <BlogPostCard
+          key={post.slug}
+          post={post}
+          featured={post.featured || index === 0}
+        />
       ))}
     </div>
   );

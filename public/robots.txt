@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/ /dashboard/ /admin/ /_next/ /images/
+
+Sitemap: https://swalook.in/sitemap.xml

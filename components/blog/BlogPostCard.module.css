@@ -1,12 +1,14 @@
 .card {
-  display: grid;
-  gap: 18px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
   border-radius: 28px;
   border: 1px solid var(--border-color);
   background: rgba(255, 255, 255, 0.95);
   box-shadow: var(--shadow-xs);
   color: inherit;
+  overflow: hidden;
   transition:
     transform var(--transition-base),
     border-color var(--transition-base),
@@ -19,16 +21,80 @@
   box-shadow: var(--shadow-card-hover);
 }
 
+/* Featured card spans full width */
+.cardFeatured {
+  flex-direction: row;
+  grid-column: 1 / -1;
+}
+
+.cardFeatured .imageWrap {
+  width: 45%;
+  min-height: 280px;
+  border-radius: 0;
+}
+
+.cardFeatured .content {
+  width: 55%;
+  padding: 32px;
+}
+
+.cardFeatured .coverImage {
+  height: 100%;
+  min-height: 280px;
+}
+
+/* Visual fallback (no image) */
 .visual {
   display: flex;
   align-items: center;
   gap: 14px;
+  padding: 20px 20px 0;
 }
 
 .visualText {
   display: grid;
   gap: 6px;
   min-width: 0;
+}
+
+/* Image cover section */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top right, rgba(0, 188, 212, 0.18), transparent 40%),
+    linear-gradient(135deg, rgba(0, 188, 212, 0.08), rgba(108, 99, 255, 0.08));
+}
+
+.coverImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card:hover .coverImage {
+  transform: scale(1.06);
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 14px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Eyebrow on image overlay */
+.imageOverlay .eyebrow {
+  color: #fff;
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
 }
 
 .eyebrow {
@@ -54,9 +120,12 @@
 }
 
 .content {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px 20px;
   min-width: 0;
+  flex: 1;
 }
 
 .title {
@@ -64,6 +133,10 @@
   color: var(--text-heading);
   font-size: 1.08rem;
   line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .excerpt {
@@ -71,27 +144,78 @@
   color: var(--text-secondary);
   font-size: 0.92rem;
   line-height: 1.72;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 188, 212, 0.06);
+  border: 1px solid rgba(0, 188, 212, 0.12);
+  color: var(--primary);
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 .readMore {
-  margin-top: 6px;
+  margin-top: auto;
+  padding-top: 6px;
   color: var(--primary);
   font-size: 0.88rem;
   font-weight: 700;
 }
 
 @media (max-width: 768px) {
+  .cardFeatured {
+    flex-direction: column;
+  }
+
+  .cardFeatured .imageWrap {
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .cardFeatured .content {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .cardFeatured .coverImage {
+    min-height: auto;
+  }
+
   .card {
-    padding: 18px;
     border-radius: 20px;
+  }
+
+  .imageWrap {
+    height: 160px;
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    padding: 14px;
-    gap: 14px;
     border-radius: 18px;
+  }
+
+  .imageWrap {
+    height: 140px;
+  }
+
+  .content {
+    padding: 14px 16px 16px;
+    gap: 6px;
   }
 
   .title {
@@ -114,17 +238,24 @@
   .category {
     font-size: 0.8rem;
   }
+
+  .chip {
+    font-size: 0.65rem;
+    padding: 1px 8px;
+  }
 }
 
 @media (max-width: 360px) {
   .card {
-    padding: 12px;
-    gap: 12px;
     border-radius: 14px;
   }
 
-  .visual {
-    gap: 10px;
+  .imageWrap {
+    height: 120px;
+  }
+
+  .content {
+    padding: 12px 14px 14px;
   }
 
   .title {
@@ -138,20 +269,45 @@
   .readMore {
     font-size: 0.8rem;
   }
+
+  .chip {
+    font-size: 0.6rem;
+    padding: 1px 6px;
+  }
 }
 
 @media (min-width: 1440px) {
   .card {
-    padding: 24px;
+    border-radius: 28px;
+  }
+
+  .cardFeatured .content {
+    padding: 36px;
+  }
+
+  .content {
+    padding: 20px 24px 24px;
   }
 
   .title {
     font-size: 1.15rem;
   }
+
+  .imageWrap {
+    height: 200px;
+  }
+
+  .cardFeatured .imageWrap {
+    min-height: 320px;
+  }
 }
 
 @media (hover: none) and (pointer: coarse) {
   .card:hover {
+    transform: none;
+  }
+
+  .card:hover .coverImage {
     transform: none;
   }
 }

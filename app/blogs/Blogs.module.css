@@ -213,11 +213,11 @@
   box-shadow: 0 10px 20px rgba(0, 188, 212, 0.22);
 }
 
-.searchHint {
+.searchBox {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  width: fit-content;
+  width: min(100%, 420px);
   min-height: 42px;
   padding: 0 16px;
   border-radius: var(--radius-full);
@@ -228,9 +228,23 @@
   box-shadow: var(--shadow-xs);
 }
 
-.searchHint svg {
+.searchBox svg {
   color: var(--primary);
   flex-shrink: 0;
+}
+
+.searchBox input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-heading);
+  font: inherit;
+}
+
+.searchBox input::placeholder {
+  color: var(--text-secondary);
 }
 
 .sidebarCard {

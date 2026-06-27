@@ -17,12 +17,37 @@ import {
 import { fetchPublishedPosts, fetchCategories } from '@/lib/blog-public';
 import styles from './Blogs.module.css';
 
+function normalizePost(post, index = 0) {
+  const category = post.category || post.categories?.[0]?.name || 'Salon Growth';
+  const readTime = post.readTime || (post.readingTimeMinutes ? `${post.readingTimeMinutes} min read` : '6 min read');
+  const image =
+    post.coverImage ||
+    post.ogImage ||
+    post.heroMedia?.publicUrl ||
+    post.image ||
+    null;
+
+  return {
+    ...post,
+    href: post.href || `/blog/${post.slug}`,
+    category,
+    readTime,
+    author: post.author?.name || post.author || 'Swalook Editorial',
+    publishedAt: post.publishedAt || post.published_at || post.createdAt,
+    eyebrow: post.eyebrow || (post.featured ? 'Featured guide' : 'Salon insight'),
+    coverImage: image,
+    imageAlt: post.coverImageAlt || post.heroMedia?.altText || `${post.title} article cover`,
+    featured: Boolean(post.featured) || index === 0,
+  };
+}
+
 export default function BlogsPage() {
   const [apiPosts, setApiPosts] = useState(null);
   const [apiCategories, setApiCategories] = useState(null);
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All Posts');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Load initial data from API on mount
   useEffect(() => {
@@ -53,18 +78,28 @@ export default function BlogsPage() {
   }, []);
 
   // Determine which data to render
-  const posts = apiPosts || staticPosts;
+  const posts = useMemo(
+    () => (apiPosts || staticPosts).map((post, index) => normalizePost(post, index)),
+    [apiPosts]
+  );
   const categories = apiCategories || staticCategories;
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === 'All Posts') return posts;
-    return posts.filter((post) => {
+    const byCategory = activeCategory === 'All Posts' ? posts : posts.filter((post) => {
       const catNames = post.categories
         ? post.categories.map((c) => c.name)
         : [post.category];
       return catNames.includes(activeCategory);
     });
-  }, [posts, activeCategory]);
+
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return byCategory;
+    return byCategory.filter((post) =>
+      [post.title, post.excerpt, post.category, ...(post.tags || []).map((tag) => tag.name)]
+        .filter(Boolean)
+        .some((value) => String(value).toLowerCase().includes(query))
+    );
+  }, [posts, activeCategory, searchQuery]);
 
   const displayCategories = categories.map((c) => {
     const name = c.name || c.label;
@@ -105,10 +140,16 @@ export default function BlogsPage() {
                 onChange={setActiveCategory}
               />
 
-              <div className={styles.searchHint} aria-label="Category browser">
+              <label className={styles.searchBox}>
                 <FiSearch aria-hidden="true" />
-                <span>Browse articles by category</span>
-              </div>
+                <span className="sr-only">Search articles</span>
+                <input
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search salon CRM, marketing, billing..."
+                />
+              </label>
             </div>
 
             {loading ? (

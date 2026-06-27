@@ -3,13 +3,13 @@ import styles from "./BlockRenderer.module.css";
 function d(t) {
   if (!t) return "";
   return t
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, """)
-    .replace(/&#x27;/g, "'")
-    .replace(/&#39;/g, "'")
-    .replace(/&apos;/g, "'");
+    .replace(/\x26amp;/g, "\x26")
+    .replace(/\x26lt;/g, "\x3C")
+    .replace(/\x26gt;/g, "\x3E")
+    .replace(/\x26quot;/g, '\x22')
+    .replace(/\x26#x27;/g, "'")
+    .replace(/\x26#39;/g, "'")
+    .replace(/\x26apos;/g, "'");
 }
 
 export default function BlockRenderer({ blocks }) {

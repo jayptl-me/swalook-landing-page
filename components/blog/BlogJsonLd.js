@@ -1,15 +1,25 @@
 const SITE_URL = 'https://swalook.in';
 
-export default function BlogJsonLd({ title, description, url, publishedAt, category }) {
+export default function BlogJsonLd({
+  title,
+  description,
+  url,
+  publishedAt,
+  category,
+  coverImage,
+  updatedAt,
+}) {
+  const imageUrl = coverImage || `${SITE_URL}/swalook-logo.webp`;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: title,
     description,
     url,
-    image: `${SITE_URL}/swalook-logo.webp`,
+    image: imageUrl,
     datePublished: publishedAt,
-    dateModified: publishedAt,
+    dateModified: updatedAt || publishedAt,
     author: {
       '@type': 'Organization',
       name: 'Swalook',
@@ -32,6 +42,12 @@ export default function BlogJsonLd({ title, description, url, publishedAt, categ
       '@id': url,
     },
   };
+
+  // Use BlogPosting for richer structured data
+  if (category) {
+    jsonLd['@type'] = 'BlogPosting';
+    jsonLd.articleSection = category;
+  }
 
   return (
     <script

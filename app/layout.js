@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 const SITE_URL = 'https://swalook.in';
 
 export const metadata = {
+  metadataBase: new URL('https://swalook.in'),
   title: 'Swalook: All-in-One Salon Management Software and Marketing Platform',
   description: 'Swalook is an all-in-one salon management software and marketing platform for bookings, billing, retention, marketing automation, and staff management. Trusted by salons, spas, and multi-branch beauty brands across India.',
   keywords: [

@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 const BASE_URL = 'https://swalook.in';
 
 const featurePages = [

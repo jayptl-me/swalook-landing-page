@@ -9,6 +9,7 @@ import BlogPostGrid from '@/components/blog/BlogPostGrid';
 import BlogSidebarRail from '@/components/blog/BlogSidebarRail';
 import { fetchPublishedPosts, fetchCategories } from '@/lib/blog-public';
 import {
+  blogPosts as staticPosts,
   blogQuickRoutes,
   blogInsights,
   blogCTAItems,
@@ -89,11 +90,8 @@ export default function BlogsPage() {
           setApiPosts(postsResult.posts);
           setTotalPosts(postsResult.total || 0);
           setHasMore(postsResult.page * 12 < (postsResult.total || 0));
-        } else {
-          setApiPosts([]);
-          setTotalPosts(0);
-          setHasMore(false);
         }
+        // Don't set apiPosts to [] — leaving it null means static fallback kicks in
         if (categoriesResult && categoriesResult.length > 0) {
           setApiCategories(categoriesResult);
         }
@@ -135,15 +133,17 @@ export default function BlogsPage() {
   }, [page, hasMore, loadingMore, categorySlug]);
 
   // Determine which data to render
+  // Fall back to static blogData if API is unavailable
   const posts = useMemo(
-    () => (apiPosts || []).map((post, index) => normalizePost(post, index)),
+    () => (apiPosts || staticPosts).map((post, index) => normalizePost(post, index)),
     [apiPosts]
   );
 
   const categories = useMemo(() => {
     if (apiCategories && apiCategories.length > 0) return apiCategories;
+    // Derive categories from posts if API didn't return them
     const unique = new Map();
-    for (const post of posts) {
+    for (const post of (apiPosts || staticPosts)) {
       const cat = post.categories?.[0];
       if (cat && cat.name && !unique.has(cat.name)) {
         unique.set(cat.name, cat);
@@ -151,10 +151,27 @@ export default function BlogsPage() {
     }
     if (unique.size > 0) return Array.from(unique.values());
     return [];
-  }, [apiCategories, posts]);
+  }, [apiCategories, apiPosts]);
 
-  // Server-side search is already applied via debouncedSearch param in fetchPublishedPosts
-  const filteredPosts = posts;
+  // Client-side filtering — applies to both API posts and static fallback
+  const filteredPosts = useMemo(() => {
+    const byCategory = activeCategory === 'All Posts'
+      ? posts
+      : posts.filter((post) => {
+          const catNames = post.categories
+            ? post.categories.map((c) => c.name)
+            : [post.category];
+          return catNames.includes(activeCategory);
+        });
+
+    const query = debouncedSearch.trim().toLowerCase();
+    if (!query) return byCategory;
+    return byCategory.filter((post) =>
+      [post.title, post.excerpt, post.category, ...(post.tags || []).map((tag) => tag.name)]
+        .filter(Boolean)
+        .some((value) => String(value).toLowerCase().includes(query))
+    );
+  }, [posts, activeCategory, debouncedSearch]);
 
   const displayCategories = categories.map((c) => {
     const name = c.name || c.label;
@@ -206,7 +223,7 @@ export default function BlogsPage() {
               </label>
             </div>
 
-            {loading ? (
+            {loading && !apiPosts ? (
               <div className={styles.loadingState}>
                 <div className={styles.gridSkeleton}>
                   {[1, 2, 3, 4].map((i) => (
@@ -218,10 +235,10 @@ export default function BlogsPage() {
                   ))}
                 </div>
               </div>
-            ) : apiError ? (
+            ) : apiError && !apiPosts ? (
               <div className={styles.errorState}>
                 <FiRefreshCw className={styles.errorIcon} aria-hidden="true" />
-                <p>Could not load the latest articles. Please try again later.</p>
+                <p>Could not load the latest articles.</p>
                 <button
                   onClick={() => window.location.reload()}
                   className={styles.retryButton}

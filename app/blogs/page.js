@@ -1,19 +1,12 @@
 'use client';
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import Link from 'next/link';
-import { FiArrowRight, FiSearch, FiRefreshCw, FiLoader } from 'react-icons/fi';
+import { FiSearch, FiLoader } from 'react-icons/fi';
 import BlogHero from '@/components/blog/BlogHero';
 import BlogCategoryTabs from '@/components/blog/BlogCategoryTabs';
 import BlogPostGrid from '@/components/blog/BlogPostGrid';
-import BlogSidebarRail from '@/components/blog/BlogSidebarRail';
 import { fetchPublishedPosts, fetchCategories } from '@/lib/blog-public';
-import {
-  blogPosts as staticPosts,
-  blogQuickRoutes,
-  blogInsights,
-  blogCTAItems,
-} from '@/components/blog/blogData';
+import { blogPosts as staticPosts } from '@/components/blog/blogData';
 import styles from './Blogs.module.css';
 
 function normalizePost(post, index = 0) {
@@ -199,115 +192,67 @@ export default function BlogsPage() {
 
       <section className={styles.blogsLayout}>
         <div className={styles.blogsContainer}>
-          <BlogSidebarRail
-            quickRoutes={blogQuickRoutes}
-            insights={blogInsights}
-            primaryActions={[
-              { label: 'Book Free Demo', href: '/book-demo' },
-              { label: 'Start Free Trial', href: '/free-trial' },
-            ]}
-          />
+          <div className={styles.blogToolbar}>
+            <BlogCategoryTabs
+              categories={tabs}
+              activeCategory={activeCategory}
+              onChange={setActiveCategory}
+            />
 
-          <main className={styles.blogMain}>
-            <div className={styles.blogToolbar}>
-              <BlogCategoryTabs
-                categories={tabs}
-                activeCategory={activeCategory}
-                onChange={setActiveCategory}
+            <label className={styles.searchBox}>
+              <FiSearch aria-hidden="true" />
+              <span className="sr-only">Search articles</span>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Search salon CRM, marketing, billing..."
+              />
+            </label>
+          </div>
+
+          {loading && !apiPosts ? (
+            <div className={styles.loadingState}>
+              <div className={styles.gridSkeleton}>
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className={styles.skeletonCard}>
+                    <div className={styles.skeletonImage} />
+                    <div className={styles.skeletonLine} />
+                    <div className={styles.skeletonLineShort} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              <BlogPostGrid
+                posts={filteredPosts}
+                emptyState={
+                  <div className={styles.emptyState}>
+                    <h2>No posts found</h2>
+                    <p>Try another category or return to all posts.</p>
+                  </div>
+                }
               />
 
-              <label className={styles.searchBox}>
-                <FiSearch aria-hidden="true" />
-                <span className="sr-only">Search articles</span>
-                <input
-                  type="search"
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  placeholder="Search salon CRM, marketing, billing..."
-                />
-              </label>
-            </div>
-
-            {loading && !apiPosts ? (
-              <div className={styles.loadingState}>
-                <div className={styles.gridSkeleton}>
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className={styles.skeletonCard}>
-                      <div className={styles.skeletonImage} />
-                      <div className={styles.skeletonLine} />
-                      <div className={styles.skeletonLineShort} />
-                    </div>
-                  ))}
+              {/* Load More */}
+              {hasMore && !loading && (
+                <div className="flex justify-center mt-8">
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-navy-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-navy-700 dark:text-slate-300 hover:border-brand-300 transition-colors disabled:opacity-50"
+                  >
+                    {loadingMore ? (
+                      <><FiLoader className="animate-spin" /> Loading...</>
+                    ) : (
+                      'Load More Articles'
+                    )}
+                  </button>
                 </div>
-              </div>
-            ) : apiError && !apiPosts ? (
-              <div className={styles.errorState}>
-                <FiRefreshCw className={styles.errorIcon} aria-hidden="true" />
-                <p>Could not load the latest articles.</p>
-                <button
-                  onClick={() => window.location.reload()}
-                  className={styles.retryButton}
-                >
-                  Try again
-                </button>
-              </div>
-            ) : (
-              <>
-                <BlogPostGrid
-                  posts={filteredPosts}
-                  emptyState={
-                    <div className={styles.emptyState}>
-                      <h2>No posts found</h2>
-                      <p>Try another category or return to all posts.</p>
-                    </div>
-                  }
-                />
-
-                {/* Load More */}
-                {hasMore && !loading && (
-                  <div className="flex justify-center mt-8">
-                    <button
-                      onClick={handleLoadMore}
-                      disabled={loadingMore}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-navy-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm font-semibold text-navy-700 dark:text-slate-300 hover:border-brand-300 transition-colors disabled:opacity-50"
-                    >
-                      {loadingMore ? (
-                        <><FiLoader className="animate-spin" /> Loading...</>
-                      ) : (
-                        'Load More Articles'
-                      )}
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-
-            <section className={`${styles.ctaSection} section section-alt`}>
-              <div className={`container ${styles.ctaShell}`}>
-                <div className={styles.ctaIntro}>
-                  <span className="section-label">Need help choosing?</span>
-                  <h2 className="section-title">See how Swalook fits your salon.</h2>
-                  <p className="section-subtitle">
-                    Book a demo or start a trial to explore the CRM, marketing, and retention workflows in action.
-                  </p>
-                </div>
-
-                <div className={styles.ctaGrid}>
-                  {blogCTAItems.map((item) => (
-                    <article key={item.href} className={`${styles.ctaCard} glass-card`}>
-                      <div>
-                        <h3>{item.title}</h3>
-                        <p>{item.desc}</p>
-                      </div>
-                      <Link href={item.href} className={`btn btn-outline btn-sm ${styles.ctaButton}`}>
-                        Continue <FiArrowRight aria-hidden="true" />
-                      </Link>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </section>
-          </main>
+              )}
+            </>
+          )}
         </div>
       </section>
     </>

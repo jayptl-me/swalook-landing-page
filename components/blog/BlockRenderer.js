@@ -127,9 +127,9 @@ function renderRichText(data, key) {
   if (!html) return null;
   // Sanitize HTML to prevent XSS — strip script tags, event handlers, and dangerous elements
   html = html
-    .replace(/<script\b[^<]*(?:(?<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
     .replace(/\bon\w+\s*=/gi, 'data-stripped=')
-    .replace(/<iframe\b[^<]*(?:(?<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+    .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
     .replace(/javascript:/gi, 'data-stripped:')
     .replace(/data:text\/html/gi, 'data-stripped:text/html');
   return (

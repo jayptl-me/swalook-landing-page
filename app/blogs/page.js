@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import { FiSearch, FiRefreshCw } from 'react-icons/fi';
+import { useState, useMemo } from 'react';
+import { FiSearch } from 'react-icons/fi';
 import BlogHero from '@/components/blog/BlogHero';
 import BlogCategoryTabs from '@/components/blog/BlogCategoryTabs';
 import BlogPostGrid from '@/components/blog/BlogPostGrid';
@@ -9,7 +9,6 @@ import {
   blogPosts as staticPosts,
   blogCategories as staticCategories,
 } from '@/components/blog/blogData';
-import { fetchPublishedPosts, fetchCategories } from '@/lib/blog-public';
 import styles from './Blogs.module.css';
 
 function normalizePost(post, index = 0) {
@@ -37,45 +36,15 @@ function normalizePost(post, index = 0) {
 }
 
 export default function BlogsPage() {
-  const [apiPosts, setApiPosts] = useState(null);
-  const [apiCategories, setApiCategories] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [apiError, setApiError] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All Posts');
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      setLoading(true);
-      setApiError(false);
-      try {
-        const [postsResult, categoriesResult] = await Promise.all([
-          fetchPublishedPosts({ limit: 50 }),
-          fetchCategories(),
-        ]);
-        if (cancelled) return;
-        if (postsResult.posts && postsResult.posts.length > 0) {
-          setApiPosts(postsResult.posts);
-        }
-        if (categoriesResult && categoriesResult.length > 0) {
-          setApiCategories(categoriesResult);
-        }
-      } catch {
-        if (!cancelled) setApiError(true);
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-    load();
-    return () => { cancelled = true; };
-  }, []);
-
   const posts = useMemo(
-    () => (apiPosts || staticPosts).map((post, index) => normalizePost(post, index)),
-    [apiPosts]
+    () => staticPosts.map((post, index) => normalizePost(post, index)),
+    []
   );
-  const categories = apiCategories || staticCategories;
+
+  const categories = staticCategories;
 
   const filteredPosts = useMemo(() => {
     const byCategory = activeCategory === 'All Posts' ? posts : posts.filter((post) => {
@@ -133,41 +102,15 @@ export default function BlogsPage() {
             </label>
           </div>
 
-          {loading ? (
-            <div className={styles.loadingState}>
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className={styles.skeletonCard}>
-                  <div className={styles.skeletonImage} />
-                  <div className={styles.skeletonBody}>
-                    <div className={styles.skeletonLine} />
-                    <div className={styles.skeletonLineShort} />
-                    <div className={styles.skeletonLine} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : apiError && !apiPosts ? (
-            <div className={styles.errorState}>
-              <FiRefreshCw className={styles.errorIcon} aria-hidden="true" />
-              <p>Could not load the latest articles.</p>
-              <button
-                onClick={() => window.location.reload()}
-                className={styles.retryButton}
-              >
-                Try again
-              </button>
-            </div>
-          ) : (
-            <BlogPostGrid
-              posts={filteredPosts}
-              emptyState={
-                <div className={styles.emptyState}>
-                  <h2>No posts found</h2>
-                  <p>Try another category or return to all posts.</p>
-                </div>
-              }
-            />
-          )}
+          <BlogPostGrid
+            posts={filteredPosts}
+            emptyState={
+              <div className={styles.emptyState}>
+                <h2>No posts found</h2>
+                <p>Try another category or return to all posts.</p>
+              </div>
+            }
+          />
         </div>
       </section>
     </>

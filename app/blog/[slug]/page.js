@@ -96,7 +96,7 @@ export async function generateMetadata({ params }) {
   const title = post.seoTitle || post.seo_title || post.title;
   const description = post.seoDescription || post.seo_description || post.excerpt || '';
   const canonical = post.canonicalUrl || post.canonical_url || `${SITE_URL}/blog/${post.slug}`;
-  const ogImage = post.ogImage || post.og_image || `${SITE_URL}/swalook-logo.webp`;
+  const ogImage = post.ogImage || post.og_image || '/swalook-logo.webp';
   const ogType = contentTypeToOgType(post.contentType);
 
   return {

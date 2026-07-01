@@ -53,24 +53,20 @@ function contentTypeToOgType(contentType) {
 }
 
 async function getPost(slug) {
-  let post = null;
+  // Use static blog data directly — no API dependency
+  const { getBlogPostBySlug } = await import('@/components/blog/blogData');
+  let post = getBlogPostBySlug(slug);
 
-  // Try API first
-  try {
-    const result = await fetchPostBySlug(slug);
-    // If API was reached and returned null (404), do NOT fall back to static data.
-    // The post legitimately doesn't exist (deleted, unpublished, never created).
-    // Only fall back to static data if the API was unreachable (network error).
-    if (!result.post && !result.apiReached) {
-      const { getBlogPostBySlug } = await import('@/components/blog/blogData');
-      post = getBlogPostBySlug(slug);
-    } else {
-      post = result.post;
+  // Also try API to get published data (non-blocking, best-effort)
+  if (!post) {
+    try {
+      const result = await fetchPostBySlug(slug);
+      if (result.post && result.apiReached) {
+        post = result.post;
+      }
+    } catch {
+      // API unavailable — continue with static result (null)
     }
-  } catch {
-    // Fetch threw unexpectedly — fall back to static data
-    const { getBlogPostBySlug } = await import('@/components/blog/blogData');
-    post = getBlogPostBySlug(slug);
   }
 
   if (post) {
@@ -83,29 +79,12 @@ async function getPost(slug) {
 export const revalidate = 300; // ISR: revalidate every 5 minutes
 
 export async function generateStaticParams() {
+  // Generate static params from blog data only — no API dependency
+  const { blogPosts } = await import('@/components/blog/blogData');
+  
   const slugs = new Set();
-
-  // 1. Try API-published posts
-  try {
-    const { posts } = await fetchPublishedPosts({ limit: 100 });
-    if (posts && posts.length > 0) {
-      for (const p of posts) {
-        if (p.slug) slugs.add(p.slug);
-      }
-    }
-  } catch {
-    // API unavailable — continue to static fallback
-  }
-
-  // 2. Merge with static fallback data (ensures build-time coverage
-  //    even when API is down or hasn't been seeded yet)
-  try {
-    const { blogPosts } = await import('@/components/blog/blogData');
-    for (const p of blogPosts) {
-      if (p.slug) slugs.add(p.slug);
-    }
-  } catch {
-    // No static fallback data — use whatever we got from API
+  for (const p of blogPosts) {
+    if (p.slug) slugs.add(p.slug);
   }
 
   return Array.from(slugs).map((slug) => ({ slug }));

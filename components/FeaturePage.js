@@ -34,8 +34,25 @@ export default function FeaturePage({
   withPoints = [],
   withCta,
   currentSlug,
+  accentColor,
 }) {
   const otherFeatures = allFeatures.filter(f => f.slug !== currentSlug);
+
+  // Default accent colors based on currentSlug
+  const defaultAccents = {
+    'salon-dashboard-software': '#00BCD4',
+    'salon-appointment-scheduling-software': '#6C63FF',
+    'salon-invoice-software': '#4CAF50',
+    'salon-analytics-software': '#FF9800',
+    'salon-inquiry-management': '#26C6DA',
+    'salon-inventory-management-software': '#8BC34A',
+    'salon-staff-attendance-software': '#AB47BC',
+    'salon-expense-management-software': '#EF5350',
+    'salon-loyalty-program-software': '#EC407A',
+    'salon-marketing-templates': '#42A5F5',
+  };
+
+  const color = accentColor || defaultAccents[currentSlug] || '#00BCD4';
 
   return (
     <>
@@ -44,8 +61,26 @@ export default function FeaturePage({
         <div className={styles.featureHeroBg} />
         <div className={styles.featureHeroContent}>
           <AnimatedSection>
-            <div className={styles.featureHeroIcon}>{icon}</div>
-            <h1 className={styles.featureHeroTitle}>{title}</h1>
+            <div
+              className={styles.featureHeroIcon}
+              style={{
+                background: `${color}14`,
+                color: color,
+              }}
+            >
+              {icon}
+            </div>
+            <h1
+              className={styles.featureHeroTitle}
+              style={{
+                background: `linear-gradient(135deg, ${color}, ${color}dd)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              {title}
+            </h1>
             <p className={styles.featureHeroDesc}>{heroDesc}</p>
           </AnimatedSection>
         </div>
@@ -74,7 +109,7 @@ export default function FeaturePage({
             {keyFeatures.map((f) => (
               <StaggerItem key={f.title}>
                 <div className={styles.fCard}>
-                  <div className={styles.fCardIcon}><FiCheckCircle /></div>
+                  <div className={styles.fCardIcon} style={{ color: color }}><FiCheckCircle /></div>
                   <div>
                     <h3>{f.title}</h3>
                     <p>{f.desc}</p>

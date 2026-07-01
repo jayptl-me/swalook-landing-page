@@ -116,26 +116,51 @@
   }
 }
 
-@media (max-width: 360px) {
-  .pageHero { padding: 108px 0 40px; }
+@media (max-width: 359px) {
+  .pageHero { padding: 96px 0 32px; }
 
   .pageHeroContent {
-    padding: 0 12px;
+    padding: 0 10px;
   }
 
   .pageHeroTitle {
-    font-size: clamp(1.4rem, 7vw, 1.8rem);
+    font-size: clamp(1.2rem, 7vw, 1.5rem);
   }
 
   .pageHeroDesc {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
   }
 
   .pageHeroLabel {
-    font-size: 0.62rem;
-    padding: 4px 12px;
-    min-height: 28px;
-    margin-bottom: 16px;
+    font-size: 0.58rem;
+    padding: 3px 10px;
+    min-height: 24px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 279px) {
+  .pageHero { padding: 80px 0 24px; }
+
+  .pageHeroContent {
+    padding: 0 8px;
+  }
+
+  .pageHeroTitle {
+    font-size: clamp(1rem, 6.5vw, 1.25rem);
+    margin-bottom: 12px;
+  }
+
+  .pageHeroDesc {
+    font-size: 0.78rem;
+  }
+
+  .pageHeroLabel {
+    font-size: 0.54rem;
+    padding: 2px 8px;
+    min-height: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
   }
 }
 

@@ -69,11 +69,49 @@
   .featuresGrid { grid-template-columns: 1fr; }
   .milestonesGrid { grid-template-columns: 1fr; }
 }
-@media (max-width: 360px) {
-  .missionCard, .valueCard, .highlightCard, .featureCard, .milestoneCard { padding: 18px; }
-  .featuresGrid, .milestonesGrid, .valuesGrid, .highlightsGrid { gap: 12px; }
-  .missionCard h3, .valueCard h3, .featureCard h3, .milestoneCard h3 { font-size: 0.85rem; }
-  .missionCard p, .valueCard p, .highlightCard p, .featureCard p, .milestoneCard p { font-size: 0.85rem; }
+@media (max-width: 359px) {
+  .missionCard, .valueCard, .highlightCard, .featureCard, .milestoneCard { padding: 14px; }
+  .featuresGrid, .milestonesGrid, .valuesGrid, .highlightsGrid { gap: 10px; }
+  .missionCard h3, .valueCard h3, .featureCard h3, .milestoneCard h3 { font-size: 0.8rem; }
+  .missionCard p, .valueCard p, .highlightCard p, .featureCard p, .milestoneCard p { font-size: 0.8rem; }
+  .companyGrid { padding: 0 12px; gap: 24px; }
+  .companyText h2 { font-size: clamp(1.2rem, 6.5vw, 1.5rem); }
+  .companyText p { font-size: 0.84rem; }
+  .missionGrid { padding: 0 12px; gap: 14px; }
+  .missionCard { padding: 24px; }
+  .valuesGrid { padding: 0 12px; gap: 12px; }
+  .valueCard { padding: 20px 14px; }
+  .valueIcon { width: 42px; height: 42px; font-size: 1.1rem; }
+  .valueCard p { font-size: 0.8rem; }
+  .journeyContent { padding: 0 12px; }
+  .journeyContent p { font-size: 0.88rem; }
+  .featuresGrid { padding: 0 12px; grid-template-columns: 1fr; }
+  .featureCard { padding: 22px 14px; }
+  .featureCardIcon { width: 40px; height: 40px; font-size: 1rem; }
+  .featureCard h3 { font-size: 0.85rem; }
+  .featureCard p { font-size: 0.78rem; }
+  .milestonesGrid { padding: 0 12px; gap: 12px; }
+  .milestoneCard { padding: 22px 14px; }
+  .milestoneIcon { width: 42px; height: 42px; font-size: 1.1rem; }
+  .milestoneCard h3 { font-size: 0.85rem; }
+  .milestoneCard p { font-size: 0.8rem; }
+  .aboutCta { padding: 40px 0 48px; }
+}
+@media (max-width: 279px) {
+  .companyGrid { gap: 16px; }
+  .companyText h2 { font-size: clamp(1rem, 6vw, 1.2rem); }
+  .companyText p { font-size: 0.78rem; }
+  .companyImage { border-radius: 12px; }
+  .missionCard { padding: 18px; }
+  .missionCard h3 { font-size: 0.85rem; }
+  .missionCard p { font-size: 0.78rem; }
+  .valueCard { padding: 14px 10px; }
+  .valueIcon { width: 36px; height: 36px; font-size: 0.95rem; margin-bottom: 10px; }
+  .valueCard p { font-size: 0.74rem; }
+  .featureCard, .milestoneCard { padding: 16px 10px; }
+  .featureCardIcon, .milestoneIcon { width: 34px; height: 34px; font-size: 0.85rem; }
+  .featureCard h3, .milestoneCard h3 { font-size: 0.8rem; }
+  .featureCard p, .milestoneCard p { font-size: 0.72rem; }
 }
 
 .learnMore { padding: var(--section-padding); background: var(--bg-section-alt); }

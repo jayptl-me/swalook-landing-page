@@ -1224,21 +1224,35 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 359px) {
   .hero {
-    padding-top: 84px;
+    padding-top: 80px;
+  }
+
+  .heroContent,
+  .sectionShell {
+    width: min(100%, calc(100% - 16px));
+  }
+
+  .heroTitle {
+    font-size: clamp(1.4rem, 8vw, 1.8rem);
+  }
+
+  .heroDesc {
+    font-size: 0.9rem;
   }
 
   .heroLabel {
-    font-size: 0.68rem;
-    min-height: 32px;
-    padding: 0 12px;
+    font-size: 0.65rem;
+    min-height: 28px;
+    padding: 0 10px;
+    letter-spacing: 0.08em;
   }
 
   .heroTrustItem {
-    min-height: 34px;
-    padding: 0 10px;
-    font-size: 0.78rem;
+    min-height: 30px;
+    padding: 0 8px;
+    font-size: 0.75rem;
   }
 
   .heroStats {
@@ -1247,15 +1261,25 @@
   }
 
   .statPill {
-    padding: 12px 14px;
+    padding: 10px 12px;
   }
 
   .statPill span {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .statPill p {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  .heroActions {
+    gap: 8px;
+  }
+
+  .heroActions > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 
   .routeSection,
@@ -1267,7 +1291,7 @@
   .testimonialsSection,
   .featuresOverview,
   .faqPreview {
-    padding: 48px 0;
+    padding: 40px 0;
   }
 
   .routeCard,
@@ -1275,68 +1299,576 @@
   .infoCard,
   .testimonialCard,
   .featureItem {
-    padding: 18px;
-    border-radius: 16px;
+    padding: 16px;
+    border-radius: 14px;
   }
 
   .serviceIcon,
   .infoIcon,
   .featureItemIcon,
   .testimonialIcon {
-    width: 44px;
-    height: 44px;
-    font-size: 1rem;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 0.95rem;
+    border-radius: 10px;
   }
 
   .serviceCard h3,
   .infoCard h3,
-  .testimonialCard h3 {
-    font-size: 0.92rem;
+  .testimonialCard h3,
+  .routeCardTop h3 {
+    font-size: 0.88rem;
+    word-break: break-word;
   }
 
   .serviceCard p,
   .infoCard p,
-  .testimonialCard p {
-    font-size: 0.84rem;
+  .testimonialCard p,
+  .routeCard p,
+  .featureItem p {
+    font-size: 0.82rem;
   }
 
   .heroVisualFrame {
-    border-radius: 16px;
+    border-radius: 14px;
   }
 
   .heroDeviceBody {
-    padding: 14px;
+    padding: 12px;
+  }
+
+  .heroVisualFrame,
+  .splitMedia,
+  .featureImageBox,
+  .aboutImage {
+    min-height: 200px;
+  }
+
+  .heroMetricRow {
+    gap: 8px;
+  }
+
+  .heroMetric {
+    padding: 10px 8px;
+  }
+
+  .heroMetric span {
+    font-size: 1rem;
+  }
+
+  .heroMetric p {
+    font-size: 0.75rem;
+  }
+
+  .splitGrid {
+    gap: 16px;
+    margin-top: 16px;
   }
 
   .ctaBenefit {
-    padding: 14px;
-    gap: 10px;
+    padding: 12px;
+    gap: 8px;
   }
 
   .ctaBenefit h3 {
-    font-size: 0.92rem;
-  }
-
-  .ctaBenefit p {
-    font-size: 0.84rem;
-  }
-
-  .faqQuestion {
-    padding: 14px 16px;
     font-size: 0.88rem;
   }
 
-  .faqAnswerInner {
-    padding: 0 16px 14px;
+  .ctaBenefit p {
+    font-size: 0.82rem;
   }
 
-  .routeCardTop h3 {
-    font-size: 0.92rem;
+  .faqQuestion {
+    padding: 12px 14px;
+    font-size: 0.84rem;
+  }
+
+  .faqAnswerInner {
+    padding: 0 14px 12px;
+    font-size: 0.84rem;
+  }
+
+  .sectionHeading {
+    margin-bottom: 22px;
+  }
+
+  .sectionHeadingLeft {
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .sectionNote {
+    font-size: 0.84rem;
+    margin-top: 18px;
+  }
+
+  .servicesGrid,
+  .whyGrid {
+    gap: 12px;
+  }
+
+  .routeGrid {
+    gap: 12px;
+  }
+
+  .testimonialGrid {
+    gap: 12px;
+  }
+
+  .featureRows {
+    gap: 18px;
+  }
+
+  .trustBadge h3 {
+    font-size: 1rem;
+  }
+
+  .trustBadge p {
+    font-size: 0.84rem;
+  }
+
+  .featureTextBox h3 {
+    font-size: clamp(1.1rem, 6vw, 1.3rem);
+  }
+
+  .featureTextBox p {
+    font-size: 0.84rem;
+  }
+
+  .aboutContent h2 {
+    font-size: clamp(1.3rem, 7vw, 1.6rem);
+  }
+
+  .aboutContent p {
+    font-size: 0.84rem;
+  }
+
+  .heroDeviceHeader h3 {
+    font-size: 0.95rem;
+  }
+
+  .panelHeader h4 {
+    font-size: 0.88rem;
+  }
+
+  .panelList div {
+    font-size: 0.82rem;
+  }
+}
+
+/* Ultra-small screens (250px+) */
+@media (max-width: 279px) {
+  .hero {
+    padding-top: 72px;
+  }
+
+  .heroContent,
+  .sectionShell {
+    width: min(100%, calc(100% - 12px));
+  }
+
+  .heroInner {
+    gap: 14px;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.15rem, 7vw, 1.4rem);
+    max-width: none;
+    letter-spacing: -0.02em;
+  }
+
+  .heroDesc {
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+  }
+
+  .heroLabel {
+    font-size: 0.58rem;
+    min-height: 24px;
+    padding: 0 8px;
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .heroTrustItem {
+    min-height: 26px;
+    padding: 0 6px;
+    font-size: 0.7rem;
+  }
+
+  .heroTrustStrip {
+    gap: 6px;
+  }
+
+  .heroStats {
+    gap: 4px;
+  }
+
+  .statPill {
+    padding: 8px 10px;
+  }
+
+  .statPill span {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .statPill p {
+    font-size: 0.72rem;
+  }
+
+  .routeSection,
+  .aboutSection,
+  .servicesSection,
+  .provideSection,
+  .whySection,
+  .mobileAppSection,
+  .testimonialsSection,
+  .featuresOverview,
+  .faqPreview {
+    padding: 28px 0;
+  }
+
+  .routeCard,
+  .serviceCard,
+  .infoCard,
+  .testimonialCard,
+  .featureItem {
+    padding: 12px;
+    border-radius: 12px;
   }
 
   .routeCard p {
-    font-size: 0.84rem;
+    font-size: 0.78rem;
+    margin-bottom: 10px;
+  }
+
+  .routeCardTop {
+    margin-bottom: 8px;
+  }
+
+  .routeCardTop h3 {
+    font-size: 0.82rem;
+  }
+
+  .routeCardLink {
+    font-size: 0.78rem;
+  }
+
+  .serviceIcon,
+  .infoIcon,
+  .featureItemIcon,
+  .testimonialIcon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .infoCard h3,
+  .serviceCard h3,
+  .testimonialCard h3 {
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+  }
+
+  .serviceCard p,
+  .infoCard p,
+  .testimonialCard p,
+  .featureItem p {
+    font-size: 0.76rem;
+  }
+
+  .serviceIcon {
+    margin-bottom: 12px;
+  }
+
+  .serviceLink {
+    font-size: 0.78rem;
+  }
+
+  .aboutGrid {
+    gap: 20px;
+  }
+
+  .aboutImage {
+    min-height: 160px;
+    border-radius: 14px;
+  }
+
+  .aboutContent h2 {
+    font-size: clamp(1.15rem, 6.5vw, 1.3rem);
+  }
+
+  .aboutContent p {
+    font-size: 0.8rem;
+  }
+
+  .heroVisualFrame {
+    border-radius: 12px;
+  }
+
+  .heroDeviceBody {
+    padding: 10px;
+  }
+
+  .heroDeviceBar {
+    padding: 10px 12px;
+  }
+
+  .heroDeviceBar span {
+    width: 8px;
+    height: 8px;
+  }
+
+  .heroVisualFrame,
+  .splitMedia,
+  .featureImageBox {
+    min-height: 160px;
+  }
+
+  .heroMetricRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .heroMetric {
+    padding: 8px 6px;
+  }
+
+  .heroMetric span {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  .heroMetric p {
+    font-size: 0.7rem;
+  }
+
+  .heroDeviceHeader {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .visualKicker {
+    font-size: 0.68rem;
+  }
+
+  .heroDeviceHeader h3 {
+    font-size: 0.88rem;
+  }
+
+  .visualStatus {
+    min-height: 24px;
+    padding: 0 8px;
+    font-size: 0.68rem;
+  }
+
+  .heroPanel {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .panelHeader {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .panelHeader h4 {
+    font-size: 0.82rem;
+  }
+
+  .panelHeader span {
+    font-size: 0.7rem;
+  }
+
+  .panelList div {
+    font-size: 0.78rem;
+    gap: 8px;
+  }
+
+  .splitGrid {
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .splitMedia {
+    min-height: 160px;
+  }
+
+  .featureList {
+    gap: 8px;
+  }
+
+  .featureItem {
+    padding: 10px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .featureItem h4 {
+    font-size: 0.82rem;
+    margin-bottom: 4px;
+  }
+
+  .featureItem p {
+    font-size: 0.76rem;
+  }
+
+  .sectionNote {
+    font-size: 0.78rem;
+    margin-top: 12px;
+  }
+
+  .trustBadge {
+    margin-bottom: 18px;
+  }
+
+  .trustNumber {
+    font-size: clamp(1.8rem, 10vw, 2.2rem);
+  }
+
+  .trustBadge h3 {
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+  }
+
+  .trustBadge p {
+    font-size: 0.78rem;
+  }
+
+  .testimonialGrid {
+    gap: 8px;
+  }
+
+  .featureRows {
+    gap: 14px;
+  }
+
+  .featureRow {
+    gap: 14px;
+  }
+
+  .featureImageBox {
+    min-height: 140px;
+    border-radius: 14px;
+  }
+
+  .featureTextBox h3 {
+    font-size: clamp(0.95rem, 5.5vw, 1.1rem);
+  }
+
+  .featureTextBox p {
+    font-size: 0.78rem;
+  }
+
+  .ctaContent {
+    gap: 16px;
+    padding: 8px 0;
+  }
+
+  .ctaIntro h2 {
+    font-size: clamp(1.2rem, 7vw, 1.5rem);
+  }
+
+  .ctaIntro p {
+    font-size: 0.82rem;
+  }
+
+  .ctaGrid {
+    gap: 8px;
+  }
+
+  .ctaBenefit {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .ctaBenefit svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ctaBenefit h3 {
+    font-size: 0.82rem;
+    margin-bottom: 4px;
+  }
+
+  .ctaBenefit p {
+    font-size: 0.76rem;
+  }
+
+  .faqList {
+    gap: 8px;
+  }
+
+  .faqItem {
+    border-radius: 12px;
+  }
+
+  .faqQuestion {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+
+  .faqIcon {
+    font-size: 0.9rem;
+  }
+
+  .faqAnswerInner {
+    padding: 0 12px 10px;
+    font-size: 0.78rem;
+  }
+
+  .sectionHeading {
+    margin-bottom: 16px;
+  }
+
+  .sectionHeadingLeft {
+    margin-bottom: 14px;
+  }
+
+  .servicesGrid,
+  .whyGrid {
+    gap: 8px;
+  }
+
+  .routeGrid {
+    gap: 8px;
+  }
+
+  .aboutActions,
+  .ctaActions {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .aboutActions .btn,
+  .ctaActions .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    padding: 10px 14px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .featureList {
+    grid-template-columns: 1fr;
   }
 }
 

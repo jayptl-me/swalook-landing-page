@@ -56,6 +56,56 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://swalook.in/salon-dashboard-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-appointment-scheduling-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-invoice-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-analytics-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-inquiry-management</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-inventory-management-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-staff-attendance-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-expense-management-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-loyalty-program-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/salon-marketing-templates</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://swalook.in/privacy-policy</loc>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
@@ -76,42 +126,26 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://swalook.in/blog/salon-marketing-guide-india</loc>
-    <priority>0.7</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://swalook.in/blog/salon-billing-software-explained</loc>
-    <priority>0.7</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://swalook.in/blog/how-to-reduce-salon-no-shows-india</loc>
-    <priority>0.7</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://swalook.in/blog/salon-crm-vs-excel</loc>
-    <priority>0.7</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://swalook.in/blog/how-to-automate-your-salon-marketing-with-swalook</loc>
-    <priority>0.7</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://swalook.in/blog/the-importance-of-integrated-marketing</loc>
+    <loc>https://swalook.in/blog/7-key-factors-for-choosing-salon-crm-software</loc>
+    <lastmod>2026-01-15</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://swalook.in/blog/why-salons-fall-behind-without-crm-software</loc>
+    <lastmod>2026-01-10</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://swalook.in/blog/7-key-factors-for-choosing-salon-crm-software</loc>
+    <loc>https://swalook.in/blog/the-importance-of-integrated-marketing</loc>
+    <lastmod>2026-01-07</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://swalook.in/blog/how-to-automate-your-salon-marketing-with-swalook</loc>
+    <lastmod>2026-01-02</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>

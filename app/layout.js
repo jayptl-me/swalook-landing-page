@@ -5,8 +5,8 @@ import Footer from '@/components/Footer';
 const SITE_URL = 'https://swalook.in';
 
 export const metadata = {
-  title: 'All-in-One Salon Management Software & Marketing Platform | Swalook',
-  description: 'Swalook is an all-in-one salon management software and marketing platform that helps salons manage appointments, automate marketing, reduce no-shows, retain clients, and grow revenue.',
+  title: 'Swalook: All-in-One Salon Management Software and Marketing Platform',
+  description: 'Swalook is an all-in-one salon management software and marketing platform for bookings, billing, retention, marketing automation, and staff management. Trusted by salons, spas, and multi-branch beauty brands across India.',
   keywords: [
     'salon management software',
     'salon CRM',
@@ -40,14 +40,22 @@ export const metadata = {
   },
   alternates: {
     canonical: SITE_URL,
+    languages: {
+      'en-IN': SITE_URL,
+      'x-default': SITE_URL,
+    },
   },
+  links: [
+    { rel: 'alternate', type: 'application/rss+xml', title: 'Swalook Blog', url: '/feed.xml' },
+  ],
   openGraph: {
-    title: 'All-in-One Salon Management Software & Marketing Platform | Swalook',
-    description: 'Swalook is an all-in-one salon management software and marketing platform that helps salons manage appointments, automate marketing, reduce no-shows, retain clients, and grow revenue.',
+    title: 'Swalook: All-in-One Salon Management Software and Marketing Platform',
+    description: 'Swalook is an all-in-one salon management software and marketing platform for bookings, billing, retention, marketing automation, and staff management. Trusted by salons, spas, and multi-branch beauty brands across India.',
     url: SITE_URL,
     siteName: 'Swalook',
     type: 'website',
     locale: 'en_IN',
+    countryName: 'India',
     images: [
       {
         url: `${SITE_URL}/swalook-logo.webp`,
@@ -59,15 +67,15 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'All-in-One Salon Management Software & Marketing Platform | Swalook',
-    description: 'Swalook is an all-in-one salon management software and marketing platform that helps salons manage appointments, automate marketing, reduce no-shows, retain clients, and grow revenue.',
+    title: 'Swalook: All-in-One Salon Management Software and Marketing Platform',
+    description: 'Swalook is an all-in-one salon management software and marketing platform for bookings, billing, retention, marketing automation, and staff management. Trusted by salons, spas, and multi-branch beauty brands across India.',
     images: [`${SITE_URL}/swalook-logo.webp`],
   },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <body>
         <Navbar />
         <main>{children}</main>

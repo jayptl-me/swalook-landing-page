@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6C63FF" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#00BCD4" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="violetGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#8B83FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg4)" rx="16"/>
+  <rect x="60" y="60" width="680" height="380" rx="24" fill="none" stroke="rgba(108,99,255,0.2)" stroke-width="2"/>
+  
+  <!-- Automation pipeline -->
+  <!-- Input -->
+  <rect x="100" y="170" width="140" height="80" rx="14" fill="rgba(108,99,255,0.1)" stroke="#6C63FF" stroke-width="2"/>
+  <text x="170" y="204" text-anchor="middle" fill="#6C63FF" font-size="12" font-weight="700">Booking Created</text>
+  <text x="170" y="232" text-anchor="middle" fill="#546E7A" font-size="10">Trigger event</text>
+  
+  <!-- Arrow -->
+  <text x="255" y="215" fill="#1A2332" font-size="22" font-weight="bold">→</text>
+  
+  <!-- Automation engine -->
+  <rect x="280" y="140" width="240" height="140" rx="18" fill="rgba(0,188,212,0.08)" stroke="#00BCD4" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="400" y="178" text-anchor="middle" fill="#0097A7" font-size="13" font-weight="700">Automation Engine</text>
+  <line x1="310" y1="190" x2="490" y2="190" stroke="rgba(0,188,212,0.2)" stroke-width="1"/>
+  <text x="400" y="212" text-anchor="middle" fill="#546E7A" font-size="11">→ Campaign Builder</text>
+  <text x="400" y="232" text-anchor="middle" fill="#546E7A" font-size="11">→ Audience Segments</text>
+  <text x="400" y="252" text-anchor="middle" fill="#546E7A" font-size="11">→ Channel Routing</text>
+  
+  <!-- Arrow -->
+  <text x="535" y="215" fill="#1A2332" font-size="22" font-weight="bold">→</text>
+  
+  <!-- Outputs -->
+  <rect x="570" y="100" width="130" height="50" rx="12" fill="white" stroke="#00BCD4" stroke-width="1.5"/>
+  <text x="635" y="130" text-anchor="middle" fill="#00BCD4" font-size="12" font-weight="600">SMS Reminder</text>
+  
+  <rect x="570" y="170" width="130" height="50" rx="12" fill="white" stroke="#25D366" stroke-width="1.5"/>
+  <text x="635" y="200" text-anchor="middle" fill="#25D366" font-size="12" font-weight="600">WhatsApp</text>
+  
+  <rect x="570" y="240" width="130" height="50" rx="12" fill="white" stroke="#6C63FF" stroke-width="1.5"/>
+  <text x="635" y="270" text-anchor="middle" fill="#6C63FF" font-size="12" font-weight="600">Email</text>
+  
+  <!-- Timeline at bottom -->
+  <rect x="100" y="330" width="600" height="80" rx="14" fill="rgba(108,99,255,0.06)"/>
+  <text x="400" y="354" text-anchor="middle" fill="#6C63FF" font-size="13" font-weight="700">5 Essential Automated Campaigns Every Salon Needs</text>
+  <text x="180" y="388" text-anchor="middle" fill="#546E7A" font-size="10">Reminders</text>
+  <text x="310" y="388" text-anchor="middle" fill="#546E7A" font-size="10">Welcome Series</text>
+  <text x="440" y="388" text-anchor="middle" fill="#546E7A" font-size="10">Birthday Offers</text>
+  <text x="560" y="388" text-anchor="middle" fill="#546E7A" font-size="10">Re-engagement</text>
+  <line x1="140" y1="395" x2="660" y2="395" stroke="rgba(108,99,255,0.3)" stroke-width="2"/>
+  <circle cx="200" cy="395" r="5" fill="#6C63FF"/>
+  <circle cx="340" cy="395" r="5" fill="#6C63FF"/>
+  <circle cx="460" cy="395" r="5" fill="#6C63FF"/>
+  <circle cx="580" cy="395" r="5" fill="#6C63FF"/>
+</svg>

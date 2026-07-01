@@ -21,3 +21,10 @@
   color: var(--text-heading);
   font-weight: 600;
 }
+
+@media (max-width: 279px) {
+  .breadcrumb {
+    gap: 4px;
+    font-size: 0.74rem;
+  }
+}

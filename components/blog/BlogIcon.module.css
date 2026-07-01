@@ -40,3 +40,16 @@
   border-color: rgba(108, 99, 255, 0.15);
   color: var(--secondary);
 }
+
+@media (max-width: 279px) {
+  .blogIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .blogIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -26,5 +26,6 @@
 @media (max-width: 900px) { .introContent { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .featureGrid { grid-template-columns: 1fr; } }
 @media (max-width: 480px) { .ctaSection { padding: 60px 0; } .featureCard { padding: 24px; } }
-@media (max-width: 360px) { .featureCard { padding: 18px; } .featureIcon { width: 40px; height: 40px; font-size: 1rem; } .ctaSection { padding: 48px 0; } .ctaContent h2 { font-size: 1.3rem; } .introContent { gap: 24px; } }
+@media (max-width: 359px) { .introSection { padding: 36px 0; } .introContent { padding: 0 12px; gap: 20px; } .introText h2 { font-size: 1.3rem; } .introText p { font-size: 0.88rem; } .featureCard { padding: 16px; } .featureIcon { width: 38px; height: 38px; font-size: 0.9rem; } .featureCard h3 { font-size: 0.88rem; } .featureCard p { font-size: 0.82rem; } .ctaSection { padding: 40px 0; } .ctaContent h2 { font-size: 1.2rem; } .servicesContent { padding: 0 12px; margin-bottom: 28px; } .servicesContent p { font-size: 0.88rem; } }
+@media (max-width: 279px) { .introContent { gap: 14px; } .introText h2 { font-size: 1.1rem; } .introText p { font-size: 0.82rem; } .featureGrid { gap: 10px; } .featureCard { padding: 12px; } .featureIcon { width: 32px; height: 32px; font-size: 0.82rem; margin-bottom: 10px; } .featureCard h3 { font-size: 0.82rem; } .featureCard p { font-size: 0.76rem; } .ctaSection { padding: 32px 0; } .ctaContent h2 { font-size: 1rem; } }
 @media (min-width: 1440px) { .featureGrid { grid-template-columns: repeat(4, 1fr); } .introContent { max-width: 1400px; } }

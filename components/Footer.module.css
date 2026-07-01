@@ -218,50 +218,146 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 359px) {
   .footerTop {
-    padding: 48px 0 40px;
+    padding: 40px 0 32px;
   }
 
   .footerGrid {
-    gap: 24px;
+    gap: 20px;
+    padding: 0 12px;
   }
 
   .footerLogo {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .footerTagline {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
   }
 
   .socialLink {
-    width: 34px;
-    height: 34px;
-    font-size: 0.82rem;
+    width: 30px;
+    height: 30px;
+    font-size: 0.76rem;
   }
 
   .footerColumn h4 {
-    font-size: 0.85rem;
-    margin-bottom: 16px;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .footerColumn h4::after {
+    width: 22px;
   }
 
   .footerLink {
-    font-size: 0.8rem;
-    padding: 5px 0;
+    font-size: 0.76rem;
+    padding: 4px 0;
   }
 
   .contactItem {
-    font-size: 0.8rem;
-    gap: 10px;
+    font-size: 0.76rem;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .contactIcon {
+    font-size: 0.85rem;
+  }
+
+  .footerBottom {
+    padding: 16px 0;
+  }
+
+  .footerBottomInner {
+    padding: 0 12px;
+  }
+
+  .copyright {
+    font-size: 0.72rem;
   }
 
   .policyLinks {
-    gap: 12px;
+    gap: 10px;
   }
 
   .policyLink {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 279px) {
+  .footerTop {
+    padding: 28px 0 24px;
+  }
+
+  .footerGrid {
+    gap: 14px;
+    padding: 0 8px;
+  }
+
+  .footerLogo {
+    font-size: 1rem;
+  }
+
+  .footerTagline {
+    font-size: 0.72rem;
+    margin-bottom: 16px;
+  }
+
+  .socialLink {
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+  }
+
+  .socialLinks {
+    gap: 6px;
+  }
+
+  .footerColumn h4 {
     font-size: 0.74rem;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .footerColumn h4::after {
+    width: 18px;
+    height: 1.5px;
+  }
+
+  .footerLink {
+    font-size: 0.72rem;
+    padding: 3px 0;
+  }
+
+  .contactItem {
+    font-size: 0.72rem;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .footerBottom {
+    padding: 12px 0;
+  }
+
+  .footerBottomInner {
+    padding: 0 8px;
+    gap: 10px;
+  }
+
+  .copyright {
+    font-size: 0.66rem;
+  }
+
+  .policyLinks {
+    gap: 8px;
+  }
+
+  .policyLink {
+    font-size: 0.66rem;
   }
 }
 

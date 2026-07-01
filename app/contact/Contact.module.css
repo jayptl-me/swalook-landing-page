@@ -71,11 +71,37 @@
   .contactForm { padding: 24px; }
   .newsletterForm button { width: 100%; }
 }
-@media (max-width: 360px) {
-  .contactForm { padding: 18px; }
-  .contactCard { padding: 20px; }
-  .newsletter { padding: 40px 0; }
-  .contactCard h3 { font-size: 0.85rem; }
-  .contactCard p { font-size: 0.85rem; }
-  .cardIcon { width: 48px; height: 48px; font-size: 1.1rem; }
+@media (max-width: 359px) {
+  .contactForm { padding: 16px; }
+  .contactCard { padding: 16px; }
+  .cardsGrid { padding: 0 12px; gap: 12px; }
+  .newsletter { padding: 32px 0; }
+  .contactCard h3 { font-size: 0.82rem; }
+  .contactCard p { font-size: 0.8rem; }
+  .cardIcon { width: 42px; height: 42px; font-size: 1rem; }
+  .formGrid { padding: 0 12px; gap: 24px; }
+  .formInfo h2 { font-size: 1.3rem; }
+  .formInfo p { font-size: 0.88rem; }
+  .infoBullet { font-size: 0.84rem; gap: 10px; }
+  .formGroup input, .formGroup textarea { padding: 12px 14px; font-size: 0.84rem; }
+  .submitBtn { padding: 12px; font-size: 0.88rem; }
+  .newsletterContent { padding: 0 12px; }
+  .newsletterContent h2 { font-size: 1.2rem; }
+  .newsletterContent p { font-size: 0.84rem; }
+  .newsletterForm input { padding: 12px 14px; font-size: 0.84rem; }
+  .newsletterForm button { padding: 12px 20px; font-size: 0.84rem; width: 100%; }
+}
+@media (max-width: 279px) {
+  .contactCard { padding: 12px; }
+  .cardsGrid { gap: 8px; padding: 0 8px; }
+  .cardIcon { width: 36px; height: 36px; font-size: 0.85rem; margin-bottom: 10px; }
+  .contactCard h3 { font-size: 0.78rem; }
+  .contactCard p { font-size: 0.74rem; }
+  .contactForm { padding: 12px; }
+  .formGroup input, .formGroup textarea { padding: 10px 12px; font-size: 0.8rem; }
+  .formInfo h2 { font-size: 1.1rem; }
+  .formInfo p { font-size: 0.82rem; }
+  .infoBullet { font-size: 0.78rem; }
+  .submitBtn { padding: 10px; font-size: 0.82rem; }
+  .newsletterContent h2 { font-size: 1rem; }
 }

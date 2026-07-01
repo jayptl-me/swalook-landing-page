@@ -44,3 +44,27 @@
   flex-shrink: 0;
   color: var(--primary);
 }
+
+@media (max-width: 279px) {
+  .meta {
+    gap: 6px 8px;
+    font-size: 0.74rem;
+  }
+
+  .compact {
+    gap: 4px 6px;
+    font-size: 0.7rem;
+  }
+
+  .category {
+    min-height: 22px;
+    padding: 0 8px;
+    font-size: 0.64rem;
+  }
+
+  .item {
+    min-height: 22px;
+    padding: 0 8px;
+    font-size: 0.7rem;
+  }
+}

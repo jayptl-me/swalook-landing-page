@@ -50,3 +50,11 @@
     flex-shrink: 0;
   }
 }
+
+@media (max-width: 359px) {
+  .tab { min-height: 32px; padding: 0 10px; font-size: 0.74rem; }
+}
+@media (max-width: 279px) {
+  .tab { min-height: 28px; padding: 0 8px; font-size: 0.68rem; }
+  .tabs { gap: 6px; }
+}

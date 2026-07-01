@@ -1,32 +1,18 @@
+/* Single column — full-width cards */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 28px;
 }
 
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 1440px) {
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-  }
-}
-
-.featuredCard {
-  grid-column: 1 / -1;
-}
-
+/* Empty state */
 .emptyState {
-  padding: 28px;
-  border-radius: 28px;
+  padding: 48px 32px;
+  border-radius: 24px;
   border: 1px solid var(--border-color);
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-white);
   box-shadow: var(--shadow-xs);
+  text-align: center;
 }
 
 .emptyState h2 {
@@ -43,12 +29,12 @@
 
 @media (max-width: 480px) {
   .grid {
-    gap: 14px;
+    gap: 20px;
   }
 
   .emptyState {
-    padding: 20px;
-    border-radius: 20px;
+    padding: 32px 20px;
+    border-radius: 18px;
   }
 
   .emptyState h2 {
@@ -56,21 +42,46 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 359px) {
+  .grid {
+    gap: 16px;
+  }
+
+  .emptyState {
+    padding: 24px 14px;
+    border-radius: 14px;
+  }
+
+  .emptyState h2 {
+    font-size: 0.92rem;
+  }
+
+  .emptyState p {
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 279px) {
   .grid {
     gap: 12px;
   }
 
   .emptyState {
-    padding: 16px;
-    border-radius: 16px;
+    padding: 16px 10px;
+    border-radius: 12px;
   }
 
   .emptyState h2 {
-    font-size: 0.95rem;
+    font-size: 0.84rem;
   }
 
   .emptyState p {
-    font-size: 0.84rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .grid {
+    gap: 32px;
   }
 }

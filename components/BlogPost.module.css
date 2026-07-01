@@ -208,7 +208,7 @@
 
   .sidebar {
     position: static;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sidebarCard {
@@ -265,13 +265,28 @@
     font-size: 1.1rem;
   }
 }
-@media (max-width: 360px) {
-  .container { padding: 96px 10px 32px; }
-  .body { font-size: 0.88rem; }
-  .body h2 { font-size: 1.15rem; }
-  .body h3 { font-size: 1rem; }
-  .title { font-size: clamp(1.4rem, 8vw, 2rem); }
-  .sidebarCard { padding: 16px; }
+@media (max-width: 359px) {
+  .container { padding: 84px 10px 28px; gap: 24px; }
+  .body { font-size: 0.84rem; }
+  .body h2 { font-size: 1.1rem; }
+  .body h3 { font-size: 0.95rem; }
+  .title { font-size: clamp(1.2rem, 8vw, 1.6rem); }
+  .sidebarCard { padding: 14px; }
+  .sidebarEyebrow { font-size: 0.66rem; min-height: 26px; }
+  .sidebarCard h2 { font-size: 1.05rem; }
+  .sidebarCard h3 { font-size: 0.92rem; }
+  .sidebarCard p { font-size: 0.82rem; }
+}
+@media (max-width: 279px) {
+  .container { padding: 72px 8px 24px; }
+  .body { font-size: 0.78rem; }
+  .body h2 { font-size: 1rem; }
+  .body h3 { font-size: 0.88rem; }
+  .title { font-size: clamp(1rem, 7vw, 1.3rem); }
+  .sidebarCard { padding: 10px; border-radius: 14px; }
+  .sidebarCard h2 { font-size: 0.92rem; }
+  .sidebarCard h3 { font-size: 0.82rem; }
+  .sidebarCard p { font-size: 0.76rem; }
 }
 @media (min-width: 1440px) {
   .container { max-width: 1440px; }

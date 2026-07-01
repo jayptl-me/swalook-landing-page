@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF9800" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#FF6584" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF9800"/>
+      <stop offset="100%" stop-color="#F57C00"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg2)" rx="16"/>
+  <rect x="60" y="60" width="680" height="380" rx="24" fill="none" stroke="rgba(255,152,0,0.2)" stroke-width="2"/>
+  
+  <!-- Before/After visualization -->
+  <!-- Before (manual) -->
+  <rect x="100" y="110" width="260" height="180" rx="16" fill="rgba(255,152,0,0.08)" stroke="rgba(255,152,0,0.2)" stroke-width="1.5"/>
+  <text x="230" y="140" text-anchor="middle" fill="#F57C00" font-size="14" font-weight="800">BEFORE: Manual</text>
+  <line x1="130" y1="155" x2="330" y2="155" stroke="rgba(255,152,0,0.2)" stroke-width="1"/>
+  <circle cx="155" cy="190" r="6" fill="#FF9800" opacity="0.5"/>
+  <text x="175" y="195" fill="#546E7A" font-size="11">Paper calendars</text>
+  <circle cx="155" cy="215" r="6" fill="#FF9800" opacity="0.5"/>
+  <text x="175" y="220" fill="#546E7A" font-size="11">Manual reminders</text>
+  <circle cx="155" cy="240" r="6" fill="#FF9800" opacity="0.5"/>
+  <text x="175" y="245" fill="#546E7A" font-size="11">Lost client data</text>
+  <circle cx="155" cy="265" r="6" fill="#FF9800" opacity="0.5"/>
+  <text x="175" y="270" fill="#546E7A" font-size="11">25% no-show rate</text>
+  
+  <!-- Arrow -->
+  <text x="400" y="200" text-anchor="middle" fill="#1A2332" font-size="28">→</text>
+  
+  <!-- After (Swalook CRM) -->
+  <rect x="440" y="110" width="260" height="180" rx="16" fill="rgba(0,188,212,0.08)" stroke="rgba(0,188,212,0.2)" stroke-width="1.5"/>
+  <text x="570" y="140" text-anchor="middle" fill="#0097A7" font-size="14" font-weight="800">AFTER: Swalook CRM</text>
+  <line x1="470" y1="155" x2="670" y2="155" stroke="rgba(0,188,212,0.2)" stroke-width="1"/>
+  <circle cx="495" cy="190" r="6" fill="#00BCD4"/>
+  <text x="515" y="195" fill="#546E7A" font-size="11">Auto reminders</text>
+  <circle cx="495" cy="215" r="6" fill="#00BCD4"/>
+  <text x="515" y="220" fill="#546E7A" font-size="11">< 5% no-show rate</text>
+  <circle cx="495" cy="240" r="6" fill="#00BCD4"/>
+  <text x="515" y="245" fill="#546E7A" font-size="11">Client profiles</text>
+  <circle cx="495" cy="265" r="6" fill="#00BCD4"/>
+  <text x="515" y="270" fill="#546E7A" font-size="11">+30% retention</text>
+  
+  <!-- Stats bar -->
+  <rect x="100" y="320" width="600" height="80" rx="16" fill="rgba(0,188,212,0.1)"/>
+  <text x="400" y="350" text-anchor="middle" fill="#0097A7" font-size="18" font-weight="800">₹3-5 Lakh saved per month with CRM</text>
+  <text x="400" y="378" text-anchor="middle" fill="#546E7A" font-size="12">Why Salons Fall Behind Without CRM Software — And How Swalook Transforms Operations</text>
+</svg>

@@ -1,7 +1,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 144px 0 72px;
+  padding: 120px 0 48px;
   background: var(--bg-hero-gradient);
 }
 
@@ -93,7 +93,7 @@
 
 @media (max-width: 900px) {
   .hero {
-    padding-top: 132px;
+    padding-top: 108px;
   }
 
   .stats {
@@ -103,11 +103,43 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 122px 0 60px;
+    padding: 100px 0 40px;
   }
 
   .content {
     padding-left: 16px;
     padding-right: 16px;
   }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 90px 0 36px; }
+  .title { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+  .description { font-size: 0.95rem; }
+  .label { font-size: 0.68rem; min-height: 32px; padding: 0 12px; }
+  .stat { padding: 14px 16px; }
+  .stat span { font-size: 1.2rem; }
+  .stat p { font-size: 0.8rem; }
+}
+
+@media (max-width: 359px) {
+  .hero { padding: 80px 0 28px; }
+  .content { padding: 0 12px; }
+  .title { font-size: clamp(1.2rem, 7vw, 1.5rem); }
+  .description { font-size: 0.84rem; }
+  .label { font-size: 0.6rem; min-height: 26px; padding: 0 8px; letter-spacing: 0.1em; }
+  .stats { gap: 8px; }
+  .stat { padding: 10px 12px; }
+  .stat span { font-size: 1rem; }
+  .stat p { font-size: 0.76rem; }
+}
+
+@media (max-width: 279px) {
+  .hero { padding: 68px 0 20px; }
+  .title { font-size: clamp(1rem, 6.5vw, 1.2rem); }
+  .description { font-size: 0.78rem; }
+  .label { font-size: 0.54rem; min-height: 22px; padding: 0 6px; }
+  .stat { padding: 8px 10px; border-radius: 16px; }
+  .stat span { font-size: 0.9rem; }
+  .stat p { font-size: 0.72rem; }
 }

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#FFFBEB"/>
+  <!-- Bill/receipt -->
+  <rect x="200" y="80" width="200" height="280" rx="12" fill="white" stroke="#1C1917" stroke-width="4"/>
+  <rect x="200" y="80" width="200" height="50" rx="12" fill="#1C1917"/>
+  <text x="300" y="112" text-anchor="middle" font-family="monospace" font-size="18" fill="white" font-weight="bold">INVOICE</text>
+  <rect x="220" y="150" width="160" height="6" rx="3" fill="#1C1917" opacity="0.2"/>
+  <rect x="220" y="170" width="120" height="6" rx="3" fill="#1C1917" opacity="0.15"/>
+  <rect x="220" y="190" width="140" height="6" rx="3" fill="#1C1917" opacity="0.2"/>
+  <line x1="220" y1="215" x2="380" y2="215" stroke="#D97706" stroke-width="2" stroke-dasharray="4,4"/>
+  <rect x="220" y="230" width="60" height="40" rx="4" fill="#F59E0B" opacity="0.3"/>
+  <rect x="300" y="230" width="80" height="40" rx="4" fill="#F59E0B" opacity="0.3"/>
+  <rect x="220" y="280" width="80" height="40" rx="4" fill="#F59E0B" opacity="0.3"/>
+  <rect x="300" y="280" width="80" height="40" rx="4" fill="#F59E0B" opacity="0.3"/>
+  <rect x="220" y="330" width="160" height="6" rx="3" fill="#1C1917" opacity="0.5"/>
+  <!-- GST stamp -->
+  <rect x="460" y="100" width="80" height="60" rx="8" fill="#10B981" stroke="#1C1917" stroke-width="3"/>
+  <text x="500" y="138" text-anchor="middle" font-family="monospace" font-size="14" fill="white" font-weight="bold">GST</text>
+  <!-- UPI/Payment icons -->
+  <rect x="460" y="180" width="100" height="40" rx="8" fill="#1C1917"/>
+  <text x="510" y="206" text-anchor="middle" font-family="monospace" font-size="12" fill="white">UPI</text>
+  <rect x="460" y="240" width="100" height="40" rx="8" stroke="#1C1917" stroke-width="3" fill="none"/>
+  <text x="510" y="266" text-anchor="middle" font-family="monospace" font-size="12" fill="#1C1917">CARD</text>
+  <rect x="460" y="300" width="100" height="40" rx="8" stroke="#1C1917" stroke-width="3" fill="none"/>
+  <text x="510" y="326" text-anchor="middle" font-family="monospace" font-size="12" fill="#1C1917">CASH</text>
+  <!-- Money arrow up -->
+  <path d="M640 340 l30 -60 l-15 0 l0 -40 l40 0 l0 40 l-15 0 l30 60" fill="#10B981" stroke="#1C1917" stroke-width="3"/>
+</svg>

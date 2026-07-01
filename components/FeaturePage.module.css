@@ -16,7 +16,7 @@
 .fCard { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 24px; display: flex; gap: 14px; align-items: flex-start; transition: all 0.3s ease; box-shadow: var(--shadow-xs); }
 .fCard:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
 .fCardIcon { width: 40px; height: 40px; border-radius: var(--radius-md); background: rgba(0,188,212,0.08); display: flex; align-items: center; justify-content: center; color: var(--primary); flex-shrink: 0; font-size: 1rem; }
-.fCard h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text-heading); }
+.fCard h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text-heading); overflow-wrap: break-word; word-wrap: break-word; }
 .fCard p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
 .compareSection { padding: var(--section-padding); background: var(--bg-white); }
@@ -39,6 +39,7 @@
 
 @media (max-width: 768px) { .featuresGrid { grid-template-columns: 1fr; } .otherGrid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .otherGrid { grid-template-columns: 1fr; } .featureHero { padding: 130px 0 40px; } .featureHeroIcon { width: 56px; height: 56px; font-size: 1.4rem; } }
-@media (max-width: 360px) { .fCard { padding: 16px; } .fCardIcon { width: 32px; height: 32px; } .featureHero { padding: 110px 0 30px; } .featureHeroIcon { width: 48px; height: 48px; font-size: 1.2rem; } .otherGrid { grid-template-columns: 1fr; gap: 8px; } .otherCard { padding: 10px 12px; } }
+@media (max-width: 359px) { .fCard { padding: 14px; } .fCardIcon { width: 30px; height: 30px; font-size: 0.85rem; } .featureHero { padding: 100px 0 24px; } .featureHeroIcon { width: 42px; height: 42px; font-size: 1.1rem; } .featureHeroTitle { font-size: clamp(1.3rem, 7vw, 1.6rem); } .featureHeroDesc { font-size: 0.88rem; } .otherGrid { grid-template-columns: 1fr; gap: 8px; } .otherCard { padding: 10px 12px; font-size: 0.82rem; } .featuresGrid { gap: 14px; } .whyContent { padding: 0 12px; } .whyContent h2 { font-size: 1.2rem; } .whyContent p { font-size: 0.88rem; } .compareContent { padding: 0 12px; } .withContent { padding: 0 12px; } .withItem { font-size: 0.86rem; } }
+@media (max-width: 279px) { .fCard { padding: 10px; gap: 10px; } .fCardIcon { width: 26px; height: 26px; font-size: 0.78rem; } .fCard h3 { font-size: 0.82rem; } .fCard p { font-size: 0.76rem; } .featureHero { padding: 84px 0 20px; } .featureHeroIcon { width: 36px; height: 36px; font-size: 0.95rem; margin-bottom: 12px; } .featureHeroTitle { font-size: clamp(1.05rem, 6.5vw, 1.3rem); } .featureHeroDesc { font-size: 0.82rem; margin-bottom: 0; } .featuresGrid { max-width: 100%; padding: 0 8px; gap: 10px; } .withCta { font-size: 0.84rem; } .withList { gap: 8px; max-width: 100%; } .withItem { gap: 8px; font-size: 0.8rem; } .otherGrid { gap: 6px; } .otherCard { padding: 8px 10px; font-size: 0.78rem; gap: 6px; } .otherFeatures { padding: 40px 0 48px; } }
 @media (min-width: 1440px) { .featuresGrid { grid-template-columns: repeat(4, 1fr); gap: 30px; } .otherGrid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 @media (hover: none) and (pointer: coarse) { .fCard:hover { transform: none; border-color: var(--border-color); box-shadow: var(--shadow-xs); } .otherCard:hover { transform: none; border-color: var(--border-color); color: var(--text-secondary); box-shadow: var(--shadow-xs); } }

@@ -1,5 +1,16 @@
 User-agent: *
 Allow: /
-Disallow: /api/ /dashboard/ /admin/ /_next/ /images/
+Disallow: /api/ /dashboard/ /admin/ /_next/
+
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /api/ /admin/ /_next/
+
+User-agent: Googlebot-News
+Allow: /blog/
+
+User-agent: AdsBot-Google
+Allow: /
 
 Sitemap: https://swalook.in/sitemap.xml
+Host: https://swalook.in

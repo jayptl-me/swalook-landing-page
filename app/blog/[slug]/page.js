@@ -102,7 +102,13 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
-    alternates: { canonical },
+    alternates: { canonical, languages: { 'en-IN': canonical } },
+    robots: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
     openGraph: {
       title,
       description,
@@ -137,8 +143,22 @@ export default async function BlogArticlePage({ params }) {
   const category = post.category || (post.categories && post.categories[0]?.name) || '';
   const contentBlocks = post.contentBlocks || [];
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://swalook.in' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://swalook.in/blogs' },
+      { '@type': 'ListItem', position: 3, name: title, item: `https://swalook.in/blog/${slug}` },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <BlogJsonLd
         title={title}
         description={excerpt}

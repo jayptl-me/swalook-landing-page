@@ -28,6 +28,8 @@ export default function BlockRenderer({ blocks }) {
           case "code": return renderCode(block.data, key);
           case "divider": return <hr key={key} className={styles.divider} />;
           case "highlight": return renderHighlight(block.data, key);
+          case "cta": return renderCta(block.data, key);
+          case "faq": return renderFaq(block.data, key);
           default: return null;
         }
       })}
@@ -82,7 +84,15 @@ function renderImage(data, key) {
   if (!src) return null;
   return (
     <figure key={key} className={styles.imageFigure}>
-      <img src={src} alt={data.alt || ""} className={styles.image} loading="lazy" />
+      <img 
+        src={src} 
+        alt={data.alt || ""} 
+        width={data.width || 800} 
+        height={data.height || 450} 
+        className={styles.image} 
+        loading="lazy" 
+        decoding="async" 
+      />
       {data.caption && <figcaption className={styles.imageCaption}>{d(data.caption)}</figcaption>}
     </figure>
   );
@@ -106,5 +116,28 @@ function renderHighlight(data, key) {
       <strong className={styles.highlightLabel}>{label}</strong>
       {text && ` ${text}`}
     </p>
+  );
+}
+
+function renderCta(data, key) {
+  return (
+    <div key={key} className={styles.cta}>
+      {data.title && <h3>{d(data.title)}</h3>}
+      {data.text && <p>{d(data.text)}</p>}
+      {data.buttonLabel && data.buttonHref && (
+        <a href={d(data.buttonHref)} className={styles.ctaButton}>
+          {d(data.buttonLabel)}
+        </a>
+      )}
+    </div>
+  );
+}
+
+function renderFaq(data, key) {
+  return (
+    <details key={key} className={styles.faq}>
+      <summary>{d(data.question)}</summary>
+      <p>{d(data.answer)}</p>
+    </details>
   );
 }

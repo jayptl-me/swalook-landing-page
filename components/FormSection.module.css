@@ -1,0 +1,392 @@
+/* ===== Shared Form Section Styles (Contact, Book Demo, Free Trial) ===== */
+
+.formSection {
+  padding: var(--section-padding);
+  background: var(--bg-section-alt);
+  position: relative;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  align-items: start;
+}
+
+.formInfo h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-heading);
+}
+
+.formInfo p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.infoBullets {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.infoBullet {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.infoBulletIcon {
+  color: var(--primary);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.contactForm {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 8px;
+  letter-spacing: 0.01em;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+  background: #fff;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.formGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: var(--shadow-primary);
+  letter-spacing: 0.01em;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submitBtnLoading {
+  pointer-events: none;
+}
+
+.spinner {
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.fieldError {
+  border-color: #EF5350 !important;
+  box-shadow: 0 0 0 3px rgba(239, 83, 80, 0.1) !important;
+}
+
+.errorText {
+  display: block;
+  font-size: 0.75rem;
+  color: #EF5350;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.successState {
+  text-align: center;
+  padding: 40px;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 1.6rem;
+  color: var(--success);
+}
+
+.successState h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-heading);
+}
+
+.successState p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* --- Accent variants --- */
+.tealAccent .contactForm {
+  border-top: 4px solid var(--primary);
+}
+
+.purpleAccent .contactForm {
+  border-top: 4px solid var(--secondary);
+}
+
+/* --- Newsletter --- */
+.newsletter {
+  padding: 60px 0 80px;
+  background: var(--bg-white);
+}
+
+.newsletterContent {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.newsletterContent h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-heading);
+}
+
+.newsletterContent p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 10px;
+}
+
+.newsletterForm input {
+  flex: 1;
+  padding: 14px 18px;
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+.newsletterForm input:focus {
+  border-color: var(--primary);
+}
+
+.newsletterForm button {
+  padding: 14px 28px;
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: var(--shadow-primary);
+  font-size: 0.9rem;
+}
+
+.newsletterForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary-lg);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactForm {
+    padding: 24px;
+  }
+
+  .newsletterForm button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 359px) {
+  .contactForm {
+    padding: 16px;
+  }
+
+  .formGrid {
+    padding: 0 12px;
+    gap: 24px;
+  }
+
+  .formInfo h2 {
+    font-size: 1.3rem;
+  }
+
+  .formInfo p {
+    font-size: 0.88rem;
+  }
+
+  .infoBullet {
+    font-size: 0.84rem;
+    gap: 10px;
+  }
+
+  .formGroup input,
+  .formGroup textarea {
+    padding: 12px 14px;
+    font-size: 0.84rem;
+  }
+
+  .submitBtn {
+    padding: 12px;
+    font-size: 0.88rem;
+  }
+
+  .newsletter {
+    padding: 32px 0;
+  }
+
+  .newsletterContent {
+    padding: 0 12px;
+  }
+
+  .newsletterContent h2 {
+    font-size: 1.2rem;
+  }
+
+  .newsletterContent p {
+    font-size: 0.84rem;
+  }
+
+  .newsletterForm input {
+    padding: 12px 14px;
+    font-size: 0.84rem;
+  }
+
+  .newsletterForm button {
+    padding: 12px 20px;
+    font-size: 0.84rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 279px) {
+  .contactForm {
+    padding: 12px;
+  }
+
+  .formGroup input,
+  .formGroup textarea {
+    padding: 10px 12px;
+    font-size: 0.8rem;
+  }
+
+  .formInfo h2 {
+    font-size: 1.1rem;
+  }
+
+  .formInfo p {
+    font-size: 0.82rem;
+  }
+
+  .infoBullet {
+    font-size: 0.78rem;
+  }
+
+  .submitBtn {
+    padding: 10px;
+    font-size: 0.82rem;
+  }
+
+  .newsletterContent h2 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .formGrid {
+    gap: 64px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .submitBtn:hover {
+    transform: none;
+  }
+  .newsletterForm button:hover {
+    transform: none;
+  }
+}

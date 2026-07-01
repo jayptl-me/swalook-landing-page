@@ -96,10 +96,15 @@ export default function BlogsPage() {
           setApiCategories(categoriesResult);
         }
         if ((!postsResult.posts || postsResult.posts.length === 0) && (!apiCategories || apiCategories.length === 0)) {
-          setApiError(true);
+          // API hit successfully but returned no data — show static fallback instead of error
+          setApiPosts(null);
+          setApiError(false);
         }
       } catch {
-        if (!cancelled) setApiError(true);
+        if (!cancelled) {
+          // API unreachable — static fallback will kick in (apiPosts stays null)
+          setApiError(false);
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
